@@ -47,4 +47,3 @@ public class Attribute {
 		Name = name;
 	}
 }
-

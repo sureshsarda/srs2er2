@@ -7,14 +7,27 @@ import java.util.List;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import nlp.objects.Word;
-
+/**
+ * Trie:
+ * 
+ * @author Suresh Sarda
+ *
+ */
 public class Trie {
 	private List<Node> Root;
 	
+	/**
+	 * Default constructor. Intilizes all the elements.
+	 */
 	public Trie() {
 		Root = new ArrayList<Node>();
 	}
 	
+	/**
+	 * Insert an array of sentences in the Trie.
+	 * Array of sentence --> Sentences class
+	 * @param trainingData The list of sentences encapsulated in Sentences type.
+	 */
 	public void InsertIntoTrie(Sentences trainingData) {
 		/* 
 		 * For each sentence in the list,
@@ -24,10 +37,16 @@ public class Trie {
 			InsertIntoTrie(sentence);
 		}
 	}
-	private void InsertIntoTrie(Sentence sentence) {
+	/**
+	 * Insert a sentence into the Trie.
+	 * @param sentence The sentence to be added.
+	 */
+	public void InsertIntoTrie(Sentence sentence) {
 		/*Search if the root contains*/
 		Iterator<Node> rootIterator = Root.iterator();
 		Node parent = null;
+		
+		/*Search if the the branch exists in root*/
 		while (rootIterator.hasNext()) {
 			Node current = rootIterator.next();
 			if (current.getTag().compareTo(sentence.getTokens().get(0).getPost()) == 0) {
@@ -43,7 +62,7 @@ public class Trie {
 			InsertRemaining(sentence, 1, node);
 		}
 		else {
-			/*some part of branch already exists*/
+			/*Branch already exists, update*/
 			Iterator<Word> wordIterator = sentence.getTokens().iterator();
 			
 			@SuppressWarnings("unused")
@@ -60,6 +79,14 @@ public class Trie {
 			}
 		}
 	}
+	
+	/**
+	 * Insert all the remaining tags of the sentence in trie.
+	 * 
+	 * @param sentence Sentence from which all the tags are to be put in the trie
+	 * @param position Position from where to start
+	 * @param parent Continue here in the Trie
+	 */
 	private void InsertRemaining(Sentence sentence, int position, Node parent) {
 		for (int i = position; i < sentence.getTokens().size(); i++) {
 			Word word = sentence.getTokens().get(i);
@@ -69,13 +96,31 @@ public class Trie {
 		}
 	}
 
-	
+	/**
+	 * Implementation Pending
+	 * Look for a sequence in the Trie. Match the closest possible option and return.
+	 * @param sentence The sentence the look for.
+	 * @return
+	 */
 	public LeafNode Lookup(Sentence sentence) {
+		/*
+		 * Gameplan:
+		 * Search the trie for exact match
+		 * If ExactMatch not found,
+		 * Search by removing stop words - Use AdvancedNodeSkip Algorithm
+		 * If not found, calculate EditDistance and find the nearest branch
+		 * Give the DataModel of the nearst match.
+		 */
+		//FIXME Implement This
 		return null;
 	}
 	
 	/*
 	 * Trie print functions
+	 */
+	
+	/**
+	 * Display the trie graphically on the std out.
 	 */
 	public void PrintTrie() {
 		for (Node node : Root) {
