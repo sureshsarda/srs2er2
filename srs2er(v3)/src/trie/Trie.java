@@ -1,5 +1,6 @@
 package trie;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -94,6 +95,8 @@ public class Trie {
 			parent.AddChild(child);
 			parent = child;
 		}
+		/*Insert leaf information of the sentence*/
+		parent.setLeafInformation(sentence.getDataModel());
 	}
 
 	/**
@@ -120,13 +123,40 @@ public class Trie {
 	 */
 	
 	/**
+	 * Analyze the Trie and print the output to std out
+	 * Analuzes and outputs following:
+	 * 1. For tags -
+	 * 		a. Number of times they were used for ER tagging and number of times they were not
+	 * 		b. Number of tags which have always been used for stop words
+	 * 2. For Words - 
+	 * 		Number of words used in ER tags. This will show how many words were never used and will 
+	 * 		help update the list of stopwords.
+	 * 
+	 * Usage:
+	 * 		Train the trie with some sentences using InsertIntoTrie() and call this function to produce the output.
+	 * 
+	 * @param outStream: The output stream where the results are to be printed.
+	 */
+	public void Analyze(OutputStream outStream) {
+		//TODO Implementation Pending*/
+	}
+	
+	/**
 	 * Display the trie graphically on the std out.
 	 */
-	public void PrintTrie() {
+	public void Print() {
 		for (Node node : Root) {
 			System.out.println();
 			TraverseAndPrint(node, 0);
 		}
+	}
+	/**
+	 * The format in which every node will be printed when Print function is called.
+	 * @param node The node into consideration
+	 */
+	private void PrintNode(Node node) {
+		//System.out.printf("%-5s(%1.2f) ", node.getTag(), node.getIsStopWordProbability()); //print with probability
+		System.out.printf("%-5s", node.getTag());
 	}
 	private void TraverseAndPrint(Node node, int level) {
 		//OffsetToLevel(level);
@@ -147,10 +177,7 @@ public class Trie {
 			}
 		}
 	}
-	private void PrintNode(Node node) {
-		//System.out.printf("%-5s(%1.2f) ", node.getTag(), node.getIsStopWordProbability()); //print with probability
-		System.out.printf("%-5s", node.getTag());
-	}
+
 	private void OffsetToLevel(int level) {
 		System.out.println();
 		for (int i = 0; i < level; i++) {

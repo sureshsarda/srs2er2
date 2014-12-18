@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import nlp.objects.Model;
 import nlp.processing.Stopwords;
 /**
  * Node - Represent a node in the trie
@@ -32,6 +33,22 @@ public class Node {
 	/* */
 	private LeafNode LeafInformation;
 	
+	public LeafNode getLeafInformation() {
+		return LeafInformation;
+	}
+	public void setLeafInformation(LeafNode leafInformation) {
+		LeafInformation = leafInformation;
+	}
+	
+	/* TODO something
+	 * Constructors since LeafNode only contains dataModel as data.
+	 */
+	public void setLeafInformation(Model dataModel) {
+		LeafInformation.setDataModel(dataModel);
+	}
+	public Model getLeafInformation(Model dataModel) {
+		return LeafInformation.getDataModel();
+	}
 	public Node(String tag, String word) {
 		Words = new ArrayList<String>();
 		Children = new ArrayList<Node>();

@@ -40,7 +40,7 @@ public class Srs2er {
 
         Trie trie = new Trie();
         trie.InsertIntoTrie(emps);
-        trie.PrintTrie();
+        trie.Print();
         //System.out.println(emps);
 	}
 
