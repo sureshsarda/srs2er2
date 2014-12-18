@@ -1,6 +1,8 @@
 package trie;
 
-import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -137,49 +139,67 @@ public class Trie {
 	 * 
 	 * @param outStream: The output stream where the results are to be printed.
 	 */
-	public void Analyze(OutputStream outStream) {
+	public void Analyze(PrintStream printer) {
 		//TODO Implementation Pending*/
+	}
+	
+	/**
+	 * DO NOT USE THIS FUCTION.
+	 */
+	@Override
+	public String toString() {
+		//FIXME Output is not formatted properly.
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PrintStream ps = new PrintStream(baos);
+		Print(ps);
+		try {
+			return baos.toString("ISO-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**
 	 * Display the trie graphically on the std out.
 	 */
-	public void Print() {
+	public void Print(PrintStream printer) {
 		for (Node node : Root) {
-			System.out.println();
-			TraverseAndPrint(node, 0);
+			printer.println();
+			
+			TraverseAndPrint(node, 0, printer);
 		}
 	}
 	/**
 	 * The format in which every node will be printed when Print function is called.
 	 * @param node The node into consideration
 	 */
-	private void PrintNode(Node node) {
+	private void PrintNode(Node node, PrintStream printer) {
 		//System.out.printf("%-5s(%1.2f) ", node.getTag(), node.getIsStopWordProbability()); //print with probability
-		System.out.printf("%-5s", node.getTag());
+		printer.printf("%-5s", node.getTag());
 	}
-	private void TraverseAndPrint(Node node, int level) {
+	private void TraverseAndPrint(Node node, int level, PrintStream printer) {
 		//OffsetToLevel(level);
 		while (node.getChildren().get(0) != null) {
 			level++;
-			PrintNode(node);
+			PrintNode(node, printer);
 			if (node.getChildren().size() > 1) {
 				for (int i = 1; i < node.getChildren().size(); i++) {
-					TraverseAndPrint(node.getChildren().get(i), level);
-					OffsetToLevel(level);
+					TraverseAndPrint(node.getChildren().get(i), level, printer);
+					OffsetToLevel(level, printer);
 				}
 			}
 			node = node.getChildren().get(0);
 			if (node.getChildren().isEmpty() == true) {
 				/*No more children to mine. Print and break*/
-				PrintNode(node);
+				PrintNode(node, printer);
 				break; 
 			}
 		}
 	}
 
-	private void OffsetToLevel(int level) {
-		System.out.println();
+	private void OffsetToLevel(int level, PrintStream printer) {
+		printer.println();
 		for (int i = 0; i < level; i++) {
 			//System.out.printf("%-12s", "|"); //offset with probability
 			System.out.printf("%-5s", "|");

@@ -44,7 +44,7 @@ public class Node {
 	 * Constructors since LeafNode only contains dataModel as data.
 	 */
 	public void setLeafInformation(Model dataModel) {
-		LeafInformation.setDataModel(dataModel);
+		LeafInformation = new LeafNode(dataModel);
 	}
 	public Model getLeafInformation(Model dataModel) {
 		return LeafInformation.getDataModel();

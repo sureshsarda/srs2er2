@@ -1,6 +1,7 @@
 package srs2er;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -40,7 +41,11 @@ public class Srs2er {
 
         Trie trie = new Trie();
         trie.InsertIntoTrie(emps);
-        trie.Print();
+        
+        trie.Print(System.out);
+        System.out.println("\n\n");
+        
+        System.out.println(trie.toString());
         //System.out.println(emps);
 	}
 
