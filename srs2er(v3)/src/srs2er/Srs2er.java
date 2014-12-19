@@ -43,10 +43,7 @@ public class Srs2er {
         trie.InsertIntoTrie(emps);
         
         trie.Print(System.out);
-        System.out.println("\n\n");
         
-        System.out.println(trie.toString());
-        //System.out.println(emps);
 	}
 
 }

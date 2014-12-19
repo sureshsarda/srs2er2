@@ -11,6 +11,8 @@ public class RelationEntity {
 	private String Name;
 
 	//FIXME There is a typo in the XML Cardinality is written as Cardanility
+	/*DO NOT USE YOUR SHIT BRAIN AND CORRECT THIS SPELLING
+	 * Rest assured you WILL regret */
 	@XmlAttribute(name = "Cardanality")
 	public String getCardinality() {
 		return Cardinality;
