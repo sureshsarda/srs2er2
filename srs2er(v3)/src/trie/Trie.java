@@ -19,6 +19,12 @@ import nlp.objects.Word;
  *
  */
 public class Trie {
+	public enum PrintDetail {
+		TAGS_ONLY, TAGS_AND_PROBABILITY
+	};
+
+	/* Default print behavior to TAGS only */
+	private PrintDetail PrintBehavior = PrintDetail.TAGS_ONLY;
 	private List<Node> Root;
 
 	/**
@@ -130,9 +136,7 @@ public class Trie {
 		 * found, calculate EditDistance and find the nearest branch Give the
 		 * DataModel of the nearest match.
 		 */
-		// FIXME Implement This
 		int wordIndex = 0;
-		boolean correct = false;
 		List<Word> tokens = sentence.getTokens();
 		for (Node node : Root) {
 			if (node.getTag().compareTo(tokens.get(wordIndex).getPost()) == 0) {
@@ -177,10 +181,10 @@ public class Trie {
 	}
 
 	private LeafNode AdvancedNodeSkip(List<Node> Root, Sentence sentence) {
-		// TODO Auto-generated method stub
+		// FIXME Incomplete Implementation
 		int wordIndex = 0;
 		List<Word> tokens = sentence.getTokens();
-		Stack<Node> removedStopWord = new Stack();
+		Stack<Node> removedStopWord = new Stack<Node>();
 		List<Node> test = ProbableRoutes(Root);
 
 		for (Node node : test) {
@@ -190,7 +194,6 @@ public class Trie {
 	}
 
 	private List<Node> ProbableRoutes(List<Node> parents) {
-		// TODO Auto-generated method stub
 		List<Node> probablePaths = new ArrayList<Node>();
 		for (Node parent : parents) {
 			if (parent.getIsStopWordProbability() <= 0.5) {
@@ -242,14 +245,32 @@ public class Trie {
 	}
 
 	/**
-	 * Display the trie graphically on the std out.
+	 * Display the Trie graphically on the given PrintStream
+	 * 
+	 * @param printer
+	 *            The PrintStream to print the output
+	 * 
 	 */
 	public void Print(PrintStream printer) {
 		for (Node node : Root) {
 			printer.println();
-
-			TraverseAndPrint(node, 0, printer);
+			TraverseAndPrint(node, 0, printer, this.PrintBehavior);
 		}
+	}
+
+	/**
+	 * Display the Trie graphically on the given PrintStream
+	 * 
+	 * @param printer
+	 *            The PrintStream to print the output.
+	 * @param printDetail
+	 *            The level of detail to print as specified by the enum
+	 *            PrintDetail. This value will be set as default behavior and
+	 *            used in all subsequent calls unless changed otherwise.
+	 */
+	public void Print(PrintStream printer, PrintDetail printDetail) {
+		PrintBehavior = printDetail;
+		Print(printer);
 	}
 
 	/**
@@ -259,38 +280,60 @@ public class Trie {
 	 * @param node
 	 *            The node into consideration
 	 */
-	private void PrintNode(Node node, PrintStream printer) {
-		// System.out.printf("%-5s(%1.2f) ", node.getTag(),
-		// node.getIsStopWordProbability()); //print with probability
-		printer.printf("%-5s", node.getTag());
+	private void PrintNode(Node node, PrintStream printer,
+			PrintDetail printDetail) {
+		switch (printDetail) {
+		case TAGS_ONLY:
+			printer.printf("%-5s", node.getTag());
+			break;
+		case TAGS_AND_PROBABILITY:
+			System.out.printf("%-5s(%1.2f) ", node.getTag(),
+					node.getIsStopWordProbability()); // print with probability
+			break;
+		default:
+			System.err.println("Invalid PrintDetail flag.");
+			break;
+		}
+
 	}
 
-	private void TraverseAndPrint(Node node, int level, PrintStream printer) {
+	private void TraverseAndPrint(Node node, int level, PrintStream printer,
+			PrintDetail printDetail) {
 		// OffsetToLevel(level);
 		while (node.getChildren().get(0) != null) {
 			level++;
-			PrintNode(node, printer);
+			PrintNode(node, printer, printDetail);
 			if (node.getChildren().size() > 1) {
 				for (int i = 1; i < node.getChildren().size(); i++) {
-					TraverseAndPrint(node.getChildren().get(i), level, printer);
-					OffsetToLevel(level, printer);
+					TraverseAndPrint(node.getChildren().get(i), level, printer,
+							printDetail);
+					OffsetToLevel(level, printer, printDetail);
 				}
 			}
 			node = node.getChildren().get(0);
 			if (node.getChildren().isEmpty() == true) {
 				/* No more children to mine. Print and break */
-				PrintNode(node, printer);
+				PrintNode(node, printer, printDetail);
 				break;
 			}
 		}
 	}
 
-	private void OffsetToLevel(int level, PrintStream printer) {
+	private void OffsetToLevel(int level, PrintStream printer,
+			PrintDetail printDetail) {
 		printer.println();
 		for (int i = 0; i < level; i++) {
-			// System.out.printf("%-12s", "|"); //offset with probability
-			System.out.printf("%-5s", "|");
-
+			switch (printDetail) {
+			case TAGS_ONLY:
+				System.out.printf("%-5s", "|");
+				break;
+			case TAGS_AND_PROBABILITY:
+				System.out.printf("%-12s", "|");
+				break;
+			default: /* Invalid PrintDetail Information */
+				System.err.println("Invalid PrintDetail Flag.");
+				break;
+			}
 		}
 	}
 }

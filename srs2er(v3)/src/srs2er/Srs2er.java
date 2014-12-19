@@ -11,6 +11,7 @@ import javax.xml.bind.ValidationEventHandler;
 
 import nlp.objects.Sentences;
 import trie.Trie;
+import trie.Trie.PrintDetail;
 
 /**
  * 
@@ -36,13 +37,13 @@ public class Srs2er {
         	        }
         	});
         
-        Sentences emps = (Sentences) unmarshaller.unmarshal(xml);
+        Sentences sentences = (Sentences) unmarshaller.unmarshal(xml);
         
 
         Trie trie = new Trie();
-        trie.InsertIntoTrie(emps);
+        trie.InsertIntoTrie(sentences);
         
-        trie.Print(System.out);
+        trie.Print(System.out, PrintDetail.TAGS_AND_PROBABILITY);
         
 	}
 
