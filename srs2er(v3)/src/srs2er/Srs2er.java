@@ -1,7 +1,6 @@
 package srs2er;
 
 import java.io.File;
-import java.nio.charset.Charset;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -10,6 +9,7 @@ import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
 import nlp.objects.Sentences;
+import nlp.processing.POSTagger;
 import trie.Trie;
 import trie.Trie.PrintDetail;
 
@@ -45,6 +45,8 @@ public class Srs2er {
         
         trie.Print(System.out, PrintDetail.TAGS_AND_PROBABILITY);
         
+        
+        new POSTagger().tag("Suresh is a good boy.", 0);
 	}
 
 }
