@@ -26,6 +26,7 @@ public class Trie {
 	/* Default print behavior to TAGS only */
 	private PrintDetail PrintBehavior = PrintDetail.TAGS_ONLY;
 	private List<Node> Root;
+	private boolean StatsCollected = false;
 
 	/**
 	 * Default constructor. Intilizes all the elements.
@@ -33,7 +34,14 @@ public class Trie {
 	public Trie() {
 		Root = new ArrayList<Node>();
 	}
+	
+	public boolean isStatsCollected() {
+		return StatsCollected;
+	}
 
+	public void setStatsCollected(boolean statsCollected) {
+		StatsCollected = statsCollected;
+	}
 	/**
 	 * Insert an array of sentences in the Trie. Array of sentence --> Sentences
 	 * class
