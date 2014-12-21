@@ -10,6 +10,7 @@ import javax.xml.bind.ValidationEventHandler;
 
 import nlp.objects.Sentences;
 import nlp.processing.POSTagger;
+import nlp.processing.statistics.StatisticsCollector;
 import trie.Trie;
 import trie.Trie.PrintDetail;
 
@@ -46,7 +47,8 @@ public class Srs2er {
         trie.print(System.out, PrintDetail.TAGS_AND_PROBABILITY);
         
         
-        new POSTagger().tag("Suresh is a good boy.", 0);
+        StatisticsCollector.Analyze(sentences, System.out);
+        
 	}
 
 }

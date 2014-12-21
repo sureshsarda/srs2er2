@@ -22,7 +22,6 @@ public class Trie {
 	/* Default print behavior to TAGS only */
 	private PrintDetail PrintBehavior = PrintDetail.TAGS_ONLY;
 	private List<Node> Root;
-	private boolean StatsCollected = false;
 
 	public enum PrintDetail {
 		TAGS_ONLY, //prints only POST of the trie
@@ -37,13 +36,6 @@ public class Trie {
 		Root = new ArrayList<Node>();
 	}
 	
-	public boolean isStatsCollected() {
-		return StatsCollected;
-	}
-
-	public void setStatsCollected(boolean statsCollected) {
-		StatsCollected = statsCollected;
-	}
 	/**
 	 * Insert an array of sentences in the Trie. Array of sentence --> Sentences
 	 * class
@@ -228,24 +220,6 @@ public class Trie {
 	/*
 	 * Trie print functions
 	 */
-
-	/**
-	 * Analyze the Trie and print the output to std out Analuzes and outputs
-	 * following: 1. For tags - a. Number of times they were used for ER tagging
-	 * and number of times they were not b. Number of tags which have always
-	 * been used for stop words 2. For Words - Number of words used in ER tags.
-	 * This will show how many words were never used and will help update the
-	 * list of stopwords.
-	 * 
-	 * Usage: Train the trie with some sentences using InsertIntoTrie() and call
-	 * this function to produce the output.
-	 * 
-	 * @param outStream
-	 *            : The output stream where the results are to be printed.
-	 */
-	public void analyze(PrintStream printer) {
-		// TODO Implementation Pending*/
-	}
 
 	/**
 	 * DO NOT USE THIS FUNCTION.

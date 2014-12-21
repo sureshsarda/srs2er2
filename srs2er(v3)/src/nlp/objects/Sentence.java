@@ -47,4 +47,30 @@ public class Sentence {
 	public void setDataModel(Model dataModel) {
 		DataModel = dataModel;
 	}
+	
+	public List<String> getPostForEntity(Integer id) {
+		Entity entity = DataModel.getEntities().get(id);
+		return getPostForEntity(entity);
+	}
+	public List<String> getPostForEntity(Entity entity) {
+		int length = entity.getLength();
+		List<String> tags = new ArrayList<String>(length);
+		for (int i = 0; i < length; i++) {
+			tags.add(Tokens.get(entity.getWordId() + i).getPost());
+		}
+		return tags;
+	}
+	public List<String> getPostForRelationship(Integer id) {
+		Relationship relation = DataModel.getRelationships().get(id);
+		return getPostForRelationship(relation);
+	}
+	public List<String> getPostForRelationship(Relationship relation) {
+		int length = relation.getLength();
+		List<String> tags = new ArrayList<String>(length);
+		for (int i = 0; i < length; i++) {
+			tags.add(Tokens.get(relation.getWordId() + i).getPost());
+		}
+		return tags;
+	}
+	
 }

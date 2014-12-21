@@ -29,7 +29,7 @@ public class Entity {
 		return WordId;
 	}
 	public void setWordId(int wordId) {
-		WordId = wordId;
+		WordId = wordId - 1;
 	}
 	
 	@XmlAttribute(name = "Length")
