@@ -1,4 +1,4 @@
-package nlp.processing;
+package tester;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nlp.objects.Sentence;
+import nlp.processing.POSTagger;
 
 
 public class TestSentence {

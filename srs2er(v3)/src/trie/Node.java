@@ -57,10 +57,10 @@ public class Node {
 		
 		AddWord(word);
 	}
-	public void AddChild(Node child) {
+	public void addChild(Node child) {
 		Children.add(child);
 	}
-	public Node FindChild(String post) {
+	public Node findChild(String post) {
 		Iterator<Node> itr = Children.iterator();
 		while (itr.hasNext()) {
 			Node current = itr.next();
@@ -85,7 +85,7 @@ public class Node {
 		Words.add(word);
 		
 		/*Update probability*/
-		IsStopWordProbability = (old * wordCount + (Stopwords.getInstance().Contains(word)?1.0:0.0)) / Words.size();
+		IsStopWordProbability = (old * wordCount + (Stopwords.getInstance().contains(word)?1.0:0.0)) / Words.size();
 	}
 	
 }

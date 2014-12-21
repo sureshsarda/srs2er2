@@ -53,7 +53,7 @@ public class Stopwords {
 	 * @param word
 	 * @return boolean
 	 */
-	public boolean Contains(String word) {
+	public boolean contains(String word) {
 		return words.contains(word);
 	}
 	

@@ -19,17 +19,19 @@ import nlp.objects.Word;
  *
  */
 public class Trie {
-	public enum PrintDetail {
-		TAGS_ONLY, TAGS_AND_PROBABILITY
-	};
-
 	/* Default print behavior to TAGS only */
 	private PrintDetail PrintBehavior = PrintDetail.TAGS_ONLY;
 	private List<Node> Root;
 	private boolean StatsCollected = false;
 
+	public enum PrintDetail {
+		TAGS_ONLY, //prints only POST of the trie
+		TAGS_AND_PROBABILITY //prints POSTs as well as the probability of that node
+	};
+
+	
 	/**
-	 * Default constructor. Intilizes all the elements.
+	 * Default constructor. Initializes all the elements.
 	 */
 	public Trie() {
 		Root = new ArrayList<Node>();
@@ -49,13 +51,13 @@ public class Trie {
 	 * @param trainingData
 	 *            The list of sentences encapsulated in Sentences type.
 	 */
-	public void InsertIntoTrie(Sentences trainingData) {
+	public void insertIntoTrie(Sentences trainingData) {
 		/*
 		 * For each sentence in the list, Insert into the trie if it doesn't
 		 * exist already.
 		 */
 		for (Sentence sentence : trainingData.getSentence()) {
-			InsertIntoTrie(sentence);
+			insertIntoTrie(sentence);
 		}
 	}
 
@@ -65,7 +67,7 @@ public class Trie {
 	 * @param sentence
 	 *            The sentence to be added.
 	 */
-	public void InsertIntoTrie(Sentence sentence) {
+	private void insertIntoTrie(Sentence sentence) {
 		/* Search if the root contains */
 		Iterator<Node> rootIterator = Root.iterator();
 		Node parent = null;
@@ -87,7 +89,7 @@ public class Trie {
 			Word first = sentence.getTokens().get(0);
 			Node node = new Node(first.getPost(), first.getName());
 			Root.add(node);
-			InsertRemaining(sentence, 1, node);
+			insertRemaining(sentence, 1, node);
 		} else {
 			/* Branch already exists, update */
 			Iterator<Word> wordIterator = sentence.getTokens().iterator();
@@ -96,11 +98,11 @@ public class Trie {
 			Word first = wordIterator.next();
 			while (wordIterator.hasNext()) {
 				Word currentWord = wordIterator.next();
-				Node found = parent.FindChild(currentWord.getPost());
+				Node found = parent.findChild(currentWord.getPost());
 				if (found != null)
 					parent = found;
 				else {
-					InsertRemaining(sentence,
+					insertRemaining(sentence,
 							sentence.getTokens().indexOf(currentWord), parent);
 					break;
 				}
@@ -118,11 +120,11 @@ public class Trie {
 	 * @param parent
 	 *            Continue here in the Trie
 	 */
-	private void InsertRemaining(Sentence sentence, int position, Node parent) {
+	private void insertRemaining(Sentence sentence, int position, Node parent) {
 		for (int i = position; i < sentence.getTokens().size(); i++) {
 			Word word = sentence.getTokens().get(i);
 			Node child = new Node(word.getPost(), word.getName());
-			parent.AddChild(child);
+			parent.addChild(child);
 			parent = child;
 		}
 		/* Insert leaf information of the sentence */
@@ -137,7 +139,7 @@ public class Trie {
 	 *            The sentence the look for.
 	 * @return
 	 */
-	public LeafNode Lookup(Sentence sentence) {
+	public LeafNode lookup(Sentence sentence) {
 		/*
 		 * Game-plan: Search the Trie for exact match If ExactMatch not found,
 		 * Search by removing stop words - Use AdvancedNodeSkip Algorithm If not
@@ -148,14 +150,14 @@ public class Trie {
 		List<Word> tokens = sentence.getTokens();
 		for (Node node : Root) {
 			if (node.getTag().compareTo(tokens.get(wordIndex).getPost()) == 0) {
-				LeafNode leafInfo = CheckExactMatch(node, sentence);
+				LeafNode leafInfo = checkExactMatch(node, sentence);
 				if (leafInfo == null)
 					break;
 				else
 					return leafInfo;
 			}
 		}
-		LeafNode leafInfo = AdvancedNodeSkip(Root, sentence);
+		LeafNode leafInfo = advancedNodeSkip(Root, sentence);
 		if (leafInfo == null) {
 			System.err.println("No match found in the trie.");
 			return null;
@@ -164,7 +166,7 @@ public class Trie {
 		}
 	}
 
-	private LeafNode CheckExactMatch(Node parent, Sentence sentence) {
+	private LeafNode checkExactMatch(Node parent, Sentence sentence) {
 
 		Iterator<Word> word = sentence.getTokens().iterator();
 		word.next(); // skip the first word
@@ -188,12 +190,11 @@ public class Trie {
 		}
 	}
 
-	private LeafNode AdvancedNodeSkip(List<Node> Root, Sentence sentence) {
-		// FIXME Incomplete Implementation
+	private LeafNode advancedNodeSkip(List<Node> Root, Sentence sentence) {
 		int wordIndex = 0;
 		List<Word> tokens = sentence.getTokens();
 		Stack<Node> removedStopWord = new Stack<Node>();
-		List<Node> test = ProbableRoutes(Root);
+		List<Node> test = probableRoutes(Root);
 
 		for (Node node : test) {
 			removedStopWord.push(node);
@@ -201,14 +202,25 @@ public class Trie {
 		return null;
 	}
 
-	private List<Node> ProbableRoutes(List<Node> parents) {
+	/**
+	 * Finds probable routes from the parent nodes after trying to skip the stop words.
+	 * @param parents
+	 * @return
+	 */
+	private List<Node> probableRoutes(List<Node> parents) {
 		List<Node> probablePaths = new ArrayList<Node>();
 		for (Node parent : parents) {
+		/* FIXME
+		 * It only tries to skip the unwanted nodes. It should be able to skip stop word tags
+		 * as well as consider them if required by test sentence.
+		 * 
+		 * For now it only skips all the possible stop words.
+		 */
 			if (parent.getIsStopWordProbability() <= 0.5) {
 				probablePaths.add(parent);
 				return probablePaths;
 			}
-			probablePaths.addAll(ProbableRoutes(parent.getChildren()));
+			probablePaths.addAll(probableRoutes(parent.getChildren()));
 		}
 		return null;
 	}
@@ -231,7 +243,7 @@ public class Trie {
 	 * @param outStream
 	 *            : The output stream where the results are to be printed.
 	 */
-	public void Analyze(PrintStream printer) {
+	public void analyze(PrintStream printer) {
 		// TODO Implementation Pending*/
 	}
 
@@ -243,7 +255,7 @@ public class Trie {
 		// FIXME Output is not formatted properly.
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		PrintStream ps = new PrintStream(baos);
-		Print(ps);
+		print(ps);
 		try {
 			return baos.toString("ISO-8859-1");
 		} catch (UnsupportedEncodingException e) {
@@ -259,10 +271,10 @@ public class Trie {
 	 *            The PrintStream to print the output
 	 * 
 	 */
-	public void Print(PrintStream printer) {
+	public void print(PrintStream printer) {
 		for (Node node : Root) {
 			printer.println();
-			TraverseAndPrint(node, 0, printer, this.PrintBehavior);
+			traverseAndPrint(node, 0, printer, this.PrintBehavior);
 		}
 	}
 
@@ -276,9 +288,9 @@ public class Trie {
 	 *            PrintDetail. This value will be set as default behavior and
 	 *            used in all subsequent calls unless changed otherwise.
 	 */
-	public void Print(PrintStream printer, PrintDetail printDetail) {
+	public void print(PrintStream printer, PrintDetail printDetail) {
 		PrintBehavior = printDetail;
-		Print(printer);
+		print(printer);
 	}
 
 	/**
@@ -288,7 +300,7 @@ public class Trie {
 	 * @param node
 	 *            The node into consideration
 	 */
-	private void PrintNode(Node node, PrintStream printer,
+	private void printNode(Node node, PrintStream printer,
 			PrintDetail printDetail) {
 		switch (printDetail) {
 		case TAGS_ONLY:
@@ -305,29 +317,29 @@ public class Trie {
 
 	}
 
-	private void TraverseAndPrint(Node node, int level, PrintStream printer,
+	private void traverseAndPrint(Node node, int level, PrintStream printer,
 			PrintDetail printDetail) {
 		// OffsetToLevel(level);
 		while (node.getChildren().get(0) != null) {
 			level++;
-			PrintNode(node, printer, printDetail);
+			printNode(node, printer, printDetail);
 			if (node.getChildren().size() > 1) {
 				for (int i = 1; i < node.getChildren().size(); i++) {
-					TraverseAndPrint(node.getChildren().get(i), level, printer,
+					traverseAndPrint(node.getChildren().get(i), level, printer,
 							printDetail);
-					OffsetToLevel(level, printer, printDetail);
+					offsetToLevel(level, printer, printDetail);
 				}
 			}
 			node = node.getChildren().get(0);
 			if (node.getChildren().isEmpty() == true) {
 				/* No more children to mine. Print and break */
-				PrintNode(node, printer, printDetail);
+				printNode(node, printer, printDetail);
 				break;
 			}
 		}
 	}
 
-	private void OffsetToLevel(int level, PrintStream printer,
+	private void offsetToLevel(int level, PrintStream printer,
 			PrintDetail printDetail) {
 		printer.println();
 		for (int i = 0; i < level; i++) {

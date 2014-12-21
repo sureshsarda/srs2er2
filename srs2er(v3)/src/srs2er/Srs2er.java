@@ -41,9 +41,9 @@ public class Srs2er {
         
 
         Trie trie = new Trie();
-        trie.InsertIntoTrie(sentences);
+        trie.insertIntoTrie(sentences);
         
-        trie.Print(System.out, PrintDetail.TAGS_AND_PROBABILITY);
+        trie.print(System.out, PrintDetail.TAGS_AND_PROBABILITY);
         
         
         new POSTagger().tag("Suresh is a good boy.", 0);
