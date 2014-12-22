@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class Word {
 
-	private int Id;
+	private Integer Id;
 	private String Post;
 	private String Name;
 
@@ -31,5 +31,10 @@ public class Word {
 	}
 	public void setName(String name) {
 		this.Name = name;
+	}
+	
+	@Override
+	public String toString() {
+		return this.Id.toString() + " " + this.Name + " " + this.Post;
 	}
 }

@@ -8,8 +8,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
+import nlp.objects.Sentence;
 import nlp.objects.Sentences;
-import nlp.processing.POSTagger;
 import nlp.processing.statistics.StatisticsCollector;
 import trie.Trie;
 import trie.Trie.PrintDetail;

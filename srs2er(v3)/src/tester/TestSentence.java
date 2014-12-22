@@ -14,28 +14,27 @@ public class TestSentence {
 	
 	String[] sentences;
 	List<Sentence> sentence=new ArrayList<Sentence>();
-	POSTagger post=new POSTagger();
 	
 	public TestSentence(String filename) throws IOException
 	{
 		extractSentences(filename);
-		tagSentences();
+	//	tagSentences();
 	}
 
-	private void tagSentences() {
-
-		int sentenceIndex=0;
-		for (String string : sentences) {
-			sentence.add(post.tag(string,sentenceIndex));
-			sentenceIndex++;
-		}
-		
-		for (Sentence sentence : sentence) {
-			System.out.println(sentence.getId());
-			System.out.println(sentence.getValue());
-			System.out.println(sentence.getTokens());
-		}
-	}
+//	private void tagSentences() {
+//
+//		int sentenceIndex=0;
+//		for (String string : sentences) {
+//			sentence.add(post.tag(string,sentenceIndex));
+//			sentenceIndex++;
+//		}
+//		
+//		for (Sentence sentence : sentence) {
+//			System.out.println(sentence.getId());
+//			System.out.println(sentence.getValue());
+//			System.out.println(sentence.getTokens());
+//		}
+//	}
 
 	private void extractSentences(String filename) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(filename));
