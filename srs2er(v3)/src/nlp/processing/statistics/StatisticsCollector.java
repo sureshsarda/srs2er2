@@ -11,6 +11,7 @@ import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import nlp.objects.Word;
+import nlp.processing.Stopwords;
 
 public class StatisticsCollector {
 
@@ -92,6 +93,9 @@ public class StatisticsCollector {
 			StatisticCollectorObject obj = Words.get(word);
 			printer.printf("\n%5s %3d (%d) %20s", "WORD",
 					obj.getErTagAssigned(), obj.getTotalOccurences(), word);
+			if (Stopwords.getInstance().contains(word) == true && obj.getErTagAssigned() > 0) {
+				printer.printf("*");
+			}
 		}
 
 		for (String post : Posts.keySet()) {
@@ -99,5 +103,7 @@ public class StatisticsCollector {
 			printer.printf("\n%5s %3d (%3d) %20s", "POST",
 					obj.getErTagAssigned(), obj.getTotalOccurences(), post);
 		}
+		
+		printer.printf("\n\n* The word is assigned an ER tag and is in stop words list");
 	}
 }

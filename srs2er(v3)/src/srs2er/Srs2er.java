@@ -47,6 +47,7 @@ public class Srs2er {
         trie.print(System.out, PrintDetail.TAGS_AND_PROBABILITY);
         
         
+        /*Prints WORD and POST uses on Stdout*/
         StatisticsCollector.Analyze(sentences, System.out);
         
 	}
