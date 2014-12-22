@@ -1,18 +1,38 @@
 package tester;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 
 public class Paragraph {
 	
 	private Sentences Paragraph;
+	
 	/**
 	 * Reads a paragraph from the inputFile provided and loads it. POSTags the setences.
 	 * @param inputFile
 	 */
 	public Paragraph(File inputFile) {
-		//FIXME Implement this
+		this.Paragraph = new Sentences();
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(inputFile));
+			//TODO Reads only one line from the file.
+			String paragraph = br.readLine();
+			load(paragraph);
+			br.close();
+		}
+		catch (IOException ioe) {
+			ioe.printStackTrace();
+			System.err.println("Error reading test data file.");
+		}
+		
 	}
 	
 	/**
@@ -20,7 +40,17 @@ public class Paragraph {
 	 * @param paragraph
 	 */
 	public Paragraph(String paragraph) {
-		//FIXME Implement this
+		this.Paragraph = new Sentences();
+		load(paragraph);
+	}
+	
+	private void load(String paragraphText) {
+		ArrayList<Sentence> sentences = new ArrayList<Sentence>();
+		for (String sentenceValue : Arrays.asList(paragraphText.split("\\."))) {
+			Sentence sent = new Sentence(sentenceValue);
+			sentences.add(sent);
+		}
+		this.Paragraph.setSentence(sentences);
 	}
 	
 	/**
@@ -41,4 +71,8 @@ public class Paragraph {
 		//FIXME Implement this
 	}
 	
+	@Override
+	public String toString() {
+		return this.Paragraph.toString();
+	}
 }

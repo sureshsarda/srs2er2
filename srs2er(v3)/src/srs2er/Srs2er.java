@@ -8,9 +8,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
-import nlp.objects.Sentence;
 import nlp.objects.Sentences;
-import nlp.processing.statistics.StatisticsCollector;
+import tester.Paragraph;
 import trie.Trie;
 import trie.Trie.PrintDetail;
 
@@ -44,12 +43,12 @@ public class Srs2er {
         Trie trie = new Trie();
         trie.insertIntoTrie(sentences);
         
-        trie.print(System.out, PrintDetail.TAGS_AND_PROBABILITY);
-        
+        trie.print(System.out, PrintDetail.TAGS_ONLY);
         
         /*Prints WORD and POST uses on Stdout*/
-        StatisticsCollector.Analyze(sentences, System.out);
+        //StatisticsCollector.Analyze(sentences, System.out);
         
+        Paragraph p = new Paragraph("Student details include username and password. Student shall be able to download the courses provided by the system. Instructor shall be capable of managing student grades.  Instructor shall evaluate student’s and group’s homework submissions online. Student shall upload solution of homework submission. Instructor shall be capable of automatically accepting Homework submissions.");
+        System.out.println(p.toString());
 	}
-
 }

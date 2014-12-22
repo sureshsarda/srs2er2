@@ -3,7 +3,6 @@ package nlp.processing.statistics;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import nlp.objects.Entity;

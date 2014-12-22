@@ -24,4 +24,14 @@ public class Sentences {
 		this.SentenceList = SentenceList;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (Sentence sentence : SentenceList) {
+			sb.append(sentence.toString());
+			sb.append(System.lineSeparator());
+		}
+		return sb.toString();
+	}
+	
 }

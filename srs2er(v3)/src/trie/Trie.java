@@ -182,6 +182,7 @@ public class Trie {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private LeafNode advancedNodeSkip(List<Node> Root, Sentence sentence) {
 		int wordIndex = 0;
 		List<Word> tokens = sentence.getTokens();

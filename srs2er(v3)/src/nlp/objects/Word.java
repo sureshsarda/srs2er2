@@ -8,11 +8,21 @@ public class Word {
 	private Integer Id;
 	private String Post;
 	private String Name;
+	private String LemmatizedName;
+
+	public String getLemmatizedName() {
+		return LemmatizedName;
+	}
+
+	public void setLemmatizedName(String lemmatizedName) {
+		LemmatizedName = lemmatizedName;
+	}
 
 	@XmlAttribute(name = "Id")
 	public int getId() {
 		return Id;
 	}
+
 	public void setId(int Id) {
 		this.Id = Id;
 	}
@@ -21,20 +31,23 @@ public class Word {
 	public String getPost() {
 		return Post;
 	}
+
 	public void setPost(String Post) {
 		this.Post = Post;
 	}
-	
+
 	@XmlElement(name = "Name")
 	public String getName() {
 		return Name;
 	}
+
 	public void setName(String name) {
 		this.Name = name;
 	}
-	
+
 	@Override
 	public String toString() {
-		return this.Id.toString() + " " + this.Name + " " + this.Post;
+		return this.Id.toString() + " " + this.Name + " " + this.Post + " "
+				+ (this.LemmatizedName == null ? "null" : this.LemmatizedName);
 	}
 }

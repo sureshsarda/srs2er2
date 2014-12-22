@@ -1,6 +1,5 @@
 package nlp.objects;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +7,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-import nlp.processing.POSTagger;
+import nlp.processing.StanfordProcessor;
+import edu.stanford.nlp.util.Triple;
 
 public class Sentence {
 
@@ -16,13 +16,39 @@ public class Sentence {
 	private String Value;
 	private List<Word> Tokens = new ArrayList<Word>();
 	private Model DataModel;
+	
+	public Sentence() {
+		/*Default constructor required for marshaling*/
+	}
 
+	/**
+	 * Create a sentence object with the value specified. Tags part of speech of the sentence.
+	 * @param value
+	 */
+	public Sentence(String value) {
+		this.Value = value;
+		List<Triple<String, String, String>> tokens = StanfordProcessor.getInstance().Annotate(value);
+		
+		Integer wordIndex = 0;
+		List<Word> words = new ArrayList<Word>(tokens.size());
+		for (Triple<String, String, String> triple : tokens) {
+			Word word = new Word();
+			word.setId(wordIndex++);
+			word.setName(triple.first());
+			word.setLemmatizedName(triple.second());
+			word.setPost(triple.third());
+			words.add(word);
+			
+		}
+		this.Tokens = words;
+	}
+	
 	/* Getters and Setters */
 	@XmlAttribute(name = "Id")
 	public int getId() {
 		return Id;
 	}
-
+	
 	public void setId(int id) {
 		Id = id;
 	}
@@ -55,25 +81,8 @@ public class Sentence {
 		DataModel = dataModel;
 	}
 	
-	public Sentence() {
-		/*Default constructor required for marshaling*/
-	}
-/*---------- POSTAGS THE SENTENCE---------- */
-	public Sentence(String value) {
-		this.Value = value;
-		int wordIndex = 0;
-		for (SimpleEntry<String, String> entry : POSTagger.getInstance().tag(value)) {
-			Word word = new Word();
-			word.setId(wordIndex++);
-			word.setName(entry.getKey());
-			word.setPost(entry.getValue());
-			this.Tokens.add(word);
-		}
-	}
-	
 	
 /*---------- POST TAGS FOR ENTITY, RELATIONSHIPS ----------*/
-	
 	/**
 	 * Returns Post tags for an entity.
 	 * 
