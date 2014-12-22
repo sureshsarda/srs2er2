@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
+import trie.Trie;
 
 public class Paragraph {
 	
@@ -53,6 +54,11 @@ public class Paragraph {
 		this.Paragraph.setSentence(sentences);
 	}
 	
+	public void acquireDataModel(Trie trie) {
+		for (Sentence sentence : this.Paragraph.getSentence()) {
+			sentence.setDataModel(trie.lookup(sentence).getDataModel());
+		}
+	}
 	/**
 	 * Converts the List of sentences into a xml format which can be read by the plugin.
 	 * @return XML in string format.
