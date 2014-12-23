@@ -45,9 +45,11 @@ public class Word {
 		this.Name = name;
 	}
 
+	public static final String PrintFormat = "%2d  %-4s %-15s %-15s";
+	
 	@Override
 	public String toString() {
-		return this.Id.toString() + " " + this.Name + " " + this.Post + " "
-				+ (this.LemmatizedName == null ? "null" : this.LemmatizedName);
+		return String.format(PrintFormat, this.Id, this.Post,this.Name,
+				(this.LemmatizedName == null ? "null" : this.LemmatizedName));
 	}
 }

@@ -148,6 +148,8 @@ public class Sentence {
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.Value);
 		sb.append(System.lineSeparator());
+		sb.append(String.format(Word.PrintFormat, 00 , "POST", "Name", "Lemmatized"));
+		sb.append(System.lineSeparator());
 		for (Word word : Tokens) {
 			sb.append(word.toString());
 			sb.append(System.lineSeparator());

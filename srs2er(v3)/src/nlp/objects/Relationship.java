@@ -62,11 +62,10 @@ public class Relationship {
 		sb.append(this.Name);
 		sb.append(" [");
 		for (RelationEntity entity: Connects) {
-			sb.append(entity.toString() + " ");
+			sb.append(entity.toString() + ",");
 		}
 		sb.append("]");
 		
 		return sb.toString();
 	}
 }
-

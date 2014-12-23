@@ -72,7 +72,7 @@ public class Entity {
 		sb.append(this.Name);
 		sb.append(" [");
 		for (Attribute attribute : Attributes) {
-			sb.append(attribute.toString() + " ");
+			sb.append(attribute.toString() + ",");
 		}
 		sb.append("]");
 		
