@@ -48,7 +48,9 @@ public class Srs2er {
         /*Prints WORD and POST uses on Stdout*/
         //StatisticsCollector.Analyze(sentences, System.out);
         
-        Paragraph p = new Paragraph("Student details include username and password. Student shall be able to download the courses provided by the system. Instructor shall be capable of managing student grades.  Instructor shall evaluate student’s and group’s homework submissions online. Student shall upload solution of homework submission. Instructor shall be capable of automatically accepting Homework submissions.");
+        Paragraph p = new Paragraph("The restaurant has a kitchen which employs chefs. "
+        							+ "Each branch has one manager to overlook its operations. "
+        							+ "Manager procures furniture and staff for the restaurant.");
         p.acquireDataModel(trie);
         
         System.out.println(p.toString());

@@ -15,7 +15,7 @@ public class Sentence {
 	private int Id;
 	private String Value;
 	private List<Word> Tokens = new ArrayList<Word>();
-	private Model DataModel;
+	private Model DataModel = new Model();
 	
 	public Sentence() {
 		/*Default constructor required for marshaling*/
@@ -152,6 +152,7 @@ public class Sentence {
 			sb.append(word.toString());
 			sb.append(System.lineSeparator());
 		}
+		sb.append(this.DataModel.toString());
 		return sb.toString();
 	}
 }

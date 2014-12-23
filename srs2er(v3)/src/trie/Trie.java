@@ -24,18 +24,18 @@ public class Trie {
 	private List<Node> Root;
 
 	public enum PrintDetail {
-		TAGS_ONLY, //prints only POST of the trie
-		TAGS_AND_PROBABILITY //prints POSTs as well as the probability of that node
+		TAGS_ONLY, // prints only POST of the trie
+		TAGS_AND_PROBABILITY // prints POSTs as well as the probability of that
+								// node
 	};
 
-	
 	/**
 	 * Default constructor. Initializes all the elements.
 	 */
 	public Trie() {
 		Root = new ArrayList<Node>();
 	}
-	
+
 	/**
 	 * Insert an array of sentences in the Trie. Array of sentence --> Sentences
 	 * class
@@ -141,8 +141,8 @@ public class Trie {
 		int wordIndex = 0;
 		List<Word> tokens = sentence.getTokens();
 		for (Node node : Root) {
-			if (node.getTag().compareTo(tokens.get(wordIndex).getPost()) == 0) {
-				LeafNode leafInfo = checkExactMatch(node, sentence);
+			if (tagComparer(node.getTag(), tokens.get(wordIndex).getPost()) == true) {
+				LeafNode leafInfo = checkExactMatch(node, sentence, 1);
 				if (leafInfo == null)
 					break;
 				else
@@ -158,30 +158,35 @@ public class Trie {
 		}
 	}
 
-	private LeafNode checkExactMatch(Node parent, Sentence sentence) {
-
-		Iterator<Word> word = sentence.getTokens().iterator();
-		word.next(); // skip the first word
-
-		while (true) {
-			Word currentWord = word.next();
-
-			for (Node child : parent.getChildren()) {
-				if (child.getTag().compareTo(currentWord.getPost()) == 0) {
-					parent = child;
-					if (word.hasNext() == true) {
-						// more words to compare
-						continue;
-					} else {
-						// this was the last word
-						return child.getLeafInformation();
-					}
+	private LeafNode checkExactMatch(Node parent, Sentence sentence,
+			int position) {
+		Word currentWord = sentence.getTokens().get(position);
+		for (Node child : parent.getChildren()) {
+			if (tagComparer(child.getTag(), currentWord.getPost()) == true) {
+				if (position + 1< sentence.getTokens().size()) {
+					return checkExactMatch(child, sentence, ++position);
+				} else {
+					// this was the last word
+					return child.getLeafInformation();
 				}
 			}
-			return null;
 		}
+		return null;
 	}
 
+	private boolean tagComparer(String tag1, String tag2) {
+		/* Prefix Match
+		 * If both the tags belong to same family, then, are considered same.
+		 * Refer POST Tag Categorization on oneNote.
+		 */
+		if (tag1.charAt(0) == tag2.charAt(0) && tag1.charAt(1) == tag2.charAt(1)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	@SuppressWarnings("unused")
 	private LeafNode advancedNodeSkip(List<Node> Root, Sentence sentence) {
 		int wordIndex = 0;
@@ -196,19 +201,22 @@ public class Trie {
 	}
 
 	/**
-	 * Finds probable routes from the parent nodes after trying to skip the stop words.
+	 * Finds probable routes from the parent nodes after trying to skip the stop
+	 * words.
+	 * 
 	 * @param parents
 	 * @return
 	 */
 	private List<Node> probableRoutes(List<Node> parents) {
 		List<Node> probablePaths = new ArrayList<Node>();
 		for (Node parent : parents) {
-		/* FIXME
-		 * It only tries to skip the unwanted nodes. It should be able to skip stop word tags
-		 * as well as consider them if required by test sentence.
-		 * 
-		 * For now it only skips all the possible stop words.
-		 */
+			/*
+			 * FIXME It only tries to skip the unwanted nodes. It should be able
+			 * to skip stop word tags as well as consider them if required by
+			 * test sentence.
+			 * 
+			 * For now it only skips all the possible stop words.
+			 */
 			if (parent.getIsStopWordProbability() <= 0.5) {
 				probablePaths.add(parent);
 				return probablePaths;

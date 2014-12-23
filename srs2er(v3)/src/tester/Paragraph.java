@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
+import trie.LeafNode;
 import trie.Trie;
 
 public class Paragraph {
@@ -56,7 +57,14 @@ public class Paragraph {
 	
 	public void acquireDataModel(Trie trie) {
 		for (Sentence sentence : this.Paragraph.getSentence()) {
-			sentence.setDataModel(trie.lookup(sentence).getDataModel());
+			LeafNode leafInfo = trie.lookup(sentence);
+			if (leafInfo == null) {
+				System.err.println("Lookup for -" + sentence.getValue() + " did not return any match.");
+			}
+			else {
+				sentence.setDataModel(leafInfo.getDataModel());
+			}
+				
 		}
 	}
 	/**

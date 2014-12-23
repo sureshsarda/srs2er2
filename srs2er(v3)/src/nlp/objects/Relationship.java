@@ -56,5 +56,17 @@ public class Relationship {
 		Connects = connects;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.Name);
+		sb.append(" [");
+		for (RelationEntity entity: Connects) {
+			sb.append(entity.toString() + " ");
+		}
+		sb.append("]");
+		
+		return sb.toString();
+	}
 }
 

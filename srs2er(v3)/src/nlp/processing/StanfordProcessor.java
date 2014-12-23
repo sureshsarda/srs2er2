@@ -19,6 +19,7 @@ public class StanfordProcessor {
 
 	private static StanfordProcessor instance = null;
 	private StanfordCoreNLP pipeline;
+	
 
 	private StanfordProcessor() {
 		Properties props;

@@ -30,5 +30,21 @@ public class Model {
 		Relationships = relationships;
 	}
 
-	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("ENTITIES");
+		sb.append(System.lineSeparator());
+		for (Entity entity : Entities) {
+			sb.append(entity.toString());
+			sb.append(System.lineSeparator());
+		}
+		sb.append("RELATIONSHIPS");
+		for (Relationship relationship : Relationships) {
+			sb.append(relationship);
+			sb.append(System.lineSeparator());
+		}
+		
+		return sb.toString();
+	}
 }

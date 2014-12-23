@@ -65,4 +65,17 @@ public class Entity {
 		Superclass = superclass;
 	}
 
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.Name);
+		sb.append(" [");
+		for (Attribute attribute : Attributes) {
+			sb.append(attribute.toString() + " ");
+		}
+		sb.append("]");
+		
+		return sb.toString();
+	}
 }
