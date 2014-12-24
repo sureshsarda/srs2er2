@@ -2,7 +2,7 @@ package util;
 
 public class Logger {
 	private static boolean Log = true;
-	
+
 	/*New Instance cannot be created*/
 	private Logger() {
 		
@@ -12,5 +12,8 @@ public class Logger {
 		if (Log == true) {
 			System.out.println(log);
 		}
+	}
+	public static void DontLog() {
+		Log = false;
 	}
 }
