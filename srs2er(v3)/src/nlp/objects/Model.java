@@ -21,7 +21,7 @@ public class Model {
 		Entities = entities;
 	}
 	
-	@XmlElementWrapper(name="Relationships")
+	@XmlElementWrapper(name="Relationnships")
 	@XmlElement(name = "Relationship")
 	public List<Relationship> getRelationships() {
 		return Relationships;

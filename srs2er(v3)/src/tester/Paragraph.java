@@ -6,7 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
+import nlp.objects.Attribute;
+import nlp.objects.Entity;
+import nlp.objects.Model;
+import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import trie.LeafNode;
@@ -15,6 +22,7 @@ import trie.Trie;
 public class Paragraph {
 	
 	private Sentences Paragraph;
+	private Model ParagraphDataModel;
 	
 	/**
 	 * Reads a paragraph from the inputFile provided and loads it. POSTags the setences.
@@ -64,9 +72,57 @@ public class Paragraph {
 			else {
 				sentence.setDataModel(leafInfo.getDataModel());
 			}
-				
+		}
+		createDataModel();
+	}
+
+	private void createDataModel() {
+		List<Entity> entities = new LinkedList<Entity>();
+		List<Relationship> relationships = new LinkedList<Relationship>();
+		
+		for (Sentence sentence : this.Paragraph.getSentence()) {
+			entities.addAll(sentence.getDataModel().getEntities());
+			relationships.addAll(sentence.getDataModel().getRelationships());
+		}
+		this.ParagraphDataModel = new Model();
+		this.ParagraphDataModel.setEntities(entities);
+		this.ParagraphDataModel.setRelationships(relationships);
+		
+		
+		
+	}
+	private void mergeDuplicateEntities() {
+		List<Entity> entities = this.ParagraphDataModel.getEntities();
+		Integer entitiesSize = entities.size();
+		for (int i = 0; i < entitiesSize; i++) {
+			Entity current = entities.get(i);
+			for (int j = i + 1; j < entitiesSize; j++) {
+				if (current.getName().compareTo(entities.get(j).getName()) == 0) {
+					/*Merge Entities*/
+					Entity duplicate = entities.get(j);
+					List<Attribute> original = duplicate.getAttributes();
+					original.addAll(duplicate.getAttributes());
+					current.setAttributes(original);
+					
+					entities.remove(j);
+					entitiesSize = entitiesSize - 1;
+					break;
+				}
+			}
 		}
 	}
+	
+	private boolean isPromotable(Attribute attribute) {
+		Iterator<Entity> entityItr = this.ParagraphDataModel.getEntities().iterator();
+		while (entityItr.hasNext()) {
+			Entity entity = entityItr.next();
+			if (entity.getName().compareTo(attribute.getName()) == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Converts the List of sentences into a xml format which can be read by the plugin.
 	 * @return XML in string format.

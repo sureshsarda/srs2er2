@@ -1,0 +1,1 @@
+A student takes courses. A student has name and address. Course has name and course id. Students take project.

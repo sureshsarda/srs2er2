@@ -46,7 +46,6 @@ public class Word {
 	}
 
 	public static final String PrintFormat = "%2d  %-4s %-15s %-15s";
-	
 	@Override
 	public String toString() {
 		return String.format(PrintFormat, this.Id, this.Post,this.Name,

@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
+import nlp.objects.Model;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import nlp.objects.Word;
@@ -19,7 +20,7 @@ import nlp.objects.Word;
  *
  */
 public class Trie {
-	/* Default print behavior to TAGS only */
+	/* Default print behavior to TAGS ONLY */
 	private PrintDetail PrintBehavior = PrintDetail.TAGS_ONLY;
 	private List<Node> Root;
 
@@ -36,6 +37,13 @@ public class Trie {
 		Root = new ArrayList<Node>();
 	}
 
+	
+	/*
+	 * ------------------------------------------------------------------------
+	 * INSERT INTO TRIE ROUTINES
+	 * ------------------------------------------------------------------------
+	 */
+
 	/**
 	 * Insert an array of sentences in the Trie. Array of sentence --> Sentences
 	 * class
@@ -43,6 +51,7 @@ public class Trie {
 	 * @param trainingData
 	 *            The list of sentences encapsulated in Sentences type.
 	 */
+	
 	public void insertIntoTrie(Sentences trainingData) {
 		/*
 		 * For each sentence in the list, Insert into the trie if it doesn't
@@ -123,6 +132,15 @@ public class Trie {
 		parent.setLeafInformation(sentence.getDataModel());
 	}
 
+	
+	/*
+	 * ------------------------------------------------------------------------
+	 * INSERTION ROUTINES END
+	 * 
+	 * LOOK UP ROUTINES BEING HERE
+	 * ------------------------------------------------------------------------
+	 */
+
 	/**
 	 * Implementation Pending Look for a sequence in the Trie. Match the closest
 	 * possible option and return.
@@ -149,13 +167,13 @@ public class Trie {
 					return leafInfo;
 			}
 		}
-		LeafNode leafInfo = advancedNodeSkip(Root, sentence);
-		if (leafInfo == null) {
-			System.err.println("No match found in the trie.");
-			return null;
-		} else {
-			return leafInfo;
-		}
+
+		return null;
+		/*
+		 * LeafNode leafInfo = advancedNodeSkip(Root, sentence); if (leafInfo ==
+		 * null) { System.err.println("No match found in the trie."); return
+		 * null; } else { return leafInfo; }
+		 */
 	}
 
 	private LeafNode checkExactMatch(Node parent, Sentence sentence,
@@ -163,7 +181,7 @@ public class Trie {
 		Word currentWord = sentence.getTokens().get(position);
 		for (Node child : parent.getChildren()) {
 			if (tagComparer(child.getTag(), currentWord.getPost()) == true) {
-				if (position + 1< sentence.getTokens().size()) {
+				if (position + 1 < sentence.getTokens().size()) {
 					return checkExactMatch(child, sentence, ++position);
 				} else {
 					// this was the last word
@@ -175,18 +193,18 @@ public class Trie {
 	}
 
 	private boolean tagComparer(String tag1, String tag2) {
-		/* Prefix Match
-		 * If both the tags belong to same family, then, are considered same.
-		 * Refer POST Tag Categorization on oneNote.
+		/*
+		 * Prefix Match If both the tags belong to same family, then, are
+		 * considered same. Refer POST Tag Categorization on oneNote.
 		 */
-		if (tag1.charAt(0) == tag2.charAt(0) && tag1.charAt(1) == tag2.charAt(1)) {
+		if (tag1.charAt(0) == tag2.charAt(0)
+				&& tag1.charAt(1) == tag2.charAt(1)) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	@SuppressWarnings("unused")
 	private LeafNode advancedNodeSkip(List<Node> Root, Sentence sentence) {
 		int wordIndex = 0;
@@ -197,7 +215,7 @@ public class Trie {
 		for (Node node : test) {
 			removedStopWord.push(node);
 		}
-		return null;
+		return new LeafNode(new Model());
 	}
 
 	/**
@@ -227,7 +245,14 @@ public class Trie {
 	}
 
 	/*
-	 * Trie print functions
+	 * ------------------------------------------------------------------------
+	 * LOOKUP FUNCTIONS END HERE
+	 * ------------------------------------------------------------------------
+	 */
+	/*
+	 * ------------------------------------------------------------------------
+	 * PRINT FUNCTIONS BEGIN HERE
+	 * ------------------------------------------------------------------------
 	 */
 
 	/**
