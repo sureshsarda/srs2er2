@@ -1,12 +1,11 @@
 package nlp.processing.statistics;
 
 import java.io.PrintStream;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
+import nlp.objects.Attribute;
 import nlp.objects.Entity;
 import nlp.objects.Relationship;
 import nlp.objects.Sentence;
@@ -66,6 +65,25 @@ public class StatisticsCollector {
 					object = Words.get(word);
 					object.increaseTaggedOccurence();
 					Posts.replace(word, object);
+				}
+				
+				for (Attribute attribute : entity.getAttributes()) {
+					for (String post  : sentence.getPostForAttribute(attribute)) {
+						if (Posts.containsKey(post) == false)
+							Posts.put(post, new StatisticCollectorObject());
+						object = Posts.get(post);
+						object.increaseTaggedOccurence();
+						Posts.replace(post, object);
+					}
+					
+					for (String word : Arrays.asList(attribute.getName().split(" "))) {
+						if (Words.containsKey(word) == false)
+							Words.put(word, new StatisticCollectorObject());
+						object = Words.get(word);
+						object.increaseTaggedOccurence();
+						Posts.replace(word, object);
+					}
+					
 				}
 			}
 
