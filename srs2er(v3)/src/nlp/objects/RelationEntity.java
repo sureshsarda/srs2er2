@@ -53,4 +53,13 @@ public class RelationEntity {
 	public String toString() {
 		return this.Name;
 	}
+	
+	public boolean equals(RelationEntity rent) {
+		//FIXME Compare Lemmetized names
+		if (this.Name.compareTo(rent.Name) == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

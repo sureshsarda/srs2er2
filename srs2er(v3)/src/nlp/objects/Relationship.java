@@ -68,4 +68,27 @@ public class Relationship {
 		
 		return sb.toString();
 	}
+	
+	public boolean equals(Relationship relation) {
+		//FIXME Compare lemmetized names here
+		if (this.Name.equals(relation.Name)) {
+			if (this.Connects.size() == relation.Connects.size()) {
+				//FIXME Not considered the fact that same entities can be in different order.
+				for (int i = 0; i < this.Connects.size(); i++) {
+					if (this.Connects.get(i).equals(relation.Connects.get(i)) == true)
+						continue;
+					else
+						return false;
+				}
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+		return false;
+
+	}
 }

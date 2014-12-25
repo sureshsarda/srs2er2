@@ -1,16 +1,15 @@
 package nlp.objects;
 
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-public class Attribute {
+public class Attribute implements Comparable<Attribute> {
 	private int Id;
 	private int WordId;
 	private int Length;
 	private String Name;
-	
-	/* Getters and Setters*/
+
+	/* Getters and Setters */
 	@XmlAttribute(name = "Id")
 	public int getId() {
 		return Id;
@@ -26,7 +25,7 @@ public class Attribute {
 	}
 
 	public void setWordId(int WordId) {
-		this.WordId = WordId;
+		this.WordId = WordId - 1;
 	}
 
 	@XmlAttribute(name = "Length")
@@ -46,9 +45,24 @@ public class Attribute {
 	public void setName(String name) {
 		Name = name;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.Name;
+	}
+
+	@Override
+	public int compareTo(Attribute o) {
+		// TODO Compare lemmetized names here.
+		return this.Name.compareTo(o.Name);
+	}
+
+	public boolean equals(Attribute attribute) {
+		if (this.Name.compareTo(attribute.Name) == 0) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 }
