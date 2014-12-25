@@ -23,6 +23,12 @@ public class Sentences {
 	public void setSentence(ArrayList<Sentence> SentenceList) {
 		this.SentenceList = SentenceList;
 	}
+	public void addSentence(ArrayList<Sentence> SentenceList) {
+		if (this.SentenceList == null) {
+			this.SentenceList = new ArrayList<Sentence>(100);
+		}
+		this.SentenceList.addAll(SentenceList);
+	}
 	
 	@Override
 	public String toString() {

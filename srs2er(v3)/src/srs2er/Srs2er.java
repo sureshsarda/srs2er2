@@ -1,6 +1,8 @@
 package srs2er;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -8,11 +10,11 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
-import edu.stanford.nlp.parser.shiftreduce.ShiftReduceTrainOptions.TrainingMethod;
 import nlp.objects.Sentences;
-import tester.Paragraph;
+import nlp.processing.statistics.StatisticsCollector;
 import trie.Trie;
 import trie.Trie.PrintDetail;
+import util.Logger;
 
 /**
  * 
@@ -21,13 +23,14 @@ import trie.Trie.PrintDetail;
  */
 public class Srs2er {
 
-	private static final String traningDataFile = "data//TrainingSentences2.xml";
+	private static final String[] trainingDataFiles = {
+			"data//TrainingSentences1.xml", "data/TrainingSentences2.xml",
+			"data/TrainingPooja.xml", "data/TrainingRohini.xml" };
 	private static final String testDataFile = "data/Test.txt";
-	
-	public static void main(String[] args) throws JAXBException {
+
+	public static void main(String[] args) throws JAXBException, FileNotFoundException {
 		JAXBContext jc = JAXBContext.newInstance(Sentences.class);
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
-		File xml = new File(traningDataFile);
 
 		/*
 		 * The following code overrides the default behavior of JABX which
@@ -35,7 +38,6 @@ public class Srs2er {
 		 * http://stackoverflow.com/questions/2633276
 		 * /jaxb-unmarshall-created-an-empty-object
 		 */
-
 		unmarshaller.setEventHandler(new ValidationEventHandler() {
 			public boolean handleEvent(ValidationEvent event) {
 				throw new RuntimeException(event.getMessage(), event
@@ -43,19 +45,32 @@ public class Srs2er {
 			}
 		});
 
-		Sentences sentences = (Sentences) unmarshaller.unmarshal(xml);
-
 		Trie trie = new Trie();
+		Sentences sentences = new Sentences();
+		
+		for (int i = 0; i < trainingDataFiles.length; i++) {
+			File xml = new File(trainingDataFiles[i]);
+			Sentences sentSet = (Sentences) unmarshaller.unmarshal(xml);
+			sentences.addSentence(sentSet.getSentence());
+			
+			Logger.Log(String.format(
+					"Reading %d sentences from file %s...",
+					sentSet.getSentence().size(), trainingDataFiles[i]));
+		}
+		
 		trie.insertIntoTrie(sentences);
-
+		
+		
 		trie.print(System.out, PrintDetail.TAGS_ONLY);
+		
+		/*File out = new File("stats.csv");
+		PrintStream ps = new PrintStream(out);
+		StatisticsCollector.Analyze(sentences, ps);*/
 
-		/* Prints WORD and POST uses on Stdout */
-		// StatisticsCollector.Analyze(sentences, System.out);
-
-		Paragraph p = new Paragraph(testDataFile);
-		p.acquireDataModel(trie);
-
-		System.out.println(p.toString());
+		/*
+		 * Paragraph p = new Paragraph(testDataFile); p.acquireDataModel(trie);
+		 * 
+		 * System.out.println(p.toString());
+		 */
 	}
 }

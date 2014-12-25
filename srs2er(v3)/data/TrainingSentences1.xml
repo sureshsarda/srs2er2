@@ -30,7 +30,7 @@
         <Superclass></Superclass>
       </Entity>
     </Entities>
-    <Relationships>
+    <Relationnships>
       <Relationship Id="0" WordId="7" Length="1">
         <Name>employs</Name>
         <Connects>
@@ -38,7 +38,7 @@
           <Entity EntityId="2" Cardanility="Many" Participation=""><Name>chefs</Name></Entity>
         </Connects>
       </Relationship>
-    </Relationships>
+    </Relationnships>
   </DataModel>
 </Sentence>
 <Sentence Id="2">
@@ -67,7 +67,7 @@
         <Superclass></Superclass>
       </Entity>
     </Entities>
-    <Relationships>
+    <Relationnships>
       <Relationship Id="0" WordId="7" Length="1">
         <Name>overlook</Name>
         <Connects>
@@ -75,7 +75,7 @@
           <Entity EntityId="1" Cardanility="One" Participation="Total"><Name>manager</Name></Entity>
         </Connects>
       </Relationship>
-    </Relationships>
+    </Relationnships>
   </DataModel>
 </Sentence>
 <Sentence Id="3">
@@ -113,7 +113,7 @@
         <Superclass></Superclass>
       </Entity>
     </Entities>
-    <Relationships />
+    <Relationnships />
   </DataModel>
 </Sentence>
 <Sentence Id="4">
@@ -141,7 +141,7 @@
         <Superclass></Superclass>
       </Entity>
     </Entities>
-    <Relationships />
+    <Relationnships />
   </DataModel>
 </Sentence>
 <Sentence Id="5">
@@ -174,7 +174,7 @@
         <Superclass></Superclass>
       </Entity>
     </Entities>
-    <Relationships>
+    <Relationnships>
       <Relationship Id="0" WordId="7" Length="1">
         <Name>employs</Name>
         <Connects>
@@ -182,7 +182,7 @@
           <Entity EntityId="2" Cardanility="" Participation=""><Name>chefs</Name></Entity>
         </Connects>
       </Relationship>
-    </Relationships>
+    </Relationnships>
   </DataModel>
 </Sentence>
 <Sentence Id="6">
@@ -217,7 +217,7 @@
         <Superclass></Superclass>
       </Entity>
     </Entities>
-    <Relationships />
+    <Relationnships />
   </DataModel>
 </Sentence>
 <Sentence Id="7">
@@ -245,7 +245,7 @@
         <Superclass></Superclass>
       </Entity>
     </Entities>
-    <Relationships>
+    <Relationnships>
       <Relationship Id="0" WordId="3" Length="1">
         <Name>visits</Name>
         <Connects>
@@ -253,7 +253,7 @@
           <Entity EntityId="1" Cardanility="" Participation=""><Name>restaurant</Name></Entity>
         </Connects>
       </Relationship>
-    </Relationships>
+    </Relationnships>
   </DataModel>
 </Sentence>
 <Sentence Id="8">
@@ -287,7 +287,7 @@
         <Superclass></Superclass>
       </Entity>
     </Entities>
-    <Relationships>
+    <Relationnships>
       <Relationship Id="0" WordId="9" Length="1">
         <Name>book</Name>
         <Connects>
@@ -295,7 +295,7 @@
           <Entity EntityId="1" Cardanility="" Participation=""><Name>table</Name></Entity>
         </Connects>
       </Relationship>
-    </Relationships>
+    </Relationnships>
   </DataModel>
 </Sentence>
 <Sentence Id="9">
@@ -323,7 +323,7 @@
         <Superclass></Superclass>
       </Entity>
     </Entities>
-    <Relationships />
+    <Relationnships />
   </DataModel>
 </Sentence>
 <Sentence Id="10">
@@ -356,7 +356,7 @@
         <Superclass></Superclass>
       </Entity>
     </Entities>
-    <Relationships>
+    <Relationnships>
       <Relationship Id="0" WordId="7" Length="1">
         <Name>serves</Name>
         <Connects>
@@ -364,7 +364,7 @@
           <Entity EntityId="2" Cardanility="" Participation=""><Name>drinks</Name></Entity>
         </Connects>
       </Relationship>
-    </Relationships>
+    </Relationnships>
   </DataModel>
 </Sentence>
 </Sentences>

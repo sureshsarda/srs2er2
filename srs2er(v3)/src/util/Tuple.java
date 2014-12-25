@@ -24,7 +24,7 @@ public class Tuple<T1, T2> {
 	public void setSecond(T2 obj) {
 		second = obj;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "(" + first.toString() + "," + second.toString() + ")";

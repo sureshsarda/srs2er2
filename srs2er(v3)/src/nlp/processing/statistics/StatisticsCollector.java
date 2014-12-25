@@ -1,9 +1,11 @@
 package nlp.processing.statistics;
 
 import java.io.PrintStream;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import nlp.objects.Entity;
 import nlp.objects.Relationship;
@@ -87,8 +89,42 @@ public class StatisticsCollector {
 			}
 		}
 
+		
+		
 		/* Printer Routine */
-		for (String word : Words.keySet()) {
+		/*Sorted Maps*/
+		/*Map<StatisticCollectorObject, String> reversedWords = new TreeMap<StatisticCollectorObject, String>();
+		Map<StatisticCollectorObject, String> reversedPosts = new TreeMap<StatisticCollectorObject, String>();
+		
+		for (String key : Words.keySet()) {
+			StatisticCollectorObject entry = Words.get(key);
+			reversedWords.put(entry, key);
+			
+		}
+		
+		for (String key : Posts.keySet()) {
+			StatisticCollectorObject entry = Words.get(key);
+			reversedPosts.put(entry, key);
+			
+		}
+		
+		
+		for (StatisticCollectorObject obj : reversedWords.keySet()) {
+			String word = reversedWords.get(obj);
+			printer.printf("\n%5s %3d (%d) %20s", "WORD",
+					obj.getErTagAssigned(), obj.getTotalOccurences(), word);
+			if (Stopwords.getInstance().contains(word) == true && obj.getErTagAssigned() > 0) {
+				printer.printf("*");
+			}
+		}
+
+		for (StatisticCollectorObject obj : reversedPosts.keySet()) {
+			String post = reversedPosts.get(obj);
+			printer.printf("\n%5s %3d (%3d) %20s", "POST",
+					obj.getErTagAssigned(), obj.getTotalOccurences(), post);
+		}*/
+		
+/*		for (String word : Words.keySet()) {
 			StatisticCollectorObject obj = Words.get(word);
 			printer.printf("\n%5s %3d (%d) %20s", "WORD",
 					obj.getErTagAssigned(), obj.getTotalOccurences(), word);
@@ -102,7 +138,22 @@ public class StatisticsCollector {
 			printer.printf("\n%5s %3d (%3d) %20s", "POST",
 					obj.getErTagAssigned(), obj.getTotalOccurences(), post);
 		}
-		
+*/
+		for (String word : Words.keySet()) {
+			StatisticCollectorObject obj = Words.get(word);
+			printer.printf("\n%s,%d,%d,%s", "WORD",
+					obj.getErTagAssigned(), obj.getTotalOccurences(), word);
+			if (Stopwords.getInstance().contains(word) == true && obj.getErTagAssigned() > 0) {
+				printer.printf("*");
+			}
+		}
+
+		for (String post : Posts.keySet()) {
+			StatisticCollectorObject obj = Posts.get(post);
+			printer.printf("\n%s,%d,%d,%s", "POST",
+					obj.getErTagAssigned(), obj.getTotalOccurences(), post);
+		}
+
 		printer.printf("\n\n* The word is assigned an ER tag and is in stop words list");
 	}
 }

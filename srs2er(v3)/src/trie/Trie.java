@@ -3,8 +3,8 @@ package trie;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -22,7 +22,7 @@ import nlp.objects.Word;
 public class Trie {
 	/* Default print behavior to TAGS ONLY */
 	private PrintDetail PrintBehavior = PrintDetail.TAGS_ONLY;
-	private List<Node> Root;
+	protected List<Node> Root;
 
 	public enum PrintDetail {
 		TAGS_ONLY, // prints only POST of the trie
@@ -282,7 +282,7 @@ public class Trie {
 	public void print(PrintStream printer) {
 		for (Node node : Root) {
 			printer.println();
-			traverseAndPrint(node, 0, printer, this.PrintBehavior);
+			node.print(printer, this.PrintBehavior, 0);
 		}
 	}
 
@@ -299,69 +299,5 @@ public class Trie {
 	public void print(PrintStream printer, PrintDetail printDetail) {
 		PrintBehavior = printDetail;
 		print(printer);
-	}
-
-	/**
-	 * The format in which every node will be printed when Print function is
-	 * called.
-	 * 
-	 * @param node
-	 *            The node into consideration
-	 */
-	private void printNode(Node node, PrintStream printer,
-			PrintDetail printDetail) {
-		switch (printDetail) {
-		case TAGS_ONLY:
-			printer.printf("%-5s", node.getTag());
-			break;
-		case TAGS_AND_PROBABILITY:
-			System.out.printf("%-5s(%1.2f) ", node.getTag(),
-					node.getIsStopWordProbability()); // print with probability
-			break;
-		default:
-			System.err.println("Invalid PrintDetail flag.");
-			break;
-		}
-
-	}
-
-	private void traverseAndPrint(Node node, int level, PrintStream printer,
-			PrintDetail printDetail) {
-		// OffsetToLevel(level);
-		while (node.getChildren().get(0) != null) {
-			level++;
-			printNode(node, printer, printDetail);
-			if (node.getChildren().size() > 1) {
-				for (int i = 1; i < node.getChildren().size(); i++) {
-					traverseAndPrint(node.getChildren().get(i), level, printer,
-							printDetail);
-					offsetToLevel(level, printer, printDetail);
-				}
-			}
-			node = node.getChildren().get(0);
-			if (node.getChildren().isEmpty() == true) {
-				/* No more children to mine. Print and break */
-				printNode(node, printer, printDetail);
-				break;
-			}
-		}
-	}
-
-	private void offsetToLevel(int level, PrintStream printer,
-			PrintDetail printDetail) {
-		printer.println();
-		for (int i = 0; i < level; i++) {
-			switch (printDetail) {
-			case TAGS_ONLY:
-				System.out.printf("%-5s", "|");
-				break;
-			case TAGS_AND_PROBABILITY:
-				System.out.printf("%-12s", "|");
-				break;
-			default: /* Invalid PrintDetail Information */
-				System.err.println("Invalid PrintDetail Flag.");
-				break;
-			}
-		}
 	}
 }
