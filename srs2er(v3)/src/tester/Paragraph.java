@@ -17,6 +17,7 @@ import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import trie.LeafNode;
+import trie.Lookup;
 import trie.Trie;
 
 public class Paragraph {
@@ -65,7 +66,7 @@ public class Paragraph {
 	
 	public void acquireDataModel(Trie trie) {
 		for (Sentence sentence : this.Paragraph.getSentence()) {
-			LeafNode leafInfo = trie.lookup(sentence);
+			LeafNode leafInfo = Lookup.strictMatch(trie, sentence);
 			if (leafInfo == null) {
 				System.err.println("Lookup for -" + sentence.getValue() + " did not return any match.");
 			}
@@ -73,7 +74,7 @@ public class Paragraph {
 				sentence.setDataModel(leafInfo.getDataModel());
 			}
 		}
-		createDataModel();
+		//createDataModel();
 	}
 
 	private void createDataModel() {

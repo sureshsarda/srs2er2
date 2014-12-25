@@ -2,7 +2,6 @@ package srs2er;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -11,7 +10,7 @@ import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
 import nlp.objects.Sentences;
-import nlp.processing.statistics.StatisticsCollector;
+import tester.Paragraph;
 import trie.Trie;
 import trie.Trie.PrintDetail;
 import util.Logger;
@@ -67,10 +66,10 @@ public class Srs2er {
 		PrintStream ps = new PrintStream(out);
 		StatisticsCollector.Analyze(sentences, ps);*/
 
-		/*
-		 * Paragraph p = new Paragraph(testDataFile); p.acquireDataModel(trie);
-		 * 
-		 * System.out.println(p.toString());
-		 */
+		
+		Paragraph p = new Paragraph(new File(testDataFile));
+		p.acquireDataModel(trie);
+		System.out.println(p.toString());
+		
 	}
 }
