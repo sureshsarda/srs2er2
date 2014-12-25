@@ -6,9 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import nlp.objects.Attribute;
 import nlp.objects.Entity;
@@ -19,6 +21,7 @@ import nlp.objects.Sentences;
 import trie.LeafNode;
 import trie.Lookup;
 import trie.Trie;
+import util.Logger;
 
 public class Paragraph {
 	
@@ -74,7 +77,7 @@ public class Paragraph {
 				sentence.setDataModel(leafInfo.getDataModel());
 			}
 		}
-		//createDataModel();
+		createDataModel();
 	}
 
 	private void createDataModel() {
@@ -88,29 +91,53 @@ public class Paragraph {
 		this.ParagraphDataModel = new Model();
 		this.ParagraphDataModel.setEntities(entities);
 		this.ParagraphDataModel.setRelationships(relationships);
+
+		mergeDuplicateEntities();
+		mergeDuplicateRelationships();
 		
 		
+	}
+	
+	private void mergeDuplicateRelationships() {
+		Set<Relationship> relationSet = new HashSet<Relationship>();
 		
+		for (Relationship relationship : this.ParagraphDataModel.getRelationships()) {
+			boolean result = relationSet.add(relationship);
+			if (result == false) {
+				Logger.Log("Duplicate Relationship removed.");
+			}
+		}
+		List<Relationship> newRelationList = new ArrayList<Relationship>(relationSet.size());
+		newRelationList.addAll(relationSet);
+		this.ParagraphDataModel.setRelationships(newRelationList);
 	}
 	private void mergeDuplicateEntities() {
 		List<Entity> entities = this.ParagraphDataModel.getEntities();
 		Integer entitiesSize = entities.size();
+		
 		for (int i = 0; i < entitiesSize; i++) {
 			Entity current = entities.get(i);
+			
 			for (int j = i + 1; j < entitiesSize; j++) {
-				if (current.getName().compareTo(entities.get(j).getName()) == 0) {
+				if (current.getLemmName().compareTo(entities.get(j).getLemmName()) == 0) {
 					/*Merge Entities*/
-					Entity duplicate = entities.get(j);
-					List<Attribute> original = duplicate.getAttributes();
-					original.addAll(duplicate.getAttributes());
-					current.setAttributes(original);
+					Entity duplicateName = entities.get(j);
+					Set<Attribute> attributeSet = new HashSet<Attribute>();
+					
+					attributeSet.addAll(current.getAttributes());
+					attributeSet.addAll(duplicateName.getAttributes());
+					
+					List<Attribute> newAttributeList = new ArrayList<Attribute>();
+					newAttributeList.addAll(attributeSet);
+					
+					current.setAttributes(newAttributeList);
 					
 					entities.remove(j);
 					entitiesSize = entitiesSize - 1;
-					break;
 				}
 			}
 		}
+		this.ParagraphDataModel.setEntities(entities);
 	}
 	
 	private boolean isPromotable(Attribute attribute) {
@@ -122,6 +149,10 @@ public class Paragraph {
 			}
 		}
 		return false;
+	}
+	
+	private void updateIds() {
+		
 	}
 	
 	/**
@@ -139,11 +170,15 @@ public class Paragraph {
 	 * @param filepath Absolute path of file to store the file. Provide the extension of the file.
 	 */
 	public void saveAsXml(String filepath) {
-		//FIXME Implement this
+		
 	}
 	
 	@Override
 	public String toString() {
 		return this.Paragraph.toString();
+	}
+	
+	public Model getParagraphDataModel() {
+		return this.ParagraphDataModel;
 	}
 }
