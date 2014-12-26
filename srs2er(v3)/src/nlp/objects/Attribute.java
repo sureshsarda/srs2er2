@@ -3,11 +3,14 @@ package nlp.objects;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
+import nlp.processing.StanfordProcessor;
+
 public class Attribute implements Comparable<Attribute> {
 	private int Id;
 	private int WordId;
 	private int Length;
 	private String Name;
+	private String LemmName;
 
 	/* Getters and Setters */
 	@XmlAttribute(name = "Id")
@@ -46,19 +49,41 @@ public class Attribute implements Comparable<Attribute> {
 		Name = name;
 	}
 
+	public String getLemmName() {
+		if (this.LemmName == null) {
+			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+		return LemmName;
+	}
+
 	@Override
 	public String toString() {
 		return this.Name;
 	}
 
 	@Override
-	public int compareTo(Attribute o) {
-		// TODO Compare lemmetized names here.
-		return this.Name.compareTo(o.Name);
+	public int compareTo(Attribute attribute) {
+
+		if (this.LemmName == null) {
+			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+		if (attribute.LemmName == null) {
+			attribute.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+		
+		return this.LemmName.compareTo(attribute.LemmName);
 	}
 
 	public boolean equals(Attribute attribute) {
-		if (this.Name.compareTo(attribute.Name) == 0) {
+
+		if (this.LemmName == null) {
+			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+		if (attribute.LemmName == null) {
+			attribute.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+
+		if (this.LemmName.compareTo(attribute.LemmName) == 0) {
 			return true;
 		} else {
 			return false;

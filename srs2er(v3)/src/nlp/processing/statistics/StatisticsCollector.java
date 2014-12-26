@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import util.Logger;
 import nlp.objects.Attribute;
 import nlp.objects.Entity;
 import nlp.objects.Relationship;
@@ -29,10 +30,8 @@ public class StatisticsCollector {
 		StatisticCollectorObject object = null;
 
 		/*
-		 * FIXME:
-		 * Improve code quality
-		 * Provide more functionality
-		 * Shift code to sentences class
+		 * FIXME: Improve code quality Provide more functionality Shift code to
+		 * sentences class
 		 */
 		/* Add/Update all the tokens */
 		for (Sentence sentence : sentences.getSentence()) {
@@ -66,24 +65,29 @@ public class StatisticsCollector {
 					object.increaseTaggedOccurence();
 					Posts.replace(word, object);
 				}
-				
+
 				for (Attribute attribute : entity.getAttributes()) {
-					for (String post  : sentence.getPostForAttribute(attribute)) {
-						if (Posts.containsKey(post) == false)
-							Posts.put(post, new StatisticCollectorObject());
-						object = Posts.get(post);
-						object.increaseTaggedOccurence();
-						Posts.replace(post, object);
+					try {
+						for (String post : sentence
+								.getPostForAttribute(attribute)) {
+							if (Posts.containsKey(post) == false)
+								Posts.put(post, new StatisticCollectorObject());
+							object = Posts.get(post);
+							object.increaseTaggedOccurence();
+							Posts.replace(post, object);
+						}
+
+						for (String word : Arrays.asList(attribute.getName()
+								.split(" "))) {
+							if (Words.containsKey(word) == false)
+								Words.put(word, new StatisticCollectorObject());
+							object = Words.get(word);
+							object.increaseTaggedOccurence();
+							Posts.replace(word, object);
+						}
+					} catch (NullPointerException ex) {
+						Logger.Log("Cannot parse attribute [" + sentence.getValue() + "]");
 					}
-					
-					for (String word : Arrays.asList(attribute.getName().split(" "))) {
-						if (Words.containsKey(word) == false)
-							Words.put(word, new StatisticCollectorObject());
-						object = Words.get(word);
-						object.increaseTaggedOccurence();
-						Posts.replace(word, object);
-					}
-					
 				}
 			}
 
@@ -107,69 +111,61 @@ public class StatisticsCollector {
 			}
 		}
 
-		
-		
 		/* Printer Routine */
-		/*Sorted Maps*/
-		/*Map<StatisticCollectorObject, String> reversedWords = new TreeMap<StatisticCollectorObject, String>();
-		Map<StatisticCollectorObject, String> reversedPosts = new TreeMap<StatisticCollectorObject, String>();
-		
-		for (String key : Words.keySet()) {
-			StatisticCollectorObject entry = Words.get(key);
-			reversedWords.put(entry, key);
-			
-		}
-		
-		for (String key : Posts.keySet()) {
-			StatisticCollectorObject entry = Words.get(key);
-			reversedPosts.put(entry, key);
-			
-		}
-		
-		
-		for (StatisticCollectorObject obj : reversedWords.keySet()) {
-			String word = reversedWords.get(obj);
-			printer.printf("\n%5s %3d (%d) %20s", "WORD",
-					obj.getErTagAssigned(), obj.getTotalOccurences(), word);
-			if (Stopwords.getInstance().contains(word) == true && obj.getErTagAssigned() > 0) {
-				printer.printf("*");
-			}
-		}
+		/* Sorted Maps */
+		/*
+		 * Map<StatisticCollectorObject, String> reversedWords = new
+		 * TreeMap<StatisticCollectorObject, String>();
+		 * Map<StatisticCollectorObject, String> reversedPosts = new
+		 * TreeMap<StatisticCollectorObject, String>();
+		 * 
+		 * for (String key : Words.keySet()) { StatisticCollectorObject entry =
+		 * Words.get(key); reversedWords.put(entry, key);
+		 * 
+		 * }
+		 * 
+		 * for (String key : Posts.keySet()) { StatisticCollectorObject entry =
+		 * Words.get(key); reversedPosts.put(entry, key);
+		 * 
+		 * }
+		 * 
+		 * 
+		 * for (StatisticCollectorObject obj : reversedWords.keySet()) { String
+		 * word = reversedWords.get(obj); printer.printf("\n%5s %3d (%d) %20s",
+		 * "WORD", obj.getErTagAssigned(), obj.getTotalOccurences(), word); if
+		 * (Stopwords.getInstance().contains(word) == true &&
+		 * obj.getErTagAssigned() > 0) { printer.printf("*"); } }
+		 * 
+		 * for (StatisticCollectorObject obj : reversedPosts.keySet()) { String
+		 * post = reversedPosts.get(obj); printer.printf("\n%5s %3d (%3d) %20s",
+		 * "POST", obj.getErTagAssigned(), obj.getTotalOccurences(), post); }
+		 */
 
-		for (StatisticCollectorObject obj : reversedPosts.keySet()) {
-			String post = reversedPosts.get(obj);
-			printer.printf("\n%5s %3d (%3d) %20s", "POST",
-					obj.getErTagAssigned(), obj.getTotalOccurences(), post);
-		}*/
-		
-/*		for (String word : Words.keySet()) {
-			StatisticCollectorObject obj = Words.get(word);
-			printer.printf("\n%5s %3d (%d) %20s", "WORD",
-					obj.getErTagAssigned(), obj.getTotalOccurences(), word);
-			if (Stopwords.getInstance().contains(word) == true && obj.getErTagAssigned() > 0) {
-				printer.printf("*");
-			}
-		}
-
-		for (String post : Posts.keySet()) {
-			StatisticCollectorObject obj = Posts.get(post);
-			printer.printf("\n%5s %3d (%3d) %20s", "POST",
-					obj.getErTagAssigned(), obj.getTotalOccurences(), post);
-		}
-*/
+		/*
+		 * for (String word : Words.keySet()) { StatisticCollectorObject obj =
+		 * Words.get(word); printer.printf("\n%5s %3d (%d) %20s", "WORD",
+		 * obj.getErTagAssigned(), obj.getTotalOccurences(), word); if
+		 * (Stopwords.getInstance().contains(word) == true &&
+		 * obj.getErTagAssigned() > 0) { printer.printf("*"); } }
+		 * 
+		 * for (String post : Posts.keySet()) { StatisticCollectorObject obj =
+		 * Posts.get(post); printer.printf("\n%5s %3d (%3d) %20s", "POST",
+		 * obj.getErTagAssigned(), obj.getTotalOccurences(), post); }
+		 */
 		for (String word : Words.keySet()) {
 			StatisticCollectorObject obj = Words.get(word);
-			printer.printf("\n%s,%d,%d,%s", "WORD",
-					obj.getErTagAssigned(), obj.getTotalOccurences(), word);
-			if (Stopwords.getInstance().contains(word) == true && obj.getErTagAssigned() > 0) {
+			printer.printf("\n%s,%d,%d,%s", "WORD", obj.getErTagAssigned(),
+					obj.getTotalOccurences(), word);
+			if (Stopwords.getInstance().contains(word) == true
+					&& obj.getErTagAssigned() > 0) {
 				printer.printf("*");
 			}
 		}
 
 		for (String post : Posts.keySet()) {
 			StatisticCollectorObject obj = Posts.get(post);
-			printer.printf("\n%s,%d,%d,%s", "POST",
-					obj.getErTagAssigned(), obj.getTotalOccurences(), post);
+			printer.printf("\n%s,%d,%d,%s", "POST", obj.getErTagAssigned(),
+					obj.getTotalOccurences(), post);
 		}
 
 		printer.printf("\n\n* The word is assigned an ER tag and is in stop words list");

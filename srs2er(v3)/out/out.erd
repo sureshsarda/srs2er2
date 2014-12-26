@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram container="" lastSavePath="" name="Unnammed" sqlPre="">
+<elements>
+<entity gen_position="" id="0" name="student" pname="student" sname="student" sql_sequenz_name="">
+<position h="-1" w="-1" x="0" y="0"/>
+<attribute fkeytbl="" foreignkey="false" genType="None" length="0" name="address" notnull="false" primarykey="false" type="VARCHAR" unique="false">
+<position h="-1" w="-1" x="0" y="0"/>
+</attribute>
+<attribute fkeytbl="" foreignkey="false" genType="None" length="0" name="name" notnull="false" primarykey="false" type="VARCHAR" unique="false">
+<position h="-1" w="-1" x="0" y="0"/>
+</attribute>
+</entity>
+<entity gen_position="" id="1" name="course" pname="course" sname="course" sql_sequenz_name="">
+<position h="-1" w="-1" x="0" y="0"/>
+<attribute fkeytbl="" foreignkey="false" genType="None" length="0" name="course id" notnull="false" primarykey="false" type="VARCHAR" unique="false">
+<position h="-1" w="-1" x="0" y="0"/>
+</attribute>
+<attribute fkeytbl="" foreignkey="false" genType="None" length="0" name="name" notnull="false" primarykey="false" type="VARCHAR" unique="false">
+<position h="-1" w="-1" x="0" y="0"/>
+</attribute>
+</entity>
+<entity gen_position="" id="1" name="project" pname="project" sname="project" sql_sequenz_name="">
+<position h="-1" w="-1" x="0" y="0"/>
+</entity>
+</elements>
+</diagram>

@@ -8,13 +8,17 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-public class Entity {
+import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
+import nlp.processing.StanfordProcessor;
+
+public class Entity implements Comparable<Entity>{
 	private int Id;
 	private int WordId;
 	private int Length;
 	private String Name;
 	private List<Attribute> Attributes = new ArrayList<Attribute>();
 	private String Superclass;
+	private String LemmName;
 	
 	/* Getters and Setters*/
 	@XmlAttribute(name = "Id")
@@ -67,6 +71,13 @@ public class Entity {
 	}
 
 	
+	public String getLemmName() {
+		if (this.LemmName == null) {
+			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+		return LemmName;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -80,9 +91,20 @@ public class Entity {
 		return sb.toString();
 	}
 
+	@Override
+	public int compareTo(Entity entity) {
+		return this.Name.compareTo(entity.Name);
+	}
 	public boolean equals(Entity entity) {
-		//FIXME Compare lemmetized names here
-		if (this.Name.equals(entity.Name)) {
+
+		if (this.LemmName == null) {
+			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+		if (entity.LemmName == null) {
+			entity.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+		
+		if (this.LemmName.equals(entity.LemmName)) {
 			if (this.Attributes.size() == entity.Attributes.size()) {
 				//FIXME Not considered the fact that same entities can be in different order.
 				for (int i = 0; i < this.Attributes.size(); i++) {

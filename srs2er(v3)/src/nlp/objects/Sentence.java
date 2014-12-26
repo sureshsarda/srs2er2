@@ -143,6 +143,15 @@ public class Sentence {
 		return tags;
 	}
 	
+	public List<String> getPostForAttribute(Attribute attribute) {
+		int length = attribute.getLength();
+		List<String> tags = new ArrayList<String>(length);
+		for (int i = 0; i < length; i++) {
+			tags.add(Tokens.get(attribute.getWordId() + i).getPost());
+		}
+		return tags;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

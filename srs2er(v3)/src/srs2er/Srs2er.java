@@ -2,17 +2,20 @@ package srs2er;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 import nlp.objects.Sentences;
+import nlp.processing.statistics.StatisticsCollector;
 import tester.Paragraph;
 import trie.Trie;
-import trie.Trie.PrintDetail;
 import util.Logger;
 
 /**
@@ -26,6 +29,8 @@ public class Srs2er {
 			"data//TrainingSentences1.xml", "data/TrainingSentences2.xml",
 			"data/TrainingPooja.xml", "data/TrainingRohini.xml" };
 	private static final String testDataFile = "data/Test.txt";
+	
+	private static final String outputFile = "out/out.erd";
 
 	public static void main(String[] args) throws JAXBException, FileNotFoundException {
 		JAXBContext jc = JAXBContext.newInstance(Sentences.class);
@@ -60,16 +65,28 @@ public class Srs2er {
 		trie.insertIntoTrie(sentences);
 		
 		
-		trie.print(System.out, PrintDetail.TAGS_ONLY);
+		//trie.print(System.out, PrintDetail.TAGS_ONLY);
 		
-		/*File out = new File("stats.csv");
+		File out = new File("stats.csv");
 		PrintStream ps = new PrintStream(out);
-		StatisticsCollector.Analyze(sentences, ps);*/
+		StatisticsCollector.Analyze(sentences, ps);
 
 		
 		Paragraph p = new Paragraph(new File(testDataFile));
 		p.acquireDataModel(trie);
-		System.out.println(p.toString());
+		System.out.println(p.getParagraphDataModel().toString());
 		
+		
+		
+		try {
+			ErdBuilder erdb = new ErdBuilder(new File(outputFile));	
+			erdb.parse(p.getParagraphDataModel());
+		}
+		catch (ParserConfigurationException pce) {
+			pce.printStackTrace();
+		}
+		catch (TransformerException te) {
+			te.printStackTrace();
+		}
 	}
 }

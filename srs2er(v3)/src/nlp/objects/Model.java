@@ -40,6 +40,7 @@ public class Model {
 			sb.append(System.lineSeparator());
 		}
 		sb.append("RELATIONSHIPS");
+		sb.append(System.lineSeparator());
 		for (Relationship relationship : Relationships) {
 			sb.append(relationship);
 			sb.append(System.lineSeparator());

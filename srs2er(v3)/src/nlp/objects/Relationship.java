@@ -8,11 +8,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-public class Relationship {
+import nlp.processing.StanfordProcessor;
+
+public class Relationship implements Comparable<Relationship>{
 	private int Id;
 	private int WordId;
 	private int Length;
 	private String Name;
+	private String LemmName;
 	private List<RelationEntity> Connects = new ArrayList<RelationEntity>();
 	
 	@XmlAttribute(name = "Id")
@@ -56,6 +59,13 @@ public class Relationship {
 		Connects = connects;
 	}
 
+	public String getLemmString() {
+		if (this.LemmName == null) {
+			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+		return LemmName;
+
+	}
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -69,9 +79,26 @@ public class Relationship {
 		return sb.toString();
 	}
 	
+	@Override
+	public int compareTo(Relationship relation) {
+		if (this.LemmName == null) {
+			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+		if (relation.LemmName == null) {
+			relation.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+
+		return this.Name.compareTo(relation.Name);
+	}
 	public boolean equals(Relationship relation) {
-		//FIXME Compare lemmetized names here
-		if (this.Name.equals(relation.Name)) {
+		if (this.LemmName == null) {
+			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+		if (relation.LemmName == null) {
+			relation.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
+		}
+
+		if (this.LemmName.equals(relation.LemmName)) {
 			if (this.Connects.size() == relation.Connects.size()) {
 				//FIXME Not considered the fact that same entities can be in different order.
 				for (int i = 0; i < this.Connects.size(); i++) {

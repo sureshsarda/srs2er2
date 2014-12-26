@@ -20,7 +20,31 @@ public class StanfordProcessor {
 	private static StanfordProcessor instance = null;
 	private StanfordCoreNLP pipeline;
 	
-
+	public String compareLemmatisedString(String string1, String string2) {
+		String lemmaString1 = LemmatisedString(string1);
+		String lemmaString2 = LemmatisedString(string2);
+		
+		if (lemmaString1.compareTo(lemmaString2) == 0) {
+			return lemmaString1;
+		}
+		else {
+			return null;	
+		}
+	}
+	
+	public String LemmatisedString(String string) {
+		Annotation annotation = new Annotation(string);
+		this.pipeline.annotate(annotation);
+		
+		List<CoreLabel> labels = annotation.get(TokensAnnotation.class);
+		String lemmaString = "";
+		for (CoreLabel coreLabel : labels) {
+			lemmaString += coreLabel.get(LemmaAnnotation.class);
+		}
+		lemmaString = lemmaString.trim();
+		return lemmaString;
+	}
+	
 	private StanfordProcessor() {
 		Properties props;
 		props = new Properties();
