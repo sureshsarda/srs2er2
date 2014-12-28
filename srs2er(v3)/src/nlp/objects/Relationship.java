@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 
 import nlp.processing.StanfordProcessor;
 
-public class Relationship implements Comparable<Relationship>{
+public class Relationship {
 	private int Id;
 	private int WordId;
 	private int Length;
@@ -34,6 +34,7 @@ public class Relationship implements Comparable<Relationship>{
 		WordId = wordId - 1;
 	}
 	
+	
 	@XmlAttribute(name = "Length")
 	public int getLength() {
 		return Length;
@@ -48,6 +49,13 @@ public class Relationship implements Comparable<Relationship>{
 	}
 	public void setName(String name) {
 		Name = name;
+		
+	}
+	public String getLemmName() {
+		if (LemmName == null) {
+			LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);	
+		}
+		return this.LemmName;
 	}
 	
 	@XmlElementWrapper(name="Connects")
@@ -59,17 +67,10 @@ public class Relationship implements Comparable<Relationship>{
 		Connects = connects;
 	}
 
-	public String getLemmString() {
-		if (this.LemmName == null) {
-			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
-		}
-		return LemmName;
-
-	}
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(this.Name);
+		sb.append(this.getLemmName());
 		sb.append(" [");
 		for (RelationEntity entity: Connects) {
 			sb.append(entity.toString() + ",");
@@ -79,26 +80,9 @@ public class Relationship implements Comparable<Relationship>{
 		return sb.toString();
 	}
 	
-	@Override
-	public int compareTo(Relationship relation) {
-		if (this.LemmName == null) {
-			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
-		}
-		if (relation.LemmName == null) {
-			relation.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
-		}
-
-		return this.Name.compareTo(relation.Name);
-	}
 	public boolean equals(Relationship relation) {
-		if (this.LemmName == null) {
-			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
-		}
-		if (relation.LemmName == null) {
-			relation.LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);
-		}
-
-		if (this.LemmName.equals(relation.LemmName)) {
+		
+		if (this.getLemmName().equals(relation.getLemmName())) {
 			if (this.Connects.size() == relation.Connects.size()) {
 				//FIXME Not considered the fact that same entities can be in different order.
 				for (int i = 0; i < this.Connects.size(); i++) {

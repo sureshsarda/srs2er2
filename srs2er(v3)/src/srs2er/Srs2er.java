@@ -23,8 +23,6 @@ import util.Logger;
  * @author Suresh Sarda
  *
  */
-
-
 public class Srs2er {
 
 	private static final String[] trainingDataFiles = {
@@ -77,18 +75,6 @@ public class Srs2er {
 		Paragraph p = new Paragraph(new File(testDataFile));
 		p.acquireDataModel(trie);
 		System.out.println(p.getParagraphDataModel().toString());
-		
-		
-		
-		try {
-			ErdBuilder erdb = new ErdBuilder(new File(outputFile));	
-			erdb.parse(p.getParagraphDataModel());
-		}
-		catch (ParserConfigurationException pce) {
-			pce.printStackTrace();
-		}
-		catch (TransformerException te) {
-			te.printStackTrace();
-		}
+		p.saveAsXml(outputFile);
 	}
 }
