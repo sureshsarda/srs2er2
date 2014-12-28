@@ -24,8 +24,7 @@ import util.Logger;
  *
  */
 
-/*This comment is just to keep longest streak active*/
-/*Date 27-12-2014*/
+
 public class Srs2er {
 
 	private static final String[] trainingDataFiles = {
