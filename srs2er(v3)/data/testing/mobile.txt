@@ -1,0 +1,1 @@
+Mobile is manufactured by a company. Every mobile has an operating system, phone memory as well as a processor frequency. A mobile is identified by IMEI number. A mobile is owned by a user. Mobile is manufactured by a mobile company. Mobile has a fixed price. A shop sells mobiles. Mobiles sold by a shop are recorded. Customers buy mobiles from a shop.
