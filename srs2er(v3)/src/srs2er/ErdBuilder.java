@@ -44,10 +44,10 @@ public class ErdBuilder {
 
 		Element diagram = doc.createElement("diagram");
 
-//		diagram.setAttribute("container", "");
-//		diagram.setAttribute("lastSavePath", "");
-//		diagram.setAttribute("name", "Unnammed");
-//		diagram.setAttribute("sqlPre", "");
+		diagram.setAttribute("container", "");
+		diagram.setAttribute("lastSavePath", "");
+		diagram.setAttribute("name", "Unnammed");
+		diagram.setAttribute("sqlPre", "");
 
 		Element elements = doc.createElement("elements");
 
@@ -72,12 +72,12 @@ public class ErdBuilder {
 		Element entity = doc.createElement("entity");
 		appendTo.appendChild(entity);
 
-//		entity.setAttribute("gen_position", "");
+		entity.setAttribute("gen_position", "");
 		entity.setAttribute("id", String.valueOf(e.getId()));
 		entity.setAttribute("name", e.getLemmName());
-//		entity.setAttribute("pname", e.getLemmName());
-//		entity.setAttribute("sname", e.getLemmName());
-//		entity.setAttribute("sql_sequenz_name", "");
+		entity.setAttribute("pname", e.getLemmName());
+		entity.setAttribute("sname", e.getLemmName());
+		entity.setAttribute("sql_sequenz_name", "");
 
 		addPositionElement(entity);
 
@@ -96,14 +96,14 @@ public class ErdBuilder {
 		appendTo.appendChild(attribute);
 
 		attribute.setAttribute("name", attrb.getName());
-//		attribute.setAttribute("unique", "false");
-//		attribute.setAttribute("type", "VARCHAR");
-//		attribute.setAttribute("primarykey", "false");
-//		attribute.setAttribute("notnull", "false");
-//		attribute.setAttribute("length", "0");
-//		attribute.setAttribute("genType", "None");
-//		attribute.setAttribute("foreignkey", "false");
-//		attribute.setAttribute("fkeytbl", "");
+		attribute.setAttribute("unique", "false");
+		attribute.setAttribute("type", "VARCHAR");
+		attribute.setAttribute("primarykey", "false");
+		attribute.setAttribute("notnull", "false");
+		attribute.setAttribute("length", "0");
+		attribute.setAttribute("genType", "None");
+		attribute.setAttribute("foreignkey", "false");
+		attribute.setAttribute("fkeytbl", "");
 
 		addPositionElement(attribute);
 	}
@@ -120,13 +120,13 @@ public class ErdBuilder {
 		Element relationship = doc.createElement("relation");
 		appendTo.appendChild(relationship);
 
-//		relationship.setAttribute("gen_position", "");
+		relationship.setAttribute("gen_position", "");
 		relationship.setAttribute("id", String.valueOf(r.getId()));
 		relationship.setAttribute("name", r.getLemmName());
-//		relationship.setAttribute("pname", r.getLemmName());
-//		relationship.setAttribute("sname", r.getLemmName());
-//		relationship.setAttribute("sql_sequenz_name", "");
-//		relationship.setAttribute("makeTable", "true");
+		relationship.setAttribute("pname", r.getLemmName());
+		relationship.setAttribute("sname", r.getLemmName());
+		relationship.setAttribute("sql_sequenz_name", "");
+		relationship.setAttribute("makeTable", "true");
 
 		addPositionElement(relationship);
 	}
@@ -156,8 +156,8 @@ public class ErdBuilder {
 
 		connection.setAttribute("from", from.toString());
 		connection.setAttribute("to", to.toString());
-//		connection.setAttribute("multiplicity", "0");
-//		connection.setAttribute("cascades", "");
+		connection.setAttribute("multiplicity", "0");
+		connection.setAttribute("cascades", "");
 
 	}
 

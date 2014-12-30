@@ -5,9 +5,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
+import nlp.objects.Attribute;
+import nlp.objects.Entity;
+import nlp.objects.Model;
+import nlp.objects.RelationEntity;
+import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Word;
 import util.Logger;
+import util.Name;
 import util.Tuple;
 
 /**
@@ -22,7 +28,7 @@ public class Lookup {
 	private static final Integer FAMILY_SAME = 25;
 	private static final Integer DIFFERENT = 100;
 
-	
+
 	public static LeafNode strictMatch(Trie trie, Sentence sentence) {
 		Tuple<Node, Integer> base = searchList(trie.Root, sentence.getTokens()
 				.get(0).getPost());
@@ -36,7 +42,7 @@ public class Lookup {
 		} else {
 			/* Different families. Apply Node Skip Algorithm */
 			Logger.Log(String.format(
-					"Lookup for %s failed. Applying NodeSkip Algorithm...",
+					"Lookup Failed: %s.\nApplying NodeSkip Algorithm...",
 					sentence.getValue()));
 			Logger.Log("Skipping.");
 			return null;
@@ -51,7 +57,7 @@ public class Lookup {
 			Word currentWord = tokenIterator.next();
 			Tuple<Node, Integer> searchResult = searchList(
 					parent.getChildren(), currentWord.getPost());
-
+			
 			if (searchResult.second() == EXACTLY_SAME) {
 				parent = searchResult.first();
 			} else if (searchResult.second == FAMILY_SAME) {
@@ -59,17 +65,46 @@ public class Lookup {
 						"Lookup: %s matched in family. WordIndex = %d",
 						currentWord.getPost(), currentWord.getId()));
 				parent = searchResult.first();
-			}
-			else {
+			/*}else if (searchResult.second() == DIFFERENT) {
+				Logger.Log(String.format("Lookup: %s did not match. WordIndex = %d (Approximated to different tags)",
+						currentWord.getPost(), currentWord.getId()));
+				parent = searchResult.first();*/
+			} else {
 				Logger.Log(String.format(
-						"Lookup for %s failed. Applying NodeSkip Algorithm...",
+						"Lookup Failed: %s.\nApplying NodeSkip Algorithm...",
 						sentence.getValue()));
+				Logger.Log(String
+						.format("Trying to match:%s\nBut parent has children:%s",
+								currentWord.toString(), parent.getChildren()
+										.toString()));
 				Logger.Log("Skipping.");
 				return null;
 			}
 
 		}
+		processDataModel(sentence, parent.getLeafInformation().getDataModel());
 		return parent.getLeafInformation();
+	}
+
+	private static void processDataModel(Sentence sentence, Model model) {
+
+		for (Entity entity : model.getEntities()) {
+			entity.setName(Name.buildName(sentence.getTokens(),
+					entity.getWordId(), entity.getLength()));
+			for (Attribute attribute : entity.getAttributes()) {
+				attribute.setName(Name.buildName(sentence.getTokens(),
+						attribute.getWordId(), attribute.getLength()));
+			}
+		}
+
+		for (Relationship relationship : model.getRelationships()) {
+			relationship.setName(Name.buildName(sentence.getTokens(),
+					relationship.getWordId(), relationship.getLength()));
+			for (RelationEntity re : relationship.getConnects()) {
+				re.setName(model.getEntities().get(re.getEntityId())
+						.getLemmName());
+			}
+		}
 	}
 
 	private static Tuple<Node, Integer> searchList(List<Node> list, String post) {
@@ -97,7 +132,8 @@ public class Lookup {
 		}
 
 		/* Tags are different */
-		return new Tuple<Node, Integer>(null, DIFFERENT);
+			return new Tuple<Node, Integer>(null, DIFFERENT);
+
 	}
 
 	private static Integer CalculateTagDifferenceCost(String tag1, String tag2) {
@@ -122,7 +158,7 @@ public class Lookup {
 		Stack<Tuple<Node, Integer>> untraversedPivots = new Stack<Tuple<Node, Integer>>();
 		List<Tuple<Node, Integer>> probableLeaves = new LinkedList<Tuple<Node, Integer>>();
 		int level = 0; /* Token index */
-		
+
 		return null;
 	}
 

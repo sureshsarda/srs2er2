@@ -21,6 +21,7 @@ import nlp.objects.Model;
 import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
+import nlp.objects.Word;
 import srs2er.ErdBuilder;
 import trie.LeafNode;
 import trie.Lookup;
@@ -28,13 +29,15 @@ import trie.Trie;
 import util.Logger;
 
 public class Paragraph {
-	
+
 	private Sentences Paragraph;
 	private Model ParagraphDataModel;
-	
-	//FIXME This class is not at its proper location.
+
+	// FIXME This class is not at its proper location.
 	/**
-	 * Reads a paragraph from the inputFile provided and loads it. POSTags the setences.
+	 * Reads a paragraph from the inputFile provided and loads it. POSTags the
+	 * setences.
+	 * 
 	 * @param inputFile
 	 */
 	public Paragraph(File inputFile) {
@@ -42,42 +45,46 @@ public class Paragraph {
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(inputFile));
-			//TODO Reads only one line from the file. That is one paragraph
+			// TODO Reads only one line from the file. That is one paragraph
+			// TODO Lines starting with # are comments.
 			String paragraph = br.readLine();
 			load(paragraph);
 			br.close();
-		}
-		catch (IOException ioe) {
+		} catch (IOException ioe) {
 			ioe.printStackTrace();
 			System.err.println("Error reading test data file.");
 		}
 	}
-	
+
 	/**
-	 * Loads the paragraph provided from paragraph into the list of sentences. POSTags the sentences.
+	 * Loads the paragraph provided from paragraph into the list of sentences.
+	 * POSTags the sentences.
+	 * 
 	 * @param paragraph
 	 */
 	public Paragraph(String paragraph) {
 		this.Paragraph = new Sentences();
 		load(paragraph);
 	}
-	
+
 	private void load(String paragraphText) {
 		ArrayList<Sentence> sentences = new ArrayList<Sentence>();
 		for (String sentenceValue : Arrays.asList(paragraphText.split("\\."))) {
 			Sentence sent = new Sentence(sentenceValue);
+
 			sentences.add(sent);
 		}
 		this.Paragraph.setSentence(sentences);
 	}
-	
+
 	public void acquireDataModel(Trie trie) {
 		for (Sentence sentence : this.Paragraph.getSentence()) {
 			LeafNode leafInfo = Lookup.strictMatch(trie, sentence);
 			if (leafInfo == null) {
-				System.err.println("Lookup for -" + sentence.getValue() + " did not return any match.");
-			}
-			else {
+				System.err.println("Lookup permanantely failed for: "
+						+ sentence.getValue());
+				Logger.Log(sentence.toString());
+			} else {
 				sentence.setDataModel(leafInfo.getDataModel());
 			}
 		}
@@ -87,7 +94,7 @@ public class Paragraph {
 	private void createDataModel() {
 		List<Entity> entities = new LinkedList<Entity>();
 		List<Relationship> relationships = new LinkedList<Relationship>();
-		
+
 		for (Sentence sentence : this.Paragraph.getSentence()) {
 			entities.addAll(sentence.getDataModel().getEntities());
 			relationships.addAll(sentence.getDataModel().getRelationships());
@@ -98,55 +105,61 @@ public class Paragraph {
 
 		mergeDuplicateEntities();
 		mergeDuplicateRelationships();
-		
+
 		updateIds();
 	}
-	
+
 	private void mergeDuplicateRelationships() {
 		Set<Relationship> relationSet = new HashSet<Relationship>();
-		
-		for (Relationship relationship : this.ParagraphDataModel.getRelationships()) {
+
+		for (Relationship relationship : this.ParagraphDataModel
+				.getRelationships()) {
 			boolean result = relationSet.add(relationship);
 			if (result == false) {
 				Logger.Log("Duplicate Relationship removed.");
 			}
 		}
-		List<Relationship> newRelationList = new ArrayList<Relationship>(relationSet.size());
+		List<Relationship> newRelationList = new ArrayList<Relationship>(
+				relationSet.size());
 		newRelationList.addAll(relationSet);
 		this.ParagraphDataModel.setRelationships(newRelationList);
 	}
+
 	private void mergeDuplicateEntities() {
 		List<Entity> entities = this.ParagraphDataModel.getEntities();
 		Integer entitiesSize = entities.size();
-		
+
 		for (int i = 0; i < entitiesSize; i++) {
 			Entity current = entities.get(i);
-			
+
 			for (int j = i + 1; j < entitiesSize; j++) {
-				if (current.getLemmName().compareTo(entities.get(j).getLemmName()) == 0) {
-					/*Merge Entities*/
+				if (current.getLemmName().compareTo(
+						entities.get(j).getLemmName()) == 0) {
+					/* Merge Entities */
 					Entity duplicateName = entities.get(j);
 					Set<Attribute> attributeSet = new HashSet<Attribute>();
-					
+
 					attributeSet.addAll(current.getAttributes());
 					attributeSet.addAll(duplicateName.getAttributes());
-					
+
 					List<Attribute> newAttributeList = new ArrayList<Attribute>();
 					newAttributeList.addAll(attributeSet);
-					
+
 					current.setAttributes(newAttributeList);
-					
+
 					entities.remove(j);
+					j = j - 1; // since an element from array is removed.
 					entitiesSize = entitiesSize - 1;
 				}
 			}
 		}
 		this.ParagraphDataModel.setEntities(entities);
 	}
-	
-	//FIXME Incomplete Code Here.
+
+	// FIXME Incomplete Code Here.
 	private boolean isPromotable(Attribute attribute) {
-		Iterator<Entity> entityItr = this.ParagraphDataModel.getEntities().iterator();
+		Iterator<Entity> entityItr = this.ParagraphDataModel.getEntities()
+				.iterator();
 		while (entityItr.hasNext()) {
 			Entity entity = entityItr.next();
 			if (entity.getName().compareTo(attribute.getName()) == 0) {
@@ -155,53 +168,56 @@ public class Paragraph {
 		}
 		return false;
 	}
-	
+
 	private void updateIds() {
-		int idIndex = 1; //common id inedex for entities and relationships
+		int idIndex = 1; // common id inedex for entities and relationships
 		for (Entity entity : this.ParagraphDataModel.getEntities()) {
 			entity.setId(idIndex);
 			idIndex++;
 		}
-		for (Relationship relationship : this.ParagraphDataModel.getRelationships()) {
+		for (Relationship relationship : this.ParagraphDataModel
+				.getRelationships()) {
 			relationship.setId(idIndex);
 			idIndex++;
 		}
 	}
-	
+
 	/**
-	 * Converts the List of sentences into a xml format which can be read by the plugin.
+	 * Converts the List of sentences into a xml format which can be read by the
+	 * plugin.
 	 * 
 	 * IMPLEMENTATION INCOMPLETE
 	 * 
 	 * @return XML in string format.
 	 */
 	public String toErdXml(File outputFile) {
-		//TODO Implement this.
+		// TODO Implement this.
 		return null;
 	}
-	
+
 	/**
 	 * Saves the xml as generated by toErdXml to a path specified by filepath
-	 * @param filepath Absolute path of file to store the file. Provide the extension of the file.
+	 * 
+	 * @param filepath
+	 *            Absolute path of file to store the file. Provide the extension
+	 *            of the file.
 	 */
 	public void saveAsXml(String outputFilepath) {
 		try {
-			ErdBuilder erdb = new ErdBuilder(new File(outputFilepath));	
+			ErdBuilder erdb = new ErdBuilder(new File(outputFilepath));
 			erdb.parse(this.ParagraphDataModel);
-		}
-		catch (ParserConfigurationException pce) {
+		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
-		}
-		catch (TransformerException te) {
+		} catch (TransformerException te) {
 			te.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.Paragraph.toString();
 	}
-	
+
 	public Model getParagraphDataModel() {
 		return this.ParagraphDataModel;
 	}

@@ -97,9 +97,10 @@ public class Trie {
 
 			@SuppressWarnings("unused")
 			Word first = wordIterator.next();
+			Node found = null;
 			while (wordIterator.hasNext()) {
 				Word currentWord = wordIterator.next();
-				Node found = parent.findChild(currentWord.getPost());
+				found = parent.findChild(currentWord.getPost());
 				if (found != null)
 					parent = found;
 				else {
@@ -107,6 +108,10 @@ public class Trie {
 							sentence.getTokens().indexOf(currentWord), parent);
 					break;
 				}
+			}
+			if (found != null) {
+				/*It has found an entry and sentence has ended completely.*/
+				found.setLeafInformation(sentence.getDataModel());
 			}
 		}
 	}
