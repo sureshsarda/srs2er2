@@ -28,7 +28,9 @@ public class Srs2er {
 			"data/training/TrainingPooja.xml", "data/training/TrainingRohini.xml" };
 	
 	/*List of test data file. Keep only one file and comment out the rest*/
-	private static final String testDataFile = "data/testing/hostel.txt";
+	private static final String testDataFile = "data/testing/employee.txt";
+//	private static final String testDataFile = "data/testing/team.txt";
+//	private static final String testDataFile = "data/testing/hostel.txt";
 //	private static final String testDataFile = "data/testing/student.txt";
 //	private static final String testDataFile = "data/testing/mobile.txt";
 	

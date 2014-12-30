@@ -21,12 +21,12 @@ import nlp.objects.Model;
 import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
-import nlp.objects.Word;
 import srs2er.ErdBuilder;
 import trie.LeafNode;
 import trie.Lookup;
 import trie.Trie;
 import util.Logger;
+import util.Tuple;
 
 public class Paragraph {
 
@@ -79,14 +79,15 @@ public class Paragraph {
 
 	public void acquireDataModel(Trie trie) {
 		for (Sentence sentence : this.Paragraph.getSentence()) {
-			LeafNode leafInfo = Lookup.strictMatch(trie, sentence);
+			/*LeafNode leafInfo = Lookup.strictMatch(trie, sentence);
 			if (leafInfo == null) {
 				System.err.println("Lookup permanantely failed for: "
 						+ sentence.getValue());
 				Logger.Log(sentence.toString());
 			} else {
 				sentence.setDataModel(leafInfo.getDataModel());
-			}
+			}*/
+			Lookup.lookup(trie, sentence, new Tuple<Integer, Integer>(100, 80));
 		}
 		createDataModel();
 	}

@@ -30,7 +30,7 @@ public class Logger {
 	}
 	
 	public static void Log(String logString) {
-		System.out.println(logString);
+		//System.out.println(logString);
 	}
 	
 	
