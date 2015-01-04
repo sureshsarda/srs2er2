@@ -9,6 +9,7 @@ public class LogFormatter extends SimpleFormatter {
 	public String format(LogRecord record) {
 		StringBuffer buf = new StringBuffer(1000);
 		
+		buf.append(record.getLevel() + ": ");
 		buf.append(formatMessage(record));
 		buf.append(System.lineSeparator());
 		return buf.toString();

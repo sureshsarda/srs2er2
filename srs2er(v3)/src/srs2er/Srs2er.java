@@ -30,17 +30,20 @@ public class Srs2er {
 	 * List of training data files. All the sentences from all the files in the
 	 * array will be trainied
 	 */
-	private static final String[] trainingDataFiles = {
-	// "data/training/TrainingSentences1.xml",
-	// "data/training/TrainingSentences2.xml",
-	// "data/training/TrainingPooja.xml",
-	// "data/training/TrainingRohini.xml",
-	// "data/training/TrainingSuresh.xml",
-	// "data/training/TrainingRohit.xml"
-	"data/training/MegaTraining.xml" };
+//	private static final String[] trainingDataFiles = {
+//			"data/training/TrainingSentences1.xml",
+//			"data/training/TrainingSentences2.xml",
+//			"data/training/TrainingPooja.xml",
+//			"data/training/TrainingRohini.xml",
+//			"data/training/TrainingSuresh.xml",
+//			"data/training/TrainingRohit.xml" };
+
+	private static final String[] trainingDataFiles = { "data/training/out.xml" };
 
 	/* List of test data file. Keep only one file and comment out the rest */
-	private static final String testDataFile = "data/testing/e-exam.txt";
+	private static final String testDataFile = "data/testing/college.txt";
+//	private static final String testDataFile = "data/testing/roadways.txt";
+	// private static final String testDataFile = "data/testing/e-exam.txt";
 	// private static final String testDataFile = "data/testing/employee.txt";
 	// private static final String testDataFile = "data/testing/employee.txt";
 	// private static final String testDataFile = "data/testing/team.txt";
@@ -60,14 +63,14 @@ public class Srs2er {
 
 		LoggerSetup.setup(LOGGER);
 
-		// LOGGER.setLevel(Level.ALL);
+		//LOGGER.setLevel(Level.ALL);
 
 		LOGGER.info("Loading trainig data");
 		Sentences sentences = loadTrainingSentences();
 
 		LOGGER.info("Training Trie...");
 		Trie trie = new Trie();
-		trie.insertIntoTrie(sentences);
+		trie.insert(sentences);
 
 		if (LOGGER.getLevel().intValue() <= Level.FINE.intValue()) {
 			trie.print(System.out, PrintDetail.TAGS_ONLY);
@@ -83,7 +86,7 @@ public class Srs2er {
 
 		LOGGER.info("Acquiring data model...");
 		p.acquireDataModel(trie);
-		
+
 		LOGGER.fine(p.getParagraphDataModel().toString());
 
 		LOGGER.info("Saving the output...");

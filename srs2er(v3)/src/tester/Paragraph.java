@@ -33,7 +33,7 @@ public class Paragraph {
 
 	private Sentences Paragraph;
 	private Model ParagraphDataModel;
-	private Sentences paragraphCopy;
+
 	// FIXME This class is not at its proper location.
 	/**
 	 * Reads a paragraph from the inputFile provided and loads it. POSTags the
@@ -46,6 +46,7 @@ public class Paragraph {
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(inputFile));
+
 			// TODO Reads only one line from the file. That is one paragraph
 			// TODO Lines starting with # are comments.
 			String paragraph = br.readLine();
@@ -76,25 +77,21 @@ public class Paragraph {
 			sentences.add(sent);
 		}
 		this.Paragraph.setSentence(sentences);
-		this.paragraphCopy = new Sentences();
-		this.paragraphCopy.setSentence(Paragraph.getSentence());
-
-		Stopwords.getInstance().removeStopwrods(Paragraph);
 	}
 
 	public void acquireDataModel(Trie trie) {
 		for (Sentence sentence : this.Paragraph.getSentence()) {
-			LeafNode leafInfo = Lookup.strictMatch(trie, sentence);
+
+			Srs2er.LOGGER.info(String.format("Acquiring Data Model for: %s",
+					sentence.getValue()));
+
+			LeafNode leafInfo = Lookup.lookup(trie, sentence, new Tuple(100, 80));
 			if (leafInfo == null) {
-				System.err.println("Exact match not found. Applying AdvancedLookup Algorithm...\n"
-						+ sentence.getValue());
-				Srs2er.LOGGER.info(sentence.toString());
-				
-				Lookup.lookup(trie, sentence, new Tuple<Integer, Integer>(50, 80));
+				Srs2er.LOGGER.severe("Lookup Permanently Failed.");
 			} else {
+				Srs2er.LOGGER.info("Data Model Acquired.");
 				sentence.setDataModel(leafInfo.getDataModel());
 			}
-			
 		}
 		createDataModel();
 	}

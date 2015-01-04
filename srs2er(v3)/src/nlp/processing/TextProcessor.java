@@ -5,7 +5,7 @@ import java.util.List;
 import nlp.objects.Sentence;
 import nlp.objects.Word;
 
-public class TextProccessor {
+public class TextProcessor {
 	public  static void removePunc(Sentence sentence) {
 		List<Word> tokens = sentence.getTokens();
 		int length = tokens.size();

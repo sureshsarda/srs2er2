@@ -13,6 +13,7 @@ public class LoggerSetup {
 
 		LogFormatter formatter = new LogFormatter();
 		ConsoleHandler handler = new ConsoleHandler();
+		handler.setLevel(Level.ALL);
 		handler.setFormatter(formatter);
 
 		logger.addHandler(handler);

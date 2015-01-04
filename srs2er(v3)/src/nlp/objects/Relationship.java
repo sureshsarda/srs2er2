@@ -31,7 +31,7 @@ public class Relationship {
 		return WordId;
 	}
 	public void setWordId(int wordId) {
-		WordId = wordId ;
+		WordId = wordId -1 ;
 	}
 	
 	

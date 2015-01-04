@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
+import srs2er.Srs2er;
 import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
@@ -19,32 +20,24 @@ public class StanfordProcessor {
 
 	private static StanfordProcessor instance = null;
 	private StanfordCoreNLP pipeline;
-	
-	public String compareLemmatisedString(String string1, String string2) {
-		String lemmaString1 = LemmatisedString(string1);
-		String lemmaString2 = LemmatisedString(string2);
-		
-		if (lemmaString1.compareTo(lemmaString2) == 0) {
-			return lemmaString1;
-		}
-		else {
-			return null;	
-		}
-	}
-	
+
 	public String LemmatisedString(String string) {
+		Srs2er.LOGGER.finest(String.format("Lemmatizing String:\n %s", string));
+		
 		Annotation annotation = new Annotation(string);
 		this.pipeline.annotate(annotation);
-		
+
 		List<CoreLabel> labels = annotation.get(TokensAnnotation.class);
 		String lemmaString = "";
 		for (CoreLabel coreLabel : labels) {
 			lemmaString += coreLabel.get(LemmaAnnotation.class);
 		}
 		lemmaString = lemmaString.trim();
+		
+		Srs2er.LOGGER.finest(String.format("Lemmatized String:\n %s", lemmaString));
 		return lemmaString;
 	}
-	
+
 	private StanfordProcessor() {
 		Properties props;
 		props = new Properties();
@@ -56,7 +49,7 @@ public class StanfordProcessor {
 	public List<Triple<String, String, String>> Annotate(String text) {
 		Annotation annotation = new Annotation(text);
 		this.pipeline.annotate(annotation);
-		
+
 		List<Triple<String, String, String>> tokens = new LinkedList<Triple<String, String, String>>();
 
 		List<CoreLabel> labels = annotation.get(TokensAnnotation.class);
@@ -68,9 +61,9 @@ public class StanfordProcessor {
 			tokens.add(token);
 		}
 		return tokens;
-		
+
 	}
-	
+
 	/**
 	 * Convert paragraph into sentences.
 	 * 
@@ -96,5 +89,26 @@ public class StanfordProcessor {
 			instance = new StanfordProcessor();
 		}
 		return instance;
+	}
+
+	public String compareLemmatisedString(String string1, String string2) {
+
+		Srs2er.LOGGER.finest(String.format(
+				"Comparing [%s] and [%s] with their lemmatized names.",
+				string1, string2));
+
+		String lemmaString1 = LemmatisedString(string1);
+		String lemmaString2 = LemmatisedString(string2);
+
+		if (lemmaString1.compareTo(lemmaString2) == 0) {
+			Srs2er.LOGGER.finest(String.format(
+					"Lemmatized Names are same. [%s]", lemmaString1));
+			return lemmaString1;
+		} else {
+			Srs2er.LOGGER.finest(String.format(
+					"Lemmatized Names are not same. [%s] and [%s]",
+					lemmaString1, lemmaString2));
+			return null;
+		}
 	}
 }

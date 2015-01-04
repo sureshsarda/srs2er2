@@ -13,8 +13,8 @@ public class Name {
 		String name = "";
 		for (int i = wordId; i < wordId + length; i++) {
 			try {
-				//name += tokens.get(i).getName() + " ";
-				name += getName(tokens, i) + " ";
+				name += tokens.get(i).getName() + " ";
+//				name += getName(tokens, i) + " ";
 			}
 			catch (ArrayIndexOutOfBoundsException aioobe) {
 				srs2er.Srs2er.LOGGER.info(String.format("Failed to build word at wordId: %d and Length: %d", wordId, length));

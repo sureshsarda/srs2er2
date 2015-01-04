@@ -8,7 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 import nlp.processing.StanfordProcessor;
-import trie.Lookup;
+import nlp.processing.TextProcessor;
+import srs2er.Srs2er;
 import edu.stanford.nlp.util.Triple;
 
 public class Sentence {
@@ -17,19 +18,22 @@ public class Sentence {
 	private String Value;
 	private List<Word> Tokens = new ArrayList<Word>();
 	private Model DataModel = new Model();
-	
+
 	public Sentence() {
-		/*Default constructor required for marshaling*/
+		/* Default constructor required for marshaling */
 	}
 
 	/**
-	 * Create a sentence object with the value specified. Tags part of speech of the sentence.
+	 * Create a sentence object with the value specified. Tags part of speech of
+	 * the sentence.
+	 * 
 	 * @param value
 	 */
 	public Sentence(String value) {
 		this.Value = value;
-		List<Triple<String, String, String>> tokens = StanfordProcessor.getInstance().Annotate(value);
-		
+		List<Triple<String, String, String>> tokens = StanfordProcessor
+				.getInstance().Annotate(value);
+
 		Integer wordIndex = 0;
 		List<Word> words = new ArrayList<Word>(tokens.size());
 		for (Triple<String, String, String> triple : tokens) {
@@ -39,18 +43,18 @@ public class Sentence {
 			word.setLemmatizedName(triple.second());
 			word.setPost(triple.third());
 			words.add(word);
-			
+
 		}
 		this.Tokens = words;
-		Lookup.removePunc(this);
+		TextProcessor.removePunc(this);
 	}
-	
+
 	/* Getters and Setters */
 	@XmlAttribute(name = "Id")
 	public int getId() {
 		return Id;
 	}
-	
+
 	public void setId(int id) {
 		Id = id;
 	}
@@ -82,9 +86,8 @@ public class Sentence {
 	public void setDataModel(Model dataModel) {
 		DataModel = dataModel;
 	}
-	
-	
-/*---------- POST TAGS FOR ENTITY, RELATIONSHIPS ----------*/
+
+	/*---------- POST TAGS FOR ENTITY, RELATIONSHIPS ----------*/
 	/**
 	 * Returns Post tags for an entity.
 	 * 
@@ -144,7 +147,7 @@ public class Sentence {
 		}
 		return tags;
 	}
-	
+
 	public List<String> getPostForAttribute(Attribute attribute) {
 		int length = attribute.getLength();
 		List<String> tags = new ArrayList<String>(length);
@@ -153,13 +156,14 @@ public class Sentence {
 		}
 		return tags;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.Value);
 		sb.append(System.lineSeparator());
-		sb.append(String.format(Word.PrintFormat, 00 , "POST", "Name", "Lemmatized"));
+		sb.append(String.format(Word.PrintFormat, 00, "POST", "Name",
+				"Lemmatized"));
 		sb.append(System.lineSeparator());
 		for (Word word : Tokens) {
 			sb.append(word.toString());
