@@ -34,7 +34,7 @@ public class Entity implements Comparable<Entity>{
 		return WordId;
 	}
 	public void setWordId(int wordId) {
-		WordId = wordId - 1;
+		WordId = wordId;
 	}
 	
 	@XmlAttribute(name = "Length")

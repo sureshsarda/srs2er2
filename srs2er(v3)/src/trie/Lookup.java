@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
+import java.util.logging.Logger;
 
 import nlp.objects.Attribute;
 import nlp.objects.Entity;
@@ -16,7 +16,7 @@ import nlp.objects.RelationEntity;
 import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Word;
-import util.Logger;
+import srs2er.Srs2er;
 import util.Name;
 import util.Tuple;
 
@@ -30,25 +30,9 @@ public class Lookup {
 
 	private static final Integer EXACTLY_SAME = 0;
 	private static final Integer FAMILY_SAME = 25;
-	private static final Integer DIFFERENT = 100;
-
-	private static void removePunc(Sentence sentence) {
-		List<Word> tokens = sentence.getTokens();
-		int length = tokens.size();
-
-		for (int i = 0; i < length; i++) {
-			Word current = tokens.get(i);
-			if (current.getPost().compareTo("POS") == 0
-					|| current.getPost().compareTo(",") == 0) {
-				tokens.remove(current);
-				length--;
-			}
-		}
-	}
+	private static final Integer DIFFERENT = 50;
 
 	public static LeafNode strictMatch(Trie trie, Sentence sentence) {
-
-		removePunc(sentence);
 
 		Tuple<Node, Integer> base = searchList(trie.Root, sentence.getTokens()
 				.get(0).getPost());
@@ -56,15 +40,16 @@ public class Lookup {
 		if (base.second == EXACTLY_SAME) {
 			return searchRemaining(base.first(), sentence);
 		} else if (base.second == FAMILY_SAME) {
-			Logger.Log(String.format("Lookup: %s matched in family.", sentence
-					.getTokens().get(0).getPost()));
+			Srs2er.LOGGER.info(String.format("Lookup: %s matched in family.",
+					sentence.getTokens().get(0).getPost()));
 			return searchRemaining(base.first(), sentence);
 		} else {
 			/* Different families. Apply Node Skip Algorithm */
-			Logger.Log(String.format(
-					"Lookup Failed: %s.\nApplying NodeSkip Algorithm...",
-					sentence.getValue()));
-			Logger.Log("Skipping.");
+			/*
+			 * Logger.Log(String.format(
+			 * "Lookup Failed: %s.\nApplying NodeSkip Algorithm...",
+			 * sentence.getValue())); Logger.Log("Skipping.");
+			 */
 			return null;
 		}
 	}
@@ -81,7 +66,7 @@ public class Lookup {
 			if (searchResult.second() == EXACTLY_SAME) {
 				parent = searchResult.first();
 			} else if (searchResult.second == FAMILY_SAME) {
-				Logger.Log(String.format(
+				Srs2er.LOGGER.info(String.format(
 						"Lookup: %s matched in family. WordIndex = %d",
 						currentWord.getPost(), currentWord.getId()));
 				parent = searchResult.first();
@@ -93,19 +78,24 @@ public class Lookup {
 				 * searchResult.first();
 				 */
 			} else {
-				Logger.Log(String.format(
+				Srs2er.LOGGER.info(String.format(
 						"Lookup Failed: %s.\nApplying NodeSkip Algorithm...",
 						sentence.getValue()));
-				Logger.Log(String
-						.format("Trying to match:%s\nBut parent has children:%s",
-								currentWord.toString(), parent.getChildren()
-										.toString()));
-				Logger.Log("Skipping.");
+				Srs2er.LOGGER
+						.info(String
+								.format("Trying to match:%s\nBut parent has children:%s",
+										currentWord.toString(), parent
+												.getChildren().toString()));
+				Srs2er.LOGGER.info("Skipping.");
 				return null;
 			}
 
 		}
-		processDataModel(sentence, parent.getLeafInformation().getDataModel());
+		if (parent.getLeafInformation() != null) {
+			processDataModel(sentence, parent.getLeafInformation()
+					.getDataModel());
+		}
+
 		return parent.getLeafInformation();
 	}
 
@@ -178,23 +168,25 @@ public class Lookup {
 
 	public static List<LeafNode> lookup(Trie trie, Sentence sentence,
 			Tuple<Integer, Integer> cost) {
-		
-		Map<Node, Tuple<Integer, Integer>> possibleNodes = advancedLookup(trie, sentence, cost);
-		
+
+		Map<Node, Tuple<Integer, Integer>> possibleNodes = advancedLookup(trie,
+				sentence, cost);
+
 		for (Node node : possibleNodes.keySet()) {
 			try {
 				System.out.println(sentence.getValue());
 				Tuple<Integer, Integer> cst = possibleNodes.get(node);
-				System.out.println(String.format("Cost: %d Unmatched: %d", cst.first(), cst.second()));
-				processDataModel(sentence, node.getLeafInformation().getDataModel());
-				System.out.println(node.getLeafInformation().getDataModel().toString());
-			}
-			catch (NullPointerException npe) {
+				System.out.println(String.format("Cost: %d Unmatched: %d",
+						cst.first(), cst.second()));
+				processDataModel(sentence, node.getLeafInformation()
+						.getDataModel());
+				System.out.println(node.getLeafInformation().getDataModel()
+						.toString());
+			} catch (NullPointerException npe) {
 				System.out.println("No leaf node found at this level.");
 			}
 		}
-		
-		
+
 		return null;
 	}
 
@@ -215,8 +207,7 @@ public class Lookup {
 			if (thisCost == DIFFERENT) {
 				probablePaths.put(node,
 						new Tuple<Integer, Integer>(thisCost, 1));
-			}
-			else {
+			} else {
 				probablePaths.put(node,
 						new Tuple<Integer, Integer>(thisCost, 0));
 			}

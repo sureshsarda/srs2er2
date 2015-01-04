@@ -28,7 +28,7 @@ public class Attribute implements Comparable<Attribute> {
 	}
 
 	public void setWordId(int WordId) {
-		this.WordId = WordId - 1;
+		this.WordId = WordId ;
 	}
 
 	@XmlAttribute(name = "Length")

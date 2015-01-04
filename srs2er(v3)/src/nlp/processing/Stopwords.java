@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import nlp.objects.Sentence;
+import nlp.objects.Sentences;
+import nlp.objects.Word;
+
 /*Singleton object*/
 public class Stopwords {
 	
@@ -57,4 +61,29 @@ public class Stopwords {
 		return words.contains(word);
 	}
 	
+	public void removeStopwrods(Sentences sentences) {
+		for (Sentence sentence : sentences.getSentence()) {
+			removeStopwords(sentence);
+		}
+	}
+	private void removeStopwords(Sentence sentence) {
+		List<Word> tokens = sentence.getTokens();
+		int length = tokens.size();
+		
+		for (int i = 0 ; i < length; i++) {
+			Word currentWord = tokens.get(i);
+			if (Stopwords.getInstance().contains(currentWord.getName().toLowerCase()) == true) {
+				tokens.remove(i);
+				length--;
+				/*for(int j = i; j < length; j++) {
+					Word word = tokens.get(j);
+					word.setId(word.getId() - 1);
+					tokens.set(j, word);
+				}*/
+				i--;
+				
+			}
+		}
+		sentence.setTokens(tokens);
+	}
 }

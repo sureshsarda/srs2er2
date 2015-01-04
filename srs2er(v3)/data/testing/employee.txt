@@ -1,0 +1,1 @@
+An employee works for a company. Every employee has a name and address. Employee works for a department.

@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 import nlp.processing.StanfordProcessor;
+import trie.Lookup;
 import edu.stanford.nlp.util.Triple;
 
 public class Sentence {
@@ -41,6 +42,7 @@ public class Sentence {
 			
 		}
 		this.Tokens = words;
+		Lookup.removePunc(this);
 	}
 	
 	/* Getters and Setters */

@@ -21,18 +21,19 @@ import nlp.objects.Model;
 import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
+import nlp.processing.Stopwords;
 import srs2er.ErdBuilder;
+import srs2er.Srs2er;
 import trie.LeafNode;
 import trie.Lookup;
 import trie.Trie;
-import util.Logger;
 import util.Tuple;
 
 public class Paragraph {
 
 	private Sentences Paragraph;
 	private Model ParagraphDataModel;
-
+	private Sentences paragraphCopy;
 	// FIXME This class is not at its proper location.
 	/**
 	 * Reads a paragraph from the inputFile provided and loads it. POSTags the
@@ -70,24 +71,30 @@ public class Paragraph {
 	private void load(String paragraphText) {
 		ArrayList<Sentence> sentences = new ArrayList<Sentence>();
 		for (String sentenceValue : Arrays.asList(paragraphText.split("\\."))) {
-			Sentence sent = new Sentence(sentenceValue);
-
+			String currentSentence = sentenceValue + ".";
+			Sentence sent = new Sentence(currentSentence);
 			sentences.add(sent);
 		}
 		this.Paragraph.setSentence(sentences);
+		this.paragraphCopy = new Sentences();
+		this.paragraphCopy.setSentence(Paragraph.getSentence());
+
+		Stopwords.getInstance().removeStopwrods(Paragraph);
 	}
 
 	public void acquireDataModel(Trie trie) {
 		for (Sentence sentence : this.Paragraph.getSentence()) {
-			/*LeafNode leafInfo = Lookup.strictMatch(trie, sentence);
+			LeafNode leafInfo = Lookup.strictMatch(trie, sentence);
 			if (leafInfo == null) {
-				System.err.println("Lookup permanantely failed for: "
+				System.err.println("Exact match not found. Applying AdvancedLookup Algorithm...\n"
 						+ sentence.getValue());
-				Logger.Log(sentence.toString());
+				Srs2er.LOGGER.info(sentence.toString());
+				
+				Lookup.lookup(trie, sentence, new Tuple<Integer, Integer>(50, 80));
 			} else {
 				sentence.setDataModel(leafInfo.getDataModel());
-			}*/
-			Lookup.lookup(trie, sentence, new Tuple<Integer, Integer>(100, 80));
+			}
+			
 		}
 		createDataModel();
 	}
@@ -117,7 +124,7 @@ public class Paragraph {
 				.getRelationships()) {
 			boolean result = relationSet.add(relationship);
 			if (result == false) {
-				Logger.Log("Duplicate Relationship removed.");
+				Srs2er.LOGGER.info("Duplicate Relationship removed.");
 			}
 		}
 		List<Relationship> newRelationList = new ArrayList<Relationship>(
