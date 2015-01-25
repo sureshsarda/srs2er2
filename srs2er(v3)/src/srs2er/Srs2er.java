@@ -13,7 +13,6 @@ import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
 import nlp.objects.Sentences;
-import nlp.processing.statistics.StatisticsCollector;
 import tester.Paragraph;
 import trie.Trie;
 import trie.Trie.PrintDetail;
@@ -38,7 +37,7 @@ public class Srs2er {
 //			"data/training/TrainingSuresh.xml",
 //			"data/training/TrainingRohit.xml" };
 
-	private static final String[] trainingDataFiles = { "data/training/out.xml" };
+	private static final String[] trainingDataFiles = { "data/training/MegaTraining.xml" };
 
 	/* List of test data file. Keep only one file and comment out the rest */
 	private static final String testDataFile = "data/testing/college.txt";
@@ -73,13 +72,15 @@ public class Srs2er {
 		trie.insert(sentences);
 
 		if (LOGGER.getLevel().intValue() <= Level.FINE.intValue()) {
-			trie.print(System.out, PrintDetail.TAGS_ONLY);
+			PrintStream trieOut = new PrintStream(new File("Trie.txt"));
+			trieOut.printf("Legend: TAG (Stopword Probability StopwordCount | TotalWordcount)\n\n");
+			trie.print(trieOut, PrintDetail.ALL_DETAILS);
 		}
 
 		/* Generate Statistics */
-		File out = new File(statFile);
-		PrintStream ps = new PrintStream(out);
-		StatisticsCollector.Analyze(sentences, ps);
+//		File out = new File(statFile);
+//		PrintStream ps = new PrintStream(out);
+//		StatisticsCollector.Analyze(sentences, ps);
 
 		LOGGER.info("Loading test paragraph...");
 		Paragraph p = new Paragraph(new File(testDataFile));

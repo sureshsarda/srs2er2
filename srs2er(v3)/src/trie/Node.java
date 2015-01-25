@@ -62,7 +62,7 @@ public class Node {
 		this.Tag = new String(tag);
 		IsStopWordProbability = new Double(0);
 
-		AddWord(word);
+		addWord(word);
 	}
 
 	public void addChild(Node child) {
@@ -88,7 +88,7 @@ public class Node {
 		return Tag;
 	}
 
-	public void AddWord(String word) {
+	public void addWord(String word) {
 		int wordCount = Words.size();
 		double old = IsStopWordProbability;
 
@@ -113,8 +113,13 @@ public class Node {
 			printer.printf("%-5s", this.Tag);
 			break;
 		case TAGS_AND_PROBABILITY:
-			System.out.printf("%-5s(%1.2f) ", this.Tag,
+			printer.printf("%-5s(%1.2f) ", this.Tag,
 					this.IsStopWordProbability); // print with probability
+			break;
+		case ALL_DETAILS:
+			int totalWords = this.Words.size();
+			double stopWordsCount = this.IsStopWordProbability * totalWords;
+			printer.printf("%-5s(%1.2f %2.0f|%2d) ", this.Tag, this.IsStopWordProbability, stopWordsCount, totalWords);
 			break;
 		default:
 			System.err.println("Invalid PrintDetail flag.");
@@ -135,10 +140,13 @@ public class Node {
 		for (int i = 0; i < level; i++) {
 			switch (printDetail) {
 			case TAGS_ONLY:
-				System.out.printf("%-5s", "|");
+				printer.printf("%-5s", "|");
 				break;
 			case TAGS_AND_PROBABILITY:
-				System.out.printf("%-12s", "|");
+				printer.printf("%-12s", "|");
+				break;
+			case ALL_DETAILS:
+				printer.printf("%-18s", "|");
 				break;
 			default: /* Invalid PrintDetail Information */
 				System.err.println("Invalid PrintDetail Flag.");

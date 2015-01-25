@@ -9,7 +9,7 @@ public class LoggerSetup {
 	static public void setup(java.util.logging.Logger logger) throws IOException {
 		
 		logger.setUseParentHandlers(false);
-		logger.setLevel(Level.INFO);
+		logger.setLevel(Level.ALL);
 
 		LogFormatter formatter = new LogFormatter();
 		ConsoleHandler handler = new ConsoleHandler();

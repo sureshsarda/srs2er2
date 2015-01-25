@@ -25,8 +25,9 @@ public class Trie {
 
 	public enum PrintDetail {
 		TAGS_ONLY, // prints only POST of the trie
-		TAGS_AND_PROBABILITY // prints POSTs as well as the probability of that
+		TAGS_AND_PROBABILITY, // prints POSTs as well as the probability of that
 								// node
+		ALL_DETAILS
 	};
 
 	/**
@@ -94,14 +95,18 @@ public class Trie {
 			/* Branch already exists, update */
 			Iterator<Word> wordIterator = sentence.getTokens().iterator();
 
-			@SuppressWarnings("unused")
 			Word first = wordIterator.next();
+			parent.addWord(first.getLemmatizedName());
+			
 			Node found = null;
+			
 			while (wordIterator.hasNext()) {
 				Word currentWord = wordIterator.next();
 				found = parent.findChild(currentWord.getPost());
-				if (found != null)
+				if (found != null) {
 					parent = found;
+					found.addWord(currentWord.getLemmatizedName());
+				}
 				else {
 					insertRemaining(sentence,
 							sentence.getTokens().indexOf(currentWord), parent);
