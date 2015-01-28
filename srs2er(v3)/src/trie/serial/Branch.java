@@ -22,11 +22,13 @@ public class Branch {
 	}
 	
 	public String toString() {
+		return toString("[%s] ");
+	}
+	
+	public String toString(String format) {
 		StringBuilder sb = new StringBuilder();
 		for (SerialNode serialNode : nodes) {
-			sb.append("[");
-			sb.append(serialNode.toString());
-			sb.append("] ");
+			sb.append(String.format(format, serialNode.toString()));
 		}
 		return sb.toString();
 	}

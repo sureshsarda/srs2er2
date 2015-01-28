@@ -42,7 +42,7 @@ public class SerialTrie {
 		StringBuilder sb = new StringBuilder();
 		
 		for (Branch branch : branches) {
-			sb.append(branch.toString());
+			sb.append(branch.toString("[%-4s] "));
 			sb.append(System.lineSeparator());
 		}
 		
