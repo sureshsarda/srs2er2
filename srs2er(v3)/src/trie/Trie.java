@@ -30,6 +30,10 @@ public class Trie {
 		ALL_DETAILS
 	};
 
+	
+	public List<Node> getRoot() {
+		return this.Root;
+	}
 	/**
 	 * Default constructor. Initializes all the elements.
 	 */
