@@ -13,9 +13,9 @@ import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
 import nlp.objects.Sentences;
-import tester.Paragraph;
 import trie.Trie;
 import trie.Trie.PrintDetail;
+import trie.serial.SerialTrie;
 import util.logging.LoggerSetup;
 
 /**
@@ -74,24 +74,27 @@ public class Srs2er {
 		if (LOGGER.getLevel().intValue() <= Level.FINE.intValue()) {
 			PrintStream trieOut = new PrintStream(new File("Trie.txt"));
 			trieOut.printf("Legend: TAG (Stopword Probability StopwordCount | TotalWordcount)\n\n");
-			trie.print(trieOut, PrintDetail.ALL_DETAILS);
+			trie.print(trieOut, PrintDetail.TAGS_ONLY);
 		}
+		
+		SerialTrie sTrie = new SerialTrie(trie);
+		System.out.println(sTrie.toString());
 
 		/* Generate Statistics */
 //		File out = new File(statFile);
 //		PrintStream ps = new PrintStream(out);
 //		StatisticsCollector.Analyze(sentences, ps);
 
-		LOGGER.info("Loading test paragraph...");
-		Paragraph p = new Paragraph(new File(testDataFile));
-
-		LOGGER.info("Acquiring data model...");
-		p.acquireDataModel(trie);
-
-		LOGGER.fine(p.getParagraphDataModel().toString());
-
-		LOGGER.info("Saving the output...");
-		p.saveAsXml(outputFile);
+//		LOGGER.info("Loading test paragraph...");
+//		Paragraph p = new Paragraph(new File(testDataFile));
+//
+//		LOGGER.info("Acquiring data model...");
+//		p.acquireDataModel(trie);
+//
+//		LOGGER.fine(p.getParagraphDataModel().toString());
+//
+//		LOGGER.info("Saving the output...");
+//		p.saveAsXml(outputFile);
 	}
 
 	private static Sentences loadTrainingSentences() throws JAXBException {

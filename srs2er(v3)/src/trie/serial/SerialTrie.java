@@ -1,6 +1,7 @@
 package trie.serial;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import trie.Node;
@@ -11,9 +12,11 @@ public class SerialTrie {
 
 	public SerialTrie(Trie trie) {
 		List<Node> roots = trie.getRoot();
-
+		branches = new ArrayList<Branch>();
 		for (Node node : roots) {
-			branches.addAll(exploreNode(node));
+			List<Branch> serialized = exploreNode(node);
+			
+			branches.addAll(serialized);
 		}
 	}
 
@@ -23,6 +26,7 @@ public class SerialTrie {
 		if (node.getChildren().size() == 0) {
 			Branch branch = new Branch();
 			branch.add(new SerialNode(node.getTag()));
+			childBranches.add(branch);
 		} else {
 			for (Node child : node.getChildren()) {
 				for (Branch childBranch : exploreNode(child)) {
