@@ -141,6 +141,7 @@ public class Trie {
 			parent.addChild(child);
 			parent = child;
 		}
+		
 		/* Insert leaf information of the sentence */
 		parent.setLeafInformation(sentence.getDataModel());
 	}

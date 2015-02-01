@@ -3,6 +3,7 @@ package trie;
 import nlp.objects.Model;
 
 public class LeafNode {
+	
 	private Model DataModel;
 
 	public LeafNode(Model dataModel) {
@@ -14,6 +15,11 @@ public class LeafNode {
 
 	public void setDataModel(Model dataModel) {
 		DataModel = dataModel;
+	}
+	
+	@Override
+	public String toString() {
+		return DataModel.toString();
 	}
 	
 }

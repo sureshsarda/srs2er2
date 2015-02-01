@@ -22,18 +22,14 @@ public class Node {
 
 	/* Cannot modify once new object is created */
 	private String Tag;
-
-	/* Only private function can update the value. Anyone can read */
 	private Double IsStopWordProbability;
 
 	public Double getIsStopWordProbability() {
 		return IsStopWordProbability;
 	}
 
-	/* Cannot remove a child. Only adding is possible */
 	private List<Node> Children;
 
-	/* */
 	private LeafNode LeafInformation;
 
 	public LeafNode getLeafInformation() {

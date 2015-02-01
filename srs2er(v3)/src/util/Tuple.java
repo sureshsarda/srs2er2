@@ -1,6 +1,6 @@
 package util;
 
-public class Tuple<T1, T2>  {
+public class Tuple<T1, T2> /*implements Comparable<Tuple<T1, T2>>  */{
 	public T1 first;
 	public T2 second;
 
@@ -30,4 +30,5 @@ public class Tuple<T1, T2>  {
 		return "(" + first.toString() + "," + second.toString() + ")";
 	}
 
+	
 }

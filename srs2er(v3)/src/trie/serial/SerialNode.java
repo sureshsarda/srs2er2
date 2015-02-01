@@ -1,6 +1,6 @@
 package trie.serial;
 
-public class SerialNode {
+public class SerialNode implements Comparable<SerialNode>{
 	String tag;
 	
 	public String getTag() {
@@ -17,6 +17,11 @@ public class SerialNode {
 	
 	public String toString() {
 		return tag;
+	}
+
+	@Override
+	public int compareTo(SerialNode node) {
+		return tag.compareTo(node.tag);
 	}
 	
 }
