@@ -113,7 +113,7 @@ public class Sentence {
 		int length = entity.getLength();
 		List<String> tags = new ArrayList<String>(length);
 		for (int i = 0; i < length; i++) {
-			tags.add(Tokens.get(entity.getWordId() + i).getPost());
+			tags.add(Tokens.get(entity.getWordIndex() + i).getPost());
 		}
 		return tags;
 	}
@@ -143,7 +143,7 @@ public class Sentence {
 		int length = relation.getLength();
 		List<String> tags = new ArrayList<String>(length);
 		for (int i = 0; i < length; i++) {
-			tags.add(Tokens.get(relation.getWordId() + i).getPost());
+			tags.add(Tokens.get(relation.getWordIndex() + i).getPost());
 		}
 		return tags;
 	}
@@ -152,7 +152,7 @@ public class Sentence {
 		int length = attribute.getLength();
 		List<String> tags = new ArrayList<String>(length);
 		for (int i = 0; i < length; i++) {
-			tags.add(Tokens.get(attribute.getWordId() + i).getPost());
+			tags.add(Tokens.get(attribute.getWordIndex() + i).getPost());
 		}
 		return tags;
 	}

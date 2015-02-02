@@ -113,16 +113,16 @@ public class Lookup {
 
 		for (Entity entity : model.getEntities()) {
 			entity.setName(Name.buildName(sentence.getTokens(),
-					entity.getWordId(), entity.getLength()));
+					entity.getWordIndex(), entity.getLength()));
 			for (Attribute attribute : entity.getAttributes()) {
 				attribute.setName(Name.buildName(sentence.getTokens(),
-						attribute.getWordId(), attribute.getLength()));
+						attribute.getWordIndex(), attribute.getLength()));
 			}
 		}
 
 		for (Relationship relationship : model.getRelationships()) {
 			relationship.setName(Name.buildName(sentence.getTokens(),
-					relationship.getWordId(), relationship.getLength()));
+					relationship.getWordIndex(), relationship.getLength()));
 			for (RelationEntity re : relationship.getConnects()) {
 				re.setName(model.getEntities().get(re.getEntityId())
 						.getLemmName());

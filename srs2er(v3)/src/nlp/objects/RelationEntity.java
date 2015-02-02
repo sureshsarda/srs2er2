@@ -55,7 +55,7 @@ public class RelationEntity {
 
 	public String getLemmName() {
 		if (this.LemmName == null) {
-			this.LemmName = StanfordProcessor.getInstance().LemmatisedString(
+			this.LemmName = StanfordProcessor.getInstance().lemmatiseString(
 					this.Name);
 		}
 		return this.LemmName;

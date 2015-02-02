@@ -81,7 +81,7 @@ public class Srs2er {
 		SerialTrie sTrie = new SerialTrie(trie);
 		System.out.println(sTrie.toString());
 
-		sTrie.Lookup(new Sentence("Rohit is a good boy."));
+		sTrie.Lookup(new Sentence("Online Registration includes username, password and user id."));
 		/* Generate Statistics */
 //		File out = new File(statFile);
 //		PrintStream ps = new PrintStream(out);

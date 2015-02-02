@@ -1,6 +1,5 @@
 package nlp.objects;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,53 +9,9 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 
 import nlp.processing.StanfordProcessor;
 
-public class Relationship {
-	private int Id;
-	private int WordId;
-	private int Length;
-	private String Name;
-	private String LemmName;
-	private List<RelationEntity> Connects = new ArrayList<RelationEntity>();
-	
-	@XmlAttribute(name = "Id")
-	public int getId() {
-		return Id;
-	}
-	public void setId(int id) {
-		Id = id;
-	}
-	
-	@XmlAttribute(name = "WordId")
-	public int getWordId() {
-		return WordId;
-	}
-	public void setWordId(int wordId) {
-		WordId = wordId -1 ;
-	}
-	
-	
-	@XmlAttribute(name = "Length")
-	public int getLength() {
-		return Length;
-	}
-	public void setLength(int length) {
-		Length = length;
-	}
-	
-	@XmlElement(name = "Name")
-	public String getName() {
-		return Name;
-	}
-	public void setName(String name) {
-		Name = name;
-		
-	}
-	public String getLemmName() {
-		if (LemmName == null) {
-			LemmName = StanfordProcessor.getInstance().LemmatisedString(this.Name);	
-		}
-		return this.LemmName;
-	}
+public class Relationship extends Type {
+
+	List<RelationEntity> Connects = new ArrayList<RelationEntity>();
 	
 	@XmlElementWrapper(name="Connects")
 	@XmlElement(name = "Entity")
@@ -69,8 +24,9 @@ public class Relationship {
 
 	@Override
 	public String toString() {
+		
 		StringBuilder sb = new StringBuilder();
-		sb.append(this.getLemmName());
+		sb.append(super.toString());
 		sb.append(" [");
 		for (RelationEntity entity: Connects) {
 			sb.append(entity.toString() + ",");
@@ -81,7 +37,6 @@ public class Relationship {
 	}
 	
 	public boolean equals(Relationship relation) {
-		
 		if (this.getLemmName().equals(relation.getLemmName())) {
 			if (this.Connects.size() == relation.Connects.size()) {
 				//FIXME Not considered the fact that same entities can be in different order.
@@ -100,6 +55,7 @@ public class Relationship {
 			return false;
 		}
 		return false;
-
 	}
+	
+	
 }

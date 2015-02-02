@@ -21,21 +21,20 @@ public class StanfordProcessor {
 	private static StanfordProcessor instance = null;
 	private StanfordCoreNLP pipeline;
 
-	public String LemmatisedString(String string) {
-		Srs2er.LOGGER.finest(String.format("Lemmatizing String:\n %s", string));
+	public String lemmatiseString(String string) {
 		
 		Annotation annotation = new Annotation(string);
 		this.pipeline.annotate(annotation);
 
 		List<CoreLabel> labels = annotation.get(TokensAnnotation.class);
-		String lemmaString = "";
+		String lemmString = "";
 		for (CoreLabel coreLabel : labels) {
-			lemmaString += coreLabel.get(LemmaAnnotation.class);
+			lemmString += coreLabel.get(LemmaAnnotation.class);
 		}
-		lemmaString = lemmaString.trim();
+		lemmString = lemmString.trim();
 		
-		Srs2er.LOGGER.finest(String.format("Lemmatized String:\n %s", lemmaString));
-		return lemmaString;
+		Srs2er.LOGGER.finest(String.format("lemmatiseString() - String: %-15s LemmString: %-15s", string, lemmString));
+		return lemmString;
 	}
 
 	private StanfordProcessor() {
@@ -97,8 +96,8 @@ public class StanfordProcessor {
 				"Comparing [%s] and [%s] with their lemmatized names.",
 				string1, string2));
 
-		String lemmaString1 = LemmatisedString(string1);
-		String lemmaString2 = LemmatisedString(string2);
+		String lemmaString1 = lemmatiseString(string1);
+		String lemmaString2 = lemmatiseString(string2);
 
 		if (lemmaString1.compareTo(lemmaString2) == 0) {
 			Srs2er.LOGGER.finest(String.format(
