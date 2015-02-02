@@ -50,7 +50,7 @@ public class Type implements Comparable<Type> {
 	
 	@Override
 	public String toString() {
-		return String.format("%s WI%d Ld", lemmName, wordIndex, length);
+		return String.format("%s WI%d L%d", lemmName, wordIndex, length);
 	}
 	
 	@Override
@@ -67,5 +67,6 @@ public class Type implements Comparable<Type> {
 			}
 		}
 	}
+
 	
 }

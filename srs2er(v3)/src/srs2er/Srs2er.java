@@ -63,7 +63,7 @@ public class Srs2er {
 
 		LoggerSetup.setup(LOGGER);
 
-		//LOGGER.setLevel(Level.ALL);
+		LOGGER.setLevel(Level.CONFIG);
 
 		LOGGER.info("Loading trainig data");
 		Sentences sentences = loadTrainingSentences();
