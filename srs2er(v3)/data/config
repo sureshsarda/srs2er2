@@ -1,5 +1,15 @@
-TODO
+#single line comment
+#this file contains and manages the behavior of the program.
 
-#single line comments
+LOGGER_LEVEL: ALL
 
-enter all the file lists and settings here.
+EDIT_DISTANCE_THRESHOLD: 2
+
+TRAINING_DATA_FILES:
+file1,
+file2,
+file3
+
+TEST_DATA_FILES: testFile
+
+STOP_WORDS_FILE: data//Stopwords.csv
