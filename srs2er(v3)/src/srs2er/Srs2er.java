@@ -14,6 +14,7 @@ import javax.xml.bind.ValidationEventHandler;
 
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
+import nlp.objects.TagDataLoader;
 import trie.Trie;
 import trie.Trie.PrintDetail;
 import trie.serial.SerialTrie;
@@ -81,6 +82,8 @@ public class Srs2er {
 		SerialTrie sTrie = new SerialTrie(trie);
 		System.out.println(sTrie.toString());
 
+		TagDataLoader.getInstance().Load();
+		
 		sTrie.Lookup(new Sentence("Online Registration includes username, password and user id."));
 		/* Generate Statistics */
 //		File out = new File(statFile);

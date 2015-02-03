@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 /*Singleton Object*/
 public class TagDataLoader {
 
-    enum TagType {
+    public enum TagType {
 	UNKNOWN(00),
 	NN(1, 	"Noun (Singular)"),
 	NNS(2,	"Noun (Plural)"), 
@@ -99,24 +99,30 @@ public class TagDataLoader {
 	    substitutionCost = subs;
 	}
 	
-	int getInsertionCost() {
+	public int getInsertionCost() {
 	    return insertionCost;
 	}
 	
-	int getDeletionCost() {
+	public int getDeletionCost() {
 	    return deletionCost;
 	}
 	
-	int getSubstitutionCost(TagType subsWith) {
-	    return substitutionCost.get(subsWith.ordinal());
+	public int getSubstitutionCost(TagType subsWith) {
+	    if (subsWith == TagType.UNKNOWN) {
+		return 999;
+	    }
+	    return substitutionCost.get(subsWith.getValue() - 1);
 	}
 	
-	int getValue() {
+	public int getValue() {
 	    return value;
 	}
 
 	public String toString() {
 	    return this.name();
+	}
+	public String toLongString() {
+	    return this.longString;
 	}
 
     };
@@ -124,21 +130,25 @@ public class TagDataLoader {
     
     
     
-    private TagDataLoader instance;
+    private static TagDataLoader instance;
     
-    public TagDataLoader getInstance() throws IOException {
+    public static TagDataLoader getInstance() throws IOException {
 	if (instance == null) {
 	    instance = new TagDataLoader();
 	}
 	return instance;
     }
     
-    private TagDataLoader() throws IOException {
+    private TagDataLoader() {
+	
+    }
+    
+    public void Load() throws IOException {
 	initTagCostMatrices();
     }
 
 
-    File costMatrixFile = new File("data\\post\\cost.csv");
+    File costMatrixFile = new File("data\\post\\cost2.csv");
 
     private void initTagCostMatrices() throws IOException {
 	Iterator<String> lineIterator = Files.lines(costMatrixFile.toPath()).iterator();
@@ -166,7 +176,7 @@ public class TagDataLoader {
     
     private void assignCosts(String[] subs) {
 	List<Integer> subsCost = new ArrayList<Integer>(subs.length);
-	for (int i = 1; i < TagType.count; i++) {
+	for (int i = 1; i <= TagType.count; i++) {
 	    subsCost.add(Integer.parseInt(subs[i]));
 	}
 	TagType.valueOf(subs[0]).setSubstutionCost(subsCost);
@@ -175,16 +185,4 @@ public class TagDataLoader {
     private boolean checkTagSequence(String firstLine) {
 	return true;
     }
-
-    // FIXME UNWANTED MAIN
-    /*
-    public static void main(String[] args) throws IOException {
-	TagDataLoader tags = new TagDataLoader();
-	for (TagType tag : TagType.values()) {
-	    System.out.println(tag.longString!=null?tag.longString:tag.toString());
-	    System.out.println(String.format("Ins: %d, Del: %d", tag.insertionCost, tag.deletionCost));
-	    System.out.println(tag.substitutionCost);
-	}
-    }
-    */
 }

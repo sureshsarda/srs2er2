@@ -1,14 +1,16 @@
 package trie.serial;
 
+import nlp.objects.Tag;
+
 public class SerialNode implements Comparable<SerialNode>{
-	String tag;
+	Tag tag;
 	
-	public String getTag() {
+	public Tag getTag() {
 		return tag;
 	}
 	
 	public void setTag(String tag) {
-		this.tag = tag;
+		this.tag = new Tag(tag);
 	}
 	
 	public SerialNode(String tag) {
@@ -16,7 +18,7 @@ public class SerialNode implements Comparable<SerialNode>{
 	}
 	
 	public String toString() {
-		return tag;
+		return tag.toString();
 	}
 
 	@Override
