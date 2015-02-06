@@ -52,7 +52,7 @@ public class SerialTrie {
 	Srs2er.LOGGER.info("Looking up for: " + sentence);
 
 	for (Branch branch : branches) {
-	    Srs2er.LOGGER.config("Looking up against: " + branch.toString());
+	    Srs2er.LOGGER.config("Looking up against: " + branch.toString("[%-4s] "));
 	    int cost = EditDistance.editDistance(sentence, branch);
 	    Srs2er.LOGGER.config("Cost = " + cost);
 	    
@@ -70,7 +70,8 @@ public class SerialTrie {
 	    System.out.println("Matches with cost: " + cost);
 	    if (cost < 10) {
 		for (Branch branch : costs.get(cost)) {
-		    System.out.println(branch);
+		    System.out.println(branch.toString("[%-4s] "));
+		    EditDistance.editDistanceExtended(sentence, branch);
 		    System.out.println(branch.leafInformation.getDataModel()
 			    .toString());
 		}
