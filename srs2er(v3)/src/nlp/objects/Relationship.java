@@ -35,7 +35,18 @@ public class Relationship extends Type {
 		
 		return sb.toString();
 	}
-	
+	public String toAbstractString() {
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toAbstractString());
+		sb.append(" [");
+		for (RelationEntity entity: Connects) {
+			sb.append(entity.toAbstractString() + ",");
+		}
+		sb.append("]");
+		
+		return sb.toString();
+	}
 	public boolean equals(Relationship relation) {
 		if (this.getLemmName().equals(relation.getLemmName())) {
 			if (this.Connects.size() == relation.Connects.size()) {
