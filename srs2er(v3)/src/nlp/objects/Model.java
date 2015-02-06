@@ -36,13 +36,13 @@ public class Model {
 		sb.append("ENTITIES");
 		sb.append(System.lineSeparator());
 		for (Entity entity : Entities) {
-			sb.append(entity.toString());
+			sb.append(entity.toAbstractString());
 			sb.append(System.lineSeparator());
 		}
 		sb.append("RELATIONSHIPS");
 		sb.append(System.lineSeparator());
 		for (Relationship relationship : Relationships) {
-			sb.append(relationship);
+			sb.append(relationship.toAbstractString());
 			sb.append(System.lineSeparator());
 		}
 		

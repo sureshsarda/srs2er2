@@ -30,12 +30,12 @@ public class Entity extends Type {
 	}
 
 	@Override
-	public String toString() {
+	public String toAbstractString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
+		sb.append(super.toAbstractString());
 		sb.append(" [");
 		for (Attribute attribute : Attributes) {
-			sb.append(attribute.toString() + ",");
+			sb.append(attribute.toAbstractString() + ",");
 		}
 		sb.append("]");
 		

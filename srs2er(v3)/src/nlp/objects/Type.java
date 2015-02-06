@@ -60,7 +60,7 @@ public class Type implements Comparable<Type> {
 	return String.format("%s WI%d L%d", lemmName, wordIndex, length);
     }
     
-    public String toShortString() {
+    public String toAbstractString() {
 	return String.format("WI%d L%d", wordIndex, length);
     }
 

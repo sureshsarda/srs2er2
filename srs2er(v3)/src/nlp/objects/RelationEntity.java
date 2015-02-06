@@ -65,6 +65,10 @@ public class RelationEntity {
 	public String toString() {
 		return this.getLemmName();
 	}
+	
+	public String toAbstractString() {
+	    return String.valueOf(this.Id);
+	}
 
 	public boolean equals(RelationEntity rent) {
 		// FIXME Compare Lemmetized names
