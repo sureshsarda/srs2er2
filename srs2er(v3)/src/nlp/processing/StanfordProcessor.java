@@ -29,9 +29,9 @@ public class StanfordProcessor {
 		List<CoreLabel> labels = annotation.get(TokensAnnotation.class);
 		String lemmString = "";
 		for (CoreLabel coreLabel : labels) {
-			lemmString += coreLabel.get(LemmaAnnotation.class);
+			lemmString += coreLabel.get(LemmaAnnotation.class) + "_";
 		}
-		lemmString = lemmString.trim();
+		lemmString = lemmString.substring(0, lemmString.length() - 1);
 		
 		Srs2er.LOGGER.finest(String.format("lemmatiseString() - String: %-15s LemmString: %-15s", string, lemmString));
 		return lemmString;
