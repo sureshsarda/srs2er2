@@ -8,9 +8,11 @@ import java.util.Map;
 
 import nlp.objects.Sentence;
 import nlp.processing.EditDistance;
+import nlp.processing.EditDistance.Operation;
 import srs2er.Srs2er;
 import trie.Node;
 import trie.Trie;
+import util.Tuple;
 
 public class SerialTrie {
     List<Branch> branches;
@@ -32,6 +34,7 @@ public class SerialTrie {
 	    Branch branch = new Branch();
 	    branch.add(new SerialNode(node.getTag()));
 	    branch.leafInformation = node.getLeafInformation();
+	    branch.sentences = node.getLeafInformation().sentences;
 	    childBranches.add(branch);
 
 	} else {
@@ -52,10 +55,12 @@ public class SerialTrie {
 	Srs2er.LOGGER.info("Looking up for: " + sentence);
 
 	for (Branch branch : branches) {
-	    Srs2er.LOGGER.config("Looking up against: " + branch.toString("[%-4s] "));
+	    Srs2er.LOGGER.config("Looking up against: "
+		    + branch.toString("[%-4s] "));
 	    int cost = EditDistance.editDistance(sentence, branch);
 	    Srs2er.LOGGER.config("Cost = " + cost);
-	    
+
+	    /*Add the branch and its cost to Map*/
 	    if (costs.containsKey(cost) == false) {
 		costs.put(cost, new LinkedList<Branch>());
 	    }
@@ -67,20 +72,31 @@ public class SerialTrie {
 	}
 
 	for (Integer cost : costs.keySet()) {
-	    System.out.println("Matches with cost: " + cost);
+	    /* Change cost to include more results. All the branches with cost less than this threshold will be displayed. */
 	    if (cost < 10) {
+		System.out.println("Matches with cost: " + cost);
 		for (Branch branch : costs.get(cost)) {
+		    System.out.println("POST of the branch:");
 		    System.out.println(branch.toString("[%-4s] "));
-		    EditDistance.editDistanceExtended(sentence, branch);
+		    
+		    List<Operation> ops = EditDistance.editDistanceExtended(
+			    sentence, branch).second();
+		    
+		    Sentence sent_copy = EditDistance.updateWordIndexes(sentence, ops);
+		    
+		    System.out.println(sent_copy.toWordIndexString());
+		    //System.out.println(ops);
+		    System.out.println(branch.sentences);
 		    System.out.println(branch.leafInformation.getDataModel()
 			    .toString());
+		    
+		    
+		    
+		    System.out.println("-------------------------------------------------------------------------------------");
+		    ///System.out.printf("\n%80s\n", "");
 		}
-	    } else {
-		System.out
-			.println("There are results but the cost exceeds the threshold. Hence skipped.");
 	    }
 	}
-
     }
 
     @Override
