@@ -57,4 +57,8 @@ public class Word {
 	return String.format(PrintFormat, this.Id, this.Post, this.Name,
 		(this.LemmatizedName == null ? "null" : this.LemmatizedName));
     }
+    
+    public String toWordIndexString() {
+	return LemmatizedName + "\\" + Id;
+    }
 }

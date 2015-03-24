@@ -6,13 +6,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import nlp.objects.Model;
 import nlp.objects.Sentence;
+import nlp.objects.Word;
 import nlp.processing.EditDistance;
 import nlp.processing.EditDistance.Operation;
 import srs2er.Srs2er;
+import trie.Lookup;
 import trie.Node;
 import trie.Trie;
-import util.Tuple;
 
 public class SerialTrie {
     List<Branch> branches;
@@ -90,8 +92,16 @@ public class SerialTrie {
 		    System.out.println(branch.leafInformation.getDataModel()
 			    .toString());
 		    
+		    /*List<Word> updatedWords = new LinkedList<Word>();
+		    for (Word token : sent_copy.getTokens()) {
+			if (token.getId() != -1) {
+			    updatedWords.add(token);
+			}
+		    } 
+		    sent_copy.setTokens(updatedWords);
 		    
-		    
+		    Lookup.processDataModel(sent_copy, branch.leafInformation.getDataModel());*/
+		    //System.out.println(branch.leafInformation.getDataModel());
 		    System.out.println("-------------------------------------------------------------------------------------");
 		    ///System.out.printf("\n%80s\n", "");
 		}

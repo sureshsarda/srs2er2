@@ -109,7 +109,7 @@ public class Lookup {
 		return parent.getLeafInformation();
 	}
 
-	private static void processDataModel(Sentence sentence, Model model) {
+	public static void processDataModel(Sentence sentence, Model model) {
 
 		for (Entity entity : model.getEntities()) {
 			entity.setName(Name.buildName(sentence.getTokens(),

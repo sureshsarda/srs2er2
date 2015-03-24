@@ -57,11 +57,11 @@ public class Type implements Comparable<Type> {
 
     @Override
     public String toString() {
-	return String.format("%s WI%d L%d", lemmName, wordIndex, length);
+	return String.format("%s WI=%d L=%d", lemmName, wordIndex, length);
     }
     
     public String toAbstractString() {
-	return String.format("WI%d L%d", wordIndex, length);
+	return String.format("WI=%d L=%d", wordIndex, length);
     }
 
     @Override

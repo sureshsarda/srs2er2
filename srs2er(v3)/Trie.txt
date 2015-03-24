@@ -1,0 +1,741 @@
+Legend: TAG (Stopword Probability StopwordCount | TotalWordcount)
+
+
+DT   NN   VBZ  DT   NN   WDT  VBZ  NNS  
+|    |    |    |    |    TO   VB   NN   
+|    |    |    |    |    |    |    IN   DT   NNS  IN   DT   NN   
+|    |    |    |    |    |    |    VBN  IN   DT   NN   
+|    |    |    |    |    |    |    DT   NN   .    
+|    |    |    |    |    CC   NN   IN   NNS  
+|    |    |    |    |    |    |    NN   
+|    |    |    |    |    |    DT   JJ   NN   VBG  TO   VB   NN   
+|    |    |    |    |    |    |    NN   NN   
+|    |    |    |    |    NN   NN   WDT  VBZ  JJ   
+|    |    |    |    |    |    |    NN   NN   CC   JJ   NN   IN   PRP$ JJ   NN   
+|    |    |    |    |    |    |    |    CC   NN   VBN  TO   PRP  
+|    |    |    |    |    |    |    NNS  CC   NN   
+|    |    |    |    |    |    |    CC   NN   NN   
+|    |    |    |    |    |    CC   NN   NN   
+|    |    |    |    |    DT   NN   NN   VBD  RB   CC   NN   
+|    |    |    |    |    |    |    CC   NNS  
+|    |    |    |    |    |    |    |    DT   NN   
+|    |    |    |    |    |    VBN  NN   DT   NN   CC   NN   IN   NNS  IN   NN   
+|    |    |    |    |    IN   NNS  IN   NN   
+|    |    |    |    |    |    NN   NN   IN   NNS  CC   VB   NN   
+|    |    |    |    |    |    PRP$ NNS  
+|    |    |    |    |    |    DT   NN   IN   NNS  WDT  MD   VB   VBN  
+|    |    |    |    |    |    |    |    |    CD   NNS  
+|    |    |    |    |    |    |    |    |    DT   NN   
+|    |    |    |    |    |    PDT  DT   NNS  
+|    |    |    |    |    VBN  IN   PRP  
+|    |    |    |    |    NNP  IN   DT   NN   
+|    |    |    |    JJ   NN   IN   NNS  
+|    |    |    |    |    |    |    DT   NN   
+|    |    |    |    |    |    |    NN   TO   DT   VBG  NN   
+|    |    |    |    |    |    |    VB   NNS  
+|    |    |    |    |    |    NN   
+|    |    |    |    |    |    CC   DT   JJ   NN   
+|    |    |    |    |    |    |    JJ   NN   
+|    |    |    |    |    |    VBG  PRP  
+|    |    |    |    |    |    WDT  VBZ  IN   NN   
+|    |    |    |    |    |    TO   VB   
+|    |    |    |    NNP  NN   
+|    |    |    |    NNS  
+|    |    |    |    VBG  CC   VBN  NN   
+|    |    |    CD   NN   TO   VB   PRP$ NNS  
+|    |    |    |    |    NNS  
+|    |    |    |    NNS  VBN  IN   PRP$ NNS  
+|    |    |    |    |    IN   NN   NN   NN   
+|    |    |    |    |    JJ   NN   
+|    |    |    |    CC   JJ   NN   NNS  
+|    |    |    PRP$ NN   CC   NN   TO   VB   DT   NN   
+|    |    |    |    |    NN   
+|    |    |    |    JJ   NN   NN   
+|    |    |    |    |    VBG  NN   CC   NN   NN   
+|    |    |    IN   DT   NNS  VBN  CC   PRP$ NN   
+|    |    |    |    |    NN   DT   NN   NN   CC   DT   NN   
+|    |    |    |    NNS  NNS  NNS  CC   NNS  
+|    |    |    |    NN   PRP$ NN   NN   NN   NN   
+|    |    |    |    |    TO   VB   NNS  IN   DT   NNS  
+|    |    |    |    |    IN   JJ   NNS  
+|    |    |    NNS  IN   NN   VBG  CC   NN   
+|    |    |    |    |    DT   NNS  
+|    |    |    |    |    |    NN   NN   
+|    |    |    |    |    PRP  
+|    |    |    |    RB   IN   DT   JJ   NNS  
+|    |    |    |    VBD  NN   NN   NN   CC   NN   IN   DT   NN   
+|    |    |    |    CC   NN   IN   DT   NN   IN   IN   NN   NN   NN   CC   JJ   JJ   NNS  
+|    |    |    |    TO   NNS  IN   DT   NN   
+|    |    |    |    NN   NNS  CC   NNS  
+|    |    |    |    WP   VBP  IN   NNS  
+|    |    |    VBN  TO   DT   NN   IN   IN   PRP$ NN   
+|    |    |    |    |    |    JJ   NN   
+|    |    |    |    |    RB   CD   NN   
+|    |    |    |    |    VB   DT   NN   
+|    |    |    |    IN   DT   JJ   NN   RB   
+|    |    |    |    |    |    |    |    TO   DT   NN   
+|    |    |    |    |    |    NN   IN   DT   NN   
+|    |    |    |    |    |    |    |    IN   PRP$ JJ   NNS  
+|    |    |    |    |    |    |    NN   
+|    |    |    |    |    |    NNS  
+|    |    |    |    |    NNS  
+|    |    |    |    |    NN   NN   CC   NN   NN   
+|    |    |    |    |    CD   TO   CD   NNS  
+|    |    |    |    |    |    NN   
+|    |    |    |    DT   NN   NN   IN   JJ   NN   IN   DT   NN   
+|    |    |    |    |    |    TO   VB   PRP  
+|    |    |    |    |    |    IN   DT   NN   
+|    |    |    |    |    |    |    |    NNS  NN   
+|    |    |    |    |    |    |    WDT  TO   VB   
+|    |    |    |    |    JJ   NN   NN   
+|    |    |    |    |    NNS  IN   NNS  
+|    |    |    |    |    VBG  NN   IN   DT   JJ   CC   VBZ  VBN  DT   NN   
+|    |    |    |    NNS  VBN  IN   NN   IN   NN   
+|    |    |    |    NN   DT   NN   
+|    |    |    |    RP   IN   NNS  
+|    |    |    NN   IN   DT   NNS  VBN  IN   NN   
+|    |    |    |    |    |    NN   IN   DT   NN   
+|    |    |    |    |    JJ   NN   CC   NN   
+|    |    |    |    |    |    NNS  NNS  
+|    |    |    |    |    NNS  VBD  CC   VBN  
+|    |    |    |    NNS  IN   DT   NN   VBG  IN   DT   NN   
+|    |    |    |    TO   JJ   NNS  IN   DT   NN   
+|    |    |    |    DT   NN   CC   NN   NN   
+|    |    |    |    NN   NN   CC   NNS  IN   DT   NN   
+|    |    |    |    CC   NN   
+|    |    |    |    JJ   IN   NN   IN   NN   CC   NN   NN   
+|    |    |    JJ   NNS  IN   NNP  
+|    |    |    |    |    |    JJ   NNS  
+|    |    |    |    NN   IN   JJ   NN   IN   NNS  
+|    |    |    RB   VBN  IN   DT   NN   NN   
+|    |    |    TO   CD   CC   JJR  NN   
+|    |    |    |    VB   VBN  IN   DT   NN   
+|    |    |    NNP  NNP  NNP  CC   JJ   NN   
+|    |    |    CC   NNS  CC   NNS  
+|    |    |    |    CD   CC   CD   NN   NNS  IN   NN   
+|    |    |    |    DT   NN   CC   DT   NN   
+|    |    IN   DT   NN   VBZ  NN   IN   NNS  CC   PRP$ NN   
+|    |    |    |    |    |    VBN  IN   JJ   NNS  
+|    |    |    |    |    |    |    |    NNS  IN   NN   IN   NNS  
+|    |    |    |    |    |    DT   NN   NN   CC   VBZ  JJ   NNS  
+|    |    |    |    |    |    |    |    CC   NN   
+|    |    |    |    |    |    NNS  CC   PRP$ NN   
+|    |    |    |    |    |    PRP$ JJ   NN   
+|    |    |    |    |    NN   VBZ  DT   NN   NN   
+|    |    |    |    |    VBG  VBN  VBZ  VBN  IN   NNS  IN   NNS  
+|    |    |    |    |    MD   VB   VBN  IN   JJ   NN   IN   NN   
+|    |    |    |    NNS  VBZ  VBN  
+|    |    |    |    |    |    DT   NN   IN   NN   
+|    |    |    NNS  VBG  IN   DT   NN   VBZ  RB   VBN  
+|    |    |    |    VBZ  VBN  IN   DT   NN   
+|    |    |    |    |    NN   IN   DT   NN   
+|    |    |    |    IN   DT   NN   VBZ  VBN  IN   DT   NN   
+|    |    |    |    VBN  IN   DT   NN   VBZ  VBN  
+|    |    |    |    DT   NN   VBZ  VBZ  VBN  TO   PRP$ NN   
+|    |    |    VBN  NNS  CC   NN   NNS  VBZ  TO   VB   VBN  
+|    |    |    NN   MD   VB   IN   NNS  IN   NN   NN   JJ   NN   CC   JJ   NN   
+|    |    MD   VB   NNS  IN   DT   NN   
+|    |    |    |    |    TO   DT   NN   
+|    |    |    |    |    NNS  RB   
+|    |    |    |    IN   JJS  CD   NNS  IN   DT   NN   
+|    |    |    |    |    JJ   NNS  
+|    |    |    |    |    DT   NN   
+|    |    |    |    |    CD   NNS  
+|    |    |    |    |    RB   CD   NN   
+|    |    |    |    NN   IN   NN   NNS  CC   NN   
+|    |    |    |    |    |    DT   NN   
+|    |    |    |    |    CC   NN   NN   IN   NNS  
+|    |    |    |    |    NN   NN   CC   JJ   NN   
+|    |    |    |    |    |    IN   DT   NN   
+|    |    |    |    |    VBN  CC   NN   VBN  
+|    |    |    |    DT   JJ   NN   NN   IN   DT   NN   
+|    |    |    |    |    |    DT   JJ   CC   DT   JJ   NN   
+|    |    |    |    |    NN   TO   DT   NN   
+|    |    |    |    |    |    |    VB   PRP$ NNS  CC   NNS  
+|    |    |    |    |    |    |    |    VBN  
+|    |    |    |    |    |    VBD  IN   DT   NNS  
+|    |    |    |    |    |    NN   NN   IN   DT   NN   
+|    |    |    |    |    |    |    TO   DT   NN   IN   NN   
+|    |    |    |    |    |    |    CC   JJ   NN   
+|    |    |    |    |    |    WDT  VBZ  RB   VBN  VBN  RB   
+|    |    |    |    |    |    NNS  
+|    |    |    |    |    |    IN   DT   JJ   NNS  
+|    |    |    |    |    |    |    |    |    NN   
+|    |    |    |    |    |    |    |    NN   
+|    |    |    |    |    |    |    JJ   NN   
+|    |    |    |    |    |    VBN  IN   DT   NN   
+|    |    |    |    |    |    CC   DT   NN   
+|    |    |    |    CC   DT   NN   CC   DT   NN   IN   DT   NN   
+|    |    |    |    |    |    |    |    |    JJ   NN   
+|    |    |    |    |    VB   DT   NN   
+|    |    |    |    |    IN   NNS  CC   NNS  
+|    |    |    |    JJ   NN   NNS  
+|    |    |    |    |    |    NN   VBN  IN   DT   NN   
+|    |    |    |    |    |    |    NN   NN   NN   NN   NN   JJ   NNS  
+|    |    |    |    |    |    VBZ  
+|    |    |    |    |    |    CC   NN   
+|    |    |    |    |    TO   VB   IN   DT   NN   
+|    |    |    |    |    CC   JJ   
+|    |    |    |    |    NNS  IN   NN   NNS  NNS  NN   NN   NN   NN   
+|    |    |    |    |    |    |    DT   NN   
+|    |    |    |    VBN  IN   JJ   NNS  
+|    |    |    |    |    |    VBG  JJ   NN   
+|    |    |    |    |    |    RB   CD   NN   
+|    |    |    |    |    |    CC   NN   CC   NN   
+|    |    |    |    |    RB   CD   NN   
+|    |    |    |    CD   NNS  
+|    |    |    |    |    CC   JJR  NNS  
+|    |    |    |    |    TO   CD   NNS  
+|    |    |    |    |    NN   IN   DT   NN   
+|    |    |    |    TO   DT   NN   
+|    |    |    |    |    VB   JJ   NN   
+|    |    |    |    PRP$ JJ   NNS  
+|    |    |    |    VB   NN   IN   VBG  NN   
+|    |    |    RB   VB   DT   NN   IN   DT   JJ   NNS  
+|    |    |    |    |    |    |    NN   
+|    |    |    |    |    JJ   JJ   NN   CC   NN   NNP  
+|    |    |    CC   MD   RB   VB   VBN  
+|    |    NNS  JJ   IN   JJ   NN   JJ   NN   NN   IN   NNS  VBN  NN   NN   NN   NN   NN   NN   VBP  VBN  IN   NN   
+|    |    |    |    NNS  CC   NN   IN   DT   JJ   NN   
+|    |    |    |    NN   NN   NN   IN   NNS  NN   IN   DT   NN   
+|    |    |    NNS  IN   JJ   NNS  
+|    |    |    |    |    DT   NN   
+|    |    |    |    TO   JJ   NNS  
+|    |    |    VBP  NN   NNS  
+|    |    |    |    PRP$ NN   NN   NN   NN   CC   VBZ  VBN  
+|    |    |    |    |    |    |    CC   NN   NN   
+|    |    |    NN   IN   NNS  TO   VB   IN   
+|    |    |    DT   NN   IN   IN   CD   NNS  
+|    |    NN   NN   VBZ  VBN  IN   DT   NN   NNP  
+|    |    |    |    |    NN   NN   NN   NN   CC   NN   NN   
+|    |    |    |    |    |    |    |    CC   NN   NN   
+|    |    |    |    NN   CC   NN   NN   VBZ  VBN  
+|    |    |    VBZ  DT   NNS  IN   DT   NNS  IN   DT   NN   
+|    |    |    |    |    |    VBN  
+|    |    |    |    |    JJ   NN   IN   NNS  
+|    |    |    |    |    NN   RB   
+|    |    |    |    |    |    NN   CC   NN   IN   NNS  IN   PRP  
+|    |    |    |    PDT  DT   NNS  
+|    |    |    |    JJ   NN   NN   JJ   NN   NN   NN   CC   NN   NN   
+|    |    |    |    |    IN   VBG  DT   NN   
+|    |    |    |    |    NNS  
+|    |    |    |    NN   NN   NN   NN   IN   NN   NN   IN   NN   
+|    |    |    |    |    IN   NN   NN   NN   NN   
+|    |    |    |    |    VBN  IN   DT   NN   IN   NN   
+|    |    |    |    |    TO   JJ   NNS  
+|    |    |    |    IN   NN   NN   NN   NN   CC   NN   
+|    |    |    |    |    NNS  CC   NNS  
+|    |    |    |    VBN  IN   PRP$ NN   
+|    |    |    |    |    |    DT   NN   
+|    |    |    |    |    DT   NN   
+|    |    |    |    NNS  TO   VB   PRP$ NNS  
+|    |    |    MD   VB   NN   IN   DT   NN   
+|    |    |    |    |    IN   DT   NNS  
+|    |    |    |    |    CC   VB   NNS  IN   PRP$ NN   
+|    |    |    |    |    VBN  IN   DT   NN   
+|    |    |    |    |    NNS  
+|    |    |    RB   VBZ  NN   NN   NN   NN   CC   NN   NN   
+|    |    |    IN   IN   DT   NN   VBN  TO   DT   NN   VBZ  VBN  
+|    |    |    |    DT   NN   VBZ  VBN  
+|    |    VBN  IN   DT   NN   VBZ  DT   NN   NN   
+|    |    |    |    |    |    |    VBN  IN   CD   IN   PRP$ JJ   
+|    |    RB   VBZ  DT   NN   NN   VBN  IN   PRP  
+|    |    |    |    |    NNS  NN   
+|    |    |    IN   NN   CC   DT   JJ   NN   
+|    |    CC   JJ   NN   IN   DT   NN   VBP  VBN  
+|    |    |    NN   IN   DT   NN   VBZ  VBN  
+|    |    VBG  DT   NN   VBZ  DT   NN   IN   DT   NN   
+|    RBS  RB   VBD  NNS  VBP  VBN  IN   DT   NN   NN   
+|    NNS  VBP  NN   NN   CC   NN   
+|    |    |    VBN  IN   JJ   NN   CC   NN   
+|    |    |    |    |    DT   NN   IN   NN   NN   
+|    |    |    |    |    |    |    NN   
+|    |    |    |    |    NNS  
+|    |    |    |    TO   DT   NNS  
+|    |    |    |    NN   NNS  
+|    |    |    |    DT   NN   IN   DT   NN   
+|    |    |    DT   JJ   NN   NN   
+|    |    |    |    NN   NN   
+|    |    |    RB   VBN  IN   CD   NNS  
+|    |    |    |    |    TO   NNS  IN   NNS  
+|    |    IN   JJ   NNS  MD   VB   VBN  IN   NN   CC   NN   
+|    |    |    DT   NN   VBP  VBN  IN   DT   NN   
+|    |    |    |    |    VB   IN   DT   NN   
+|    |    |    NN   CC   NN   VBP  DT   NN   
+|    |    NNS  MD   VB   VBN  IN   DT   NN   
+|    |    VBN  TO   DT   NN   VBP  VBN  IN   DT   NN   
+|    |    NN   NN   VBZ  VBN  IN   DT   NN   
+|    VBN  NNS  VBP  NN   NN   CC   NN   
+|    NNP  MD   VB   DT   NN   IN   NNS  CC   NN   IN   DT   NN   
+|    |    |    |    NNS  IN   NNS  
+|    |    |    |    NN   NNS  IN   DT   NN   
+|    |    VBZ  DT   NN   IN   DT   NN   
+|    |    VBP  DT   NN   NN   
+|    |    NN   VBZ  VBN  DT   NN   
+|    JJ   NN   MD   VB   NNS  TO   VB   IN   NNS  
+|    |    |    NN   MD   VB   VBN  TO   DT   NN   IN   PRP$ NN   
+|    |    |    |    VBZ  VBN  TO   VB   DT   NN   
+|    |    |    |    |    |    DT   JJ   NN   NN   
+|    |    |    |    |    JJ   JJ   NN   NNS  IN   PRP$ NN   
+|    |    |    VBZ  NNS  IN   DT   JJ   NN   
+|    |    |    |    |    |    NN   NN   NN   NN   
+|    |    |    |    RB   VBN  IN   DT   NN   NN   
+|    |    |    |    VBN  IN   DT   NN   CC   NN   
+|    |    |    |    |    |    |    JJ   NN   
+|    |    |    |    |    |    NNS  
+|    |    |    |    DT   NNS  TO   VB   DT   NN   
+|    |    |    |    |    NN   DT   NN   NN   CC   DT   NN   NN   
+|    |    |    |    IN   DT   NN   
+|    |    |    IN   DT   NN   VBZ  VBN  IN   DT   NN   
+|    |    |    |    NNS  VBN  IN   DT   NN   VBZ  VBN  
+|    |    |    |    NN   NN   VBZ  VBN  NN   
+|    |    NNS  IN   NN   VBP  VBN  IN   DT   NN   
+|    |    |    NNS  IN   NNS  
+|    |    VBZ  DT   NN   NN   NN   NN   RB   RB   IN   DT   NN   NN   
+|    |    |    VBN  IN   NN   NN   
+|    |    |    |    |    DT   NN   
+|    |    |    |    TO   NN   IN   DT   NN   
+|    |    |    TO   DT   NN   
+|    |    |    NNS  
+|    IN   DT   NNS  VBP  RB   JJ   
+NN   VBZ  NN   CC   NN   IN   DT   NN   
+|    |    |    VBN  IN   PRP  IN   NN   RP   
+|    |    |    TO   DT   NN   
+|    |    |    |    VB   IN   PRP  VBZ  VBN  CC   RB   
+|    |    |    NNS  IN   PDT  DT   NNS  
+|    |    |    NN   TO   DT   NNS  
+|    |    |    |    |    |    NN   NN   
+|    |    |    |    NNS  IN   DT   NN   
+|    |    |    |    NN   NNS  CC   NN   NNS  
+|    |    |    |    |    NN   CC   NN   NN   
+|    |    |    |    CC   NN   NN   
+|    |    |    IN   NN   IN   NNS  CC   NNS  NN   NNS  CC   NNS  
+|    |    |    |    DT   NN   
+|    |    |    |    NNS  VBD  IN   DT   NN   
+|    |    |    |    JJ   NNS  IN   VBG  VBG  NN   
+|    |    |    |    WDT  PRP  VBZ  JJ   
+|    |    |    JJ   NN   CC   NN   NN   
+|    |    DT   NNS  VBD  
+|    |    |    NN   IN   JJ   NNS  CC   JJ   NNS  NN   
+|    |    |    |    |    PRP$ NNS  
+|    |    |    |    |    NN   NNS  
+|    |    |    |    CC   NN   NN   
+|    |    |    |    |    VBZ  IN   JJ   NNS  
+|    |    |    |    NN   IN   DT   NN   
+|    |    |    |    DT   NN   CC   DT   NN   
+|    |    |    JJ   NN   NN   CC   DT   NN   
+|    |    |    VBN  CC   JJ   NN   
+|    |    VBN  DT   NN   IN   NN   NN   IN   NN   NNP  
+|    |    |    |    |    NN   IN   PRP$ NNS  
+|    |    |    TO   DT   NN   
+|    |    |    IN   DT   NN   IN   CD   NNS  
+|    |    |    |    |    |    CC   NN   
+|    |    |    |    NN   NN   CC   JJ   NN   
+|    |    IN   DT   VBG  NNS  IN   DT   NN   
+|    |    |    |    NN   CC   VBZ  CD   NNS  TO   VB   
+|    |    |    NN   IN   NN   NN   CC   NN   
+|    |    RP   DT   NN   
+|    |    RB   RB   JJ   CC   JJ   NN   
+|    |    |    VBN  IN   NN   NN   
+|    |    NNS  IN   NN   NN   NN   NN   IN   NN   
+|    |    |    |    JJ   NNS  
+|    |    |    VBN  IN   NN   
+|    |    PDT  DT   NNS  NNS  CC   NNS  
+|    NNS  VBP  NN   NN   NN   NN   NN   NN   CC   NN   CC   NN   NN   
+|    |    |    |    |    CC   JJ   NN   NN   
+|    |    |    |    |    |    NN   
+|    |    |    |    CC   NN   
+|    |    |    |    IN   CD   IN   DT   NNS  
+|    |    |    VBN  DT   NN   IN   VBG  NNS  
+|    |    |    |    RB   IN   DT   NN   
+|    |    |    DT   NN   IN   IN   DT   JJ   NN   
+|    |    |    |    |    VBN  IN   PRP  
+|    |    |    JJ   IN   VBN  NNS  
+|    |    |    |    NNS  
+|    |    IN   PDT  DT   NN   VBZ  VBN  
+|    |    |    NN   NN   CC   NN   VBP  VBN  
+|    |    |    DT   NN   NNS  MD   RB   VB   VBN  
+|    |    NN   IN   VBN  NN   NNS  VBN  IN   DT   NN   
+|    |    |    |    |    CC   VBN  NNS  
+|    |    |    |    NN   NN   IN   NN   NN   IN   
+|    |    VBZ  IN   NN   NN   NN   NN   NN   CC   JJ   NNS  
+|    |    DT   NN   IN   NN   CC   NN   NNS  
+|    |    VBG  NN   JJ   IN   DT   NN   
+|    |    JJ   NNS  IN   DT   NNS  TO   VB   VBN  
+|    |    RB   VBP  NN   IN   NNS  
+|    |    |    VBZ  PRP$ NN   NN   IN   NN   CC   NN   JJ   IN   NN   
+|    |    VBN  IN   NNS  VBP  VBN  IN   DT   NN   NN   
+|    MD   VB   DT   NNS  IN   PDT  DT   NNS  IN   PRP$ NN   NN   
+|    |    |    |    |    WDT  VBP  VBN  
+|    |    |    |    NN   IN   VBG  NNS  
+|    |    |    |    |    |    VBN  NNS  
+|    |    |    |    |    |    NN   CC   DT   VBG  NN   
+|    |    |    |    |    NN   IN   NN   NN   
+|    |    |    |    |    VBN  IN   DT   NN   
+|    |    |    |    JJ   NN   CC   NN   
+|    |    |    |    |    |    NN   
+|    |    |    NNS  TO   VB   IN   DT   JJ   NN   NN   
+|    |    |    |    IN   DT   NN   
+|    |    |    |    |    JJ   NNS  
+|    |    |    |    |    NN   NN   NN   CC   NN   NN   
+|    |    |    IN   NNS  CC   NNS  IN   DT   NN   
+|    |    |    NN   IN   DT   NNS  CC   NNS  
+|    |    |    |    |    |    |    VBN  IN   DT   NN   
+|    |    |    |    |    NNS  
+|    |    |    |    NN   IN   NN   IN   DT   JJ   NN   
+|    |    |    |    |    CC   NN   
+|    |    |    JJ   NN   NN   
+|    |    |    |    |    IN   PDT  DT   NNS  
+|    |    |    |    TO   VB   NN   NN   NN   VBN  IN   NNS  
+|    |    |    |    CC   DT   JJ   NN   
+|    |    |    PRP$ NN   IN   NN   IN   NN   
+|    |    |    TO   VB   NN   IN   NN   CC   PRP$ NNS  
+|    |    |    VBG  CC   VBN  
+|    |    |    VBN  IN   NNS  VBG  NN   
+|    |    RB   VB   NN   TO   DT   NNS  
+|    |    |    |    JJ   NN   NN   
+|    NN   IN   DT   NN   VBZ  VBN  
+|    |    |    |    |    NN   VBZ  VBN  TO   DT   NN   NN   
+|    |    |    NN   NNS  CC   NN   VBZ  TO   VB   VBN  
+|    |    NNS  VBP  NN   NN   CC   NN   NN   
+|    |    |    NN   IN   DT   NN   
+|    |    |    IN   NNS  NNS  NNS  CC   NNS  
+|    |    |    NNS  IN   NNS  
+|    |    VBZ  VBG  NNS  
+|    |    |    JJ   IN   VBG  NNS  IN   DT   NN   NNS  
+|    |    |    |    |    JJ   CC   NNS  IN   JJ   NN   
+|    |    |    |    NNS  TO   DT   NNS  
+|    |    |    |    NN   JJ   NN   NN   NN   CC   NN   NN   
+|    |    |    NNS  NNS  CC   NN   
+|    |    |    |    IN   DT   NN   
+|    |    |    NN   IN   NN   JJ   VBZ  IN   DT   NN   NN   
+|    |    |    |    NN   CC   NNS  IN   WDT  PRP  VBZ  
+|    |    |    |    |    NN   NN   CC   NN   
+|    |    |    |    |    |    CC   NN   NN   
+|    |    |    VBN  IN   DT   NNS  
+|    |    |    |    |    |    NN   
+|    |    |    PRP$ JJ   NN   CC   JJ   NN   NN   CC   NN   
+|    |    |    DT   NN   NN   
+|    |    |    IN   DT   NN   JJR  IN   CD   NNS  IN   NN   
+|    |    CC   NN   NN   IN   DT   NN   VBZ  RB   VBN  
+|    |    |    |    VBP  VBN  
+|    |    NN   CC   NN   VBP  VBN  
+|    |    |    JJ   NN   IN   NNS  JJ   NN   IN   NN   VBZ  VBN  
+|    |    |    NN   NN   CC   NN   VBZ  VBN  
+|    |    |    IN   NN   JJ   NN   MD   VB   VBN  
+|    |    RB   VBZ  DT   JJ   
+|    |    VBP  JJ   NN   CC   JJ   NN   
+|    |    |    NN   IN   NNS  CC   NN   IN   NNS  
+|    |    MD   VB   DT   NN   CC   DT   NN   
+|    IN   DT   NN   VBZ  VBN  IN   DT   NN   NN   
+|    |    |    |    NNS  NNS  
+|    |    |    NNS  VBZ  VBN  
+|    |    NNS  VBN  IN   DT   NN   VBZ  RB   VBN  
+|    |    |    VBZ  TO   VB   VBN  IN   DT   NNS  
+|    |    |    |    VBN  
+|    |    |    CC   NNS  VBZ  VBN  
+|    |    |    IN   DT   NN   MD   VB   VBN  
+|    |    |    |    JJ   NNS  VBP  JJ   
+|    |    |    VBD  NN   IN   NN   NN   CC   NN   IN   DT   NN   VBP  VBN  
+|    |    |    MD   RB   VB   DT   NN   NN   IN   DT   NNS  
+|    |    NN   NN   VBZ  NN   NN   CC   NN   NN   CC   NN   IN   DT   NN   IN   DT   NN   
+|    RB   VBZ  NNS  TO   PRP$ NNS  
+|    VBG  DT   NN   VBZ  RB   VBN  TO   VB   NN   IN   DT   NN   
+|    |    IN   DT   NN   VBZ  DT   JJ   NN   NN   
+|    VBP  DT   NN   NN   CC   NN   NN   
+|    |    |    |    |    NNS  NN   CC   NN   NN   NN   
+|    |    |    |    IN   NN   
+|    |    JJ   NN   IN   NNS  
+|    VB   NN   CD   TO   CD   NNS  IN   DT   NN   
+NNP  VBZ  NN   CC   DT   NN   NN   
+|    |    |    |    NN   IN   NNS  IN   DT   NN   
+|    |    |    |    |    VBD  
+|    |    |    NN   NN   IN   NN   IN   NN   CC   NN   
+|    |    |    |    CC   NN   
+|    |    |    NNS  CC   VBD  NN   NNS  
+|    |    |    IN   NNS  
+|    |    |    |    NN   NN   CC   NN   
+|    |    NNS  IN   JJ   NNS  
+|    |    |    |    PRP$ NNS  
+|    |    |    TO   VB   
+|    |    |    CC   NNS  
+|    |    JJ   TO   NNS  WP   VBP  DT   NN   IN   NN   
+|    |    |    NN   NNS  IN   JJ   NNS  
+|    |    DT   JJ   NN   NN   IN   IN   DT   VBN  NN   
+|    |    |    |    CD   NN   NN   
+|    |    |    NN   NN   CC   DT   NN   IN   NNS  
+|    |    |    VBN  CC   JJ   NN   
+|    |    VBN  RB   IN   NN   NN   NN   CC   NN   NN   
+|    |    |    NN   NNS  IN   DT   NN   TO   NN   
+|    |    |    IN   DT   NN   NN   
+|    |    |    |    |    JJ   NN   
+|    |    |    |    NNS  
+|    |    IN   CD   NN   IN   VBG  
+|    NNS  DT   NN   NN   IN   DT   NN   
+|    |    |    NNS  IN   NNS  
+|    |    MD   VB   IN   IN   JJ   CC   NN   
+|    |    VBP  NN   NN   NN   NN   NN   NN   NN   NN   CC   NN   
+|    |    |    |    |    |    CC   NN   
+|    |    |    |    NNS  CC   NN   NN   
+|    |    |    DT   NN   
+|    |    |    |    JJ   NN   IN   DT   VBN  NN   
+|    |    |    JJ   IN   NNS  IN   PRP$ NN   
+|    |    |    |    |    DT   NN   NNS  
+|    |    |    VBN  IN   NNS  
+|    |    |    |    |    DT   VBN  NN   
+|    |    |    |    DT   IN   DT   NN   
+|    |    NNS  VBZ  NNS  CC   NNS  
+|    NN   VBZ  IN   NN   NN   NN   IN   NNS  CC   NN   IN   NNS  
+|    |    |    |    JJ   NN   IN   NN   NNP  CC   NNP  VBD  
+|    |    |    NN   NN   NN   NN   CC   NN   
+|    |    |    |    |    CC   NN   
+|    |    |    |    IN   NN   
+|    |    MD   VB   PRP$ NNS  
+|    |    NNS  VBP  NN   NN   NN   CC   NN   NN   
+|    |    IN   DT   NN   VBZ  VBN  
+|    |    |    |    |    |    WDT  NN   MD   VB   VBN  IN   WDT  NN   
+|    |    RB   RB   IN   NN   NN   VBZ  VBN  IN   DT   NN   NN   
+|    |    CC   VBN  NN   VBZ  VBN  
+|    |    VBP  JJ   NN   NNS  
+|    MD   VB   NN   NNS  
+|    |    |    DT   VBG  NN   IN   DT   NN   
+|    |    |    VBN  CC   JJ   
+|    |    |    |    IN   NN   CC   NN   
+|    |    |    JJ   CC   JJ   
+|    |    |    IN   JJ   NNS  
+|    |    |    NNS  CC   NNS  
+|    IN   DT   NN   VBZ  DT   NN   NN   NN   CC   PRP$ NN   
+|    |    |    |    |    VBN  TO   VB   PRP  
+|    |    |    |    |    |    IN   NN   
+|    |    |    |    |    IN   CD   NNS  
+|    |    NNS  VBZ  VBN  
+|    |    NN   VBZ  VBN  
+|    VBN  IN   DT   NN   
+|    |    |    NNS  VBP  VBN  
+|    CC   NNP  NN   IN   VBN  NNS  VBZ  VBN  
+|    |    NN   NN   VBZ  VBN  
+|    VBD  IN   NNS  VBP  DT   NN   
+|    TO   VB   VBN  IN   NNS  VBP  DT   NN   
+|    VBP  VBN  VBG  JJ   NNS  IN   NNS  
+|    |    |    IN   DT   NN   NN   
+|    |    NNS  
+|    |    JJ   VBN  IN   NNS  
+|    |    DT   NN   CC   JJ   NN   CC   NN   
+|    |    |    |    |    NN   
+|    |    |    |    IN   NN   CC   NN   NN   
+|    |    NN   NN   CC   JJ   NN   
+|    |    |    |    VBG  PDT  DT   NN   IN   DT   NNP  
+|    |    RB   IN   NN   CC   JJ   NN   
+|    NNPS VBP  JJ   NN   NNS  IN   PRP  
+|    ,    NNP  CC   NNP  NN   IN   DT   NN   
+NNS  VBP  NN   NNS  CC   NNS  
+|    |    |    IN   NNS  
+|    |    |    |    DT   NN   
+|    |    |    |    |    NNS  IN   DT   NN   
+|    |    |    NN   NN   NN   NN   NN   CC   NN   NNS  
+|    |    |    TO   DT   NN   
+|    |    DT   NN   IN   DT   NN   
+|    |    |    |    |    NNS  
+|    |    |    |    CC   NN   
+|    |    |    |    NN   NN   NN   NN   NN   CC   VBG  NN   
+|    |    |    |    |    |    CC   NN   NN   NN   
+|    |    |    |    |    IN   DT   NN   
+|    |    |    |    DT   NN   CC   DT   NN   
+|    |    |    |    |    |    NN   NN   CC   NN   
+|    |    |    NNS  VBN  TO   PRP  
+|    |    |    JJ   NN   NN   
+|    |    |    |    |    TO   DT   NNS  NN   
+|    |    TO   VB   DT   VBN  NNS  IN   VBN  NN   
+|    |    |    |    IN   NN   
+|    |    |    |    NN   
+|    |    |    JJ   NNS  
+|    |    VBN  TO   NN   NNS  NN   
+|    |    |    |    NNS  
+|    |    |    IN   NNPS 
+|    |    |    |    JJ   NNS  CC   JJ   NNS  
+|    |    |    |    DT   NN   IN   NNS  
+|    |    |    |    |    JJ   NN   
+|    |    |    |    |    |    IN   VBG  DT   NN   
+|    |    |    |    |    NNS  IN   DT   NN   
+|    |    |    |    NNS  IN   JJ   NNS  
+|    |    |    |    |    |    NN   
+|    |    |    |    |    |    DT   VBN  NN   
+|    |    |    |    |    |    |    NN   
+|    |    |    |    |    CC   NNS  
+|    |    |    |    |    TO   NNS  IN   DT   NN   
+|    |    |    |    IN   NNS  
+|    |    |    |    |    DT   NNS  
+|    |    |    NN   NNS  
+|    |    |    DT   NN   VBN  IN   NNS  VBD  
+|    |    |    |    JJ   NN   
+|    |    |    RP   TO   DT   NN   TO   VB   VBN  
+|    |    |    NNS  IN   NNS  
+|    |    IN   JJ   NNS  
+|    |    |    |    NN   
+|    |    |    DT   NN   IN   IN   NNS  
+|    |    |    |    NNS  VBD  
+|    |    |    NNS  VBN  IN   DT   NN   
+|    |    NNS  TO   DT   NN   
+|    |    |    |    VB   NNP  
+|    |    |    IN   DT   NN   
+|    |    |    |    |    VBN  NN   
+|    |    |    |    JJ   NNS  
+|    |    |    |    NNS  
+|    |    |    CC   NNS  IN   WDT  DT   NN   VBZ  
+|    |    PRP$ NNS  NNS  CC   NN   IN   VBG  
+|    |    JJ   VBN  IN   NNS  
+|    |    |    NN   IN   NNS  
+|    |    |    |    NN   NNS  CC   NN   
+|    |    |    JJ   NN   
+|    |    RB   VBN  TO   NNS  
+|    |    |    |    IN   NNS  
+|    |    |    JJ   NNS  CC   JJ   NNS  
+|    MD   VB   DT   NN   IN   NNS  JJ   IN   DT   NN   
+|    |    |    |    |    |    DT   JJ   NN   
+|    |    |    |    NNS  VBN  TO   PRP  
+|    |    |    IN   JJS  CD   NNS  IN   DT   NN   
+|    |    |    |    DT   JJ   NN   VBG  NNP  
+|    |    |    |    NN   CC   NN   NN   
+|    |    |    NN   IN   NNS  
+|    |    |    |    NNP  JJ   NN   CC   JJ   NN   
+|    |    |    JJ   TO   VB   DT   NN   IN   NN   NN   
+|    |    |    |    |    |    NN   IN   NN   
+|    |    |    |    CC   JJ   NNS  
+|    |    |    |    NN   NN   NN   NN   NN   NNS  
+|    |    |    |    |    CC   JJ   
+|    |    |    VBN  VBG  NN   NN   NN   NN   CC   JJ   NN   
+|    |    |    |    RB   IN   NN   CC   NN   NNS  
+|    |    |    |    NNS  IN   NN   IN   PRP$ NNS  
+|    |    |    NNS  
+|    |    |    CC   VBN  VBD  CC   JJ   
+|    |    |    |    JJ   NNS  CC   VB   NNS  
+|    |    |    CD   CC   JJR  NNS  VBG  IN   DT   NN   
+|    |    RB   VB   RP   NNS  
+|    NN   VBZ  NN   IN   DT   NN   IN   DT   NN   
+|    |    |    DT   NN   IN   DT   NN   
+|    |    |    |    JJ   NNS  IN   DT   NN   
+|    |    |    JJ   IN   RB   VBG  DT   VBN  NN   VBG  TO   DT   NN   NN   
+|    |    MD   VB   IN   DT   NN   IN   NNS  CC   NNS  
+|    |    NNS  IN   DT   NN   
+|    |    NN   TO   DT   NN   VBG  PRP  
+|    CC   NNS  VBP  JJ   IN   DT   NN   
+|    IN   DT   NN   VBP  VBG  RB   
+|    |    |    |    |    VBN  IN   DT   NN   NN   NN   CC   NN   
+|    |    |    |    RB   VBP  NN   NN   NN   RB   RB   IN   NN   
+|    |    |    |    IN   DT   NN   VBZ  VBN  
+|    |    NN   VBP  NN   TO   JJ   NNS  
+|    |    |    |    |    NN   CC   NN   
+|    |    NNS  VBP  RB   VBN  
+|    VBN  TO   VB   DT   NN   VBP  RB   VBN  
+|    |    IN   DT   NN   VBP  VBN  
+|    TO   NNS  VBP  WRB  RB   DT   NN   VBZ  VBN  
+|    RB   VBP  DT   NN   
+|    |    |    NNS  
+|    |    |    CD   NNS  IN   NN   NNS  
+|    |    |    |    CC   JJR  NNP  NN   WDT  VBP  JJ   NN   
+|    |    |    TO   VBN  NNS  IN   IN   DT   NN   
+|    |    |    JJ   NN   IN   VBG  NNS  
+|    |    VBN  IN   DT   NN   VBZ  VBN  
+|    |    IN   NN   NNS  
+|    JJ   NNS  IN   DT   NNS  
+|    VBZ  VBN  RP   IN   NN   NN   NN   CC   NNS  
+|    VB   IN   NNS  IN   DT   NN   
+|    NNS  VBP  DT   NN   IN   DT   NN   VBN  
+EX   VBP  CD   NN   NNS  RB   DT   NN   NN   CC   NN   NNS  
+|    |    |    CC   JJR  NNS  VBN  IN   DT   NN   
+|    |    JJ   NN   IN   NNS  
+|    |    |    |    NNS  
+|    |    |    NNS  IN   VBG  DT   NN   IN   DT   NN   
+|    |    |    |    |    DT   NN   
+|    |    |    |    |    NNS  IN   DT   NN   
+|    |    |    |    |    WDT  DT   NN   MD   VB   
+|    |    |    |    VBN  IN   PRP  
+|    |    NNS  WDT  MD   VB   IN   NN   
+|    |    |    |    VBP  VBN  WRB  NN   VBZ  VBN  IN   DT   NN   
+|    |    |    CC   NNS  IN   NNS  
+|    |    |    |    |    |    DT   NN   
+|    |    VBN  NNS  IN   WRB  NN   VBZ  NN   NNS  
+|    VBZ  DT   JJ   NN   IN   NN   
+|    |    |    NN   TO   NN   IN   NNS  DT   NN   MD   VB   
+|    |    |    |    NN   VBN  IN   DT   NN   
+|    |    |    |    VBN  IN   DT   NN   
+|    |    NN   VBN  IN   DT   NN   
+|    |    |    NN   IN   DT   NN   
+|    MD   VB   CD   JJR  NNS  IN   DT   NN   
+VB   NNS  VBP  NN   NN   NN   IN   NNS  CC   NNP  
+|    |    |    TO   DT   NN   
+|    |    VB   DT   NN   NN   NN   
+|    RB   VBZ  DT   NN   
+|    NN   CC   NN   IN   DT   NN   VBP  VBN  
+|    |    IN   NN   VBZ  VBN  IN   VBG  PRP  
+|    |    |    DT   NN   VBZ  VBN  
+|    |    VBP  NN   IN   NN   NN   IN   NN   
+|    IN   DT   NN   CC   NN   VBZ  RB   VBN  IN   NNS  
+|    |    |    VBN  NNS  VBZ  TO   VB   VBN  
+JJ   NN   MD   VB   TO   VB   PRP$ NN   
+|    |    NNS  VBP  JJ   IN   NN   
+|    |    |    |    VBN  IN   NN   NN   
+|    |    VBZ  NN   JJ   TO   PRP  
+|    |    CC   NN   NN   IN   DT   NN   VBZ  VBN  
+|    |    IN   NNS  VBZ  DT   JJ   NN   
+|    |    |    DT   NN   VBZ  VBN  IN   NN   CC   DT   NN   
+|    |    |    NN   VBZ  RB   JJ   
+|    |    VBP  NN   NN   CC   JJ   NNS  
+|    NNS  VBP  IN   DT   NN   
+|    |    |    VBG  IN   DT   NN   
+|    |    |    TO   VB   DT   NN   
+|    |    |    DT   NN   DT   NN   NN   CC   NN   
+|    |    IN   NNS  VBP  VBN  IN   NNS  
+|    |    |    |    |    IN   JJ   NN   
+|    |    |    DT   NN   VBP  NN   NN   CC   NN   
+|    |    CC   JJ   NNS  VBP  VBN  IN   NNS  
+|    |    MD   VB   NNS  
+|    |    |    |    CD   NN   
+|    JJ   NN   VBP  NN   CC   NN   
+|    |    |    WDT  VBP  RB   IN   NN   VBP  VBN  NNS  TO   VB   
+NNPS NN   VBZ  NN   TO   NNS  
+|    |    |    |    IN   PDT  DT   NN   NNS  VBN  IN   DT   NNS  
+|    |    |    DT   NN   NN   VBN  IN   DT   NN   
+|    NNP  VBZ  JJ   IN   VBG  DT   NNS  
+|    VBP  VBN  IN   NNS  
+|    |    |    |    NN   IN   NN   IN   JJ   NN   IN   JJ   NN   
+|    |    |    |    DT   NN   
+|    |    DT   NN   VBG  NN   CC   JJ   NN   
+|    |    IN   JJ   NNS  
+|    |    NNS  TO   DT   NN   
+|    IN   DT   NN   VBN  IN   JJ   NNS  
+|    RB   VBG  IN   DT   NN   NN   VBP  VBN  
+|    MD   VB   JJ   NNS  
+|    |    |    VBN  IN   JJ   NNS  
+VBG  NN   IN   DT   NN   IN   DT   NN   VBZ  VBN  IN   NN   
+|    |    |    NN   MD   RB   VB   VBN  
+|    NNS  VBP  RB   NN   IN   JJ   NN   IN   NNS  NN   CC   NN   
+CC   DT   JJ   CC   VBN  NN   NN   VBZ  VBN  IN   DT   NN   NN   
+RB   DT   JJ   NN   VBZ  NNS  TO   NN   NNS  
+|    |    NNS  MD   VB   NN   
+|    |    NN   MD   VB   VBN  IN   JJ   NNS  
+|    CD   NN   MD   VB   DT   NN   
+|    |    |    IN   VBN  NN   IN   DT   NN   
+|    NN   NN   VBZ  DT   NN   IN   DT   NN   IN   PRP$ NN   
+CD   NN   VBZ  JJ   NNS  
+|    |    |    TO   CD   NN   
+|    |    |    VBN  RP   TO   JJ   NNS  CC   NNS  
+|    |    MD   VB   JJ   NNS  
+|    NNS  IN   DT   RBS  MD   VB   DT   NN   
+IN   NNP  NN   NNS  VBP  IN   NNS  IN   NNS  IN   NNS  
+|    DT   NN   NN   NN   NNS  VB   NN   CC   NN   NN   VBP  VBN  
+|    |    |    PRP$ NN   NN   NN   NN   JJ   NN   CC   NN   NN   VBP  VBN  
+|    |    |    |    |    CC   NN   NN   VBP  VBN  
+|    |    |    |    JJ   NN   VBZ  VBN  
+|    |    |    NNS  VBG  PRP$ NN   JJ   NN   IN   NNS  NN   CC   NN   MD   VB   VBN  
+|    |    |    EX   VBZ  JJR  IN   CD   NN   
+|    |    |    VBZ  VBN  IN   DT   NN   VBP  VBN  
+|    JJ   VBG  DT   NN   VBZ  VBN  IN   NNS  
+|    NNS  TO   NN   CC   NN   VBZ  NN   TO   DT   NN   
+VBN  NNS  VBP  VBN  IN   NNS  
+|    |    |    |    TO   NNS  IN   NNS  
+TO   VB   DT   NN   EX   VBP  NNS  WDT  VBP  TO   VB   VBN  
+VBZ  VBN  IN   NN   NNP  VBP  JJ   CC   JJ   NN   CC   DT   NN   VBZ  RB   JJ   
+PDT  DT   NN   IN   NN   VBZ  VBN  IN   PRP$ NN   
+|    |    |    VBP  TO   CD   IN   DT   CD   NNS  
+|    |    NNS  MD   VB   VBN  IN   JJ   CD   NNS  
