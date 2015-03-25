@@ -32,20 +32,24 @@ public class Srs2er {
 
     
     private static final String[] trainingDataFiles = { "data/training/MegaTraining.xml" };
+    SerialTrie sTrie;
     
-    public Srs2er() throws JAXBException {
+    public Srs2er() throws JAXBException, IOException {
 	trainModel();
 	
     }
     
     public void trainModel() throws JAXBException, IOException {
+	/*Load and Train the Trie*/
 	Sentences sentences = loadTrainingSentences();
 	Trie trie = new Trie();
 	trie.insert(sentences);
-	SerialTrie sTrie = new SerialTrie(trie);
+	
+	/*Create and insert data in Serial Trie from original Trie*/
+	sTrie = new SerialTrie(trie);
 	TagDataLoader.getInstance().Load();
 	
-	sTrie.Lookup(new Sentence("Student"))
+	
 
     }
     
@@ -53,7 +57,11 @@ public class Srs2er {
 	
     }
     
-    public void tagParagraph() {
+    public void tagParagraph(String paragraph) {
+	String[] sentences = paragraph.split(".");
+	for (String sentence : sentences) {
+	    sTrie.Lookup(new Sentence(sentence));    
+	}
 	
     }
     
@@ -97,38 +105,44 @@ public class Srs2er {
 
 	LOGGER.setLevel(Level.INFO);
 
-	LOGGER.info("Loading trainig data");
-	Sentences sentences = loadTrainingSentences();
-
-	LOGGER.info("Training Trie...");
-	Trie trie = new Trie();
-	trie.insert(sentences);
-
-	if (LOGGER.getLevel().intValue() <= Level.FINE.intValue()) {
-	    PrintStream trieOut = new PrintStream(new File("Trie.txt"));
-	    trieOut.printf("Legend: TAG (Stopword Probability StopwordCount | TotalWordcount)\n\n");
-	    trie.print(trieOut, PrintDetail.TAGS_ONLY);
-	}
 	
-	SerialTrie sTrie = new SerialTrie(trie);
-	TagDataLoader.getInstance().Load();
-
-	// sTrie.Lookup(new
-	// Sentence("Online Registration includes username, password, name, address, registration number and user id."));
-
+	Srs2er tool = new Srs2er();
+	tool.trainModel();
+	tool.tagParagraph("Student takes a course");
 	
 	
-	List<String> test = Files.readAllLines(Paths
-		.get("C:\\Users\\SureshSarda\\Desktop\\sentences.txt"));
-
-	for (String string : test) {
-	    
-	    File file = new File("C:\\Users\\SureshSarda\\Desktop\\eda\\" + string + ".txt");
-	    file.createNewFile();
-	    System.setOut(new PrintStream(file));
-	    sTrie.Lookup(new Sentence(string));
-	}
-
+//	LOGGER.info("Loading trainig data");
+//	Sentences sentences = loadTrainingSentences();
+//
+//	LOGGER.info("Training Trie...");
+//	Trie trie = new Trie();
+//	trie.insert(sentences);
+//
+//	if (LOGGER.getLevel().intValue() <= Level.FINE.intValue()) {
+//	    PrintStream trieOut = new PrintStream(new File("Trie.txt"));
+//	    trieOut.printf("Legend: TAG (Stopword Probability StopwordCount | TotalWordcount)\n\n");
+//	    trie.print(trieOut, PrintDetail.TAGS_ONLY);
+//	}
+//	
+//	SerialTrie sTrie = new SerialTrie(trie);
+//	TagDataLoader.getInstance().Load();
+//
+//	// sTrie.Lookup(new
+//	// Sentence("Online Registration includes username, password, name, address, registration number and user id."));
+//
+//	
+//	
+//	List<String> test = Files.readAllLines(Paths
+//		.get("C:\\Users\\SureshSarda\\Desktop\\sentences.txt"));
+//
+//	for (String string : test) {
+//	    
+//	    File file = new File("C:\\Users\\SureshSarda\\Desktop\\eda\\" + string + ".txt");
+//	    file.createNewFile();
+//	    System.setOut(new PrintStream(file));
+//	    sTrie.Lookup(new Sentence(string));
+//	}
+//
 	/* Generate Statistics */
 	// File out = new File(statFile);
 	// PrintStream ps = new PrintStream(out);
