@@ -1,9 +1,7 @@
 package srs2er;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -32,6 +30,33 @@ import util.logging.LoggerSetup;
  */
 public class Srs2er {
 
+    
+    private static final String[] trainingDataFiles = { "data/training/MegaTraining.xml" };
+    
+    public Srs2er() throws JAXBException {
+	trainModel();
+	
+    }
+    
+    public void trainModel() throws JAXBException, IOException {
+	Sentences sentences = loadTrainingSentences();
+	Trie trie = new Trie();
+	trie.insert(sentences);
+	SerialTrie sTrie = new SerialTrie(trie);
+	TagDataLoader.getInstance().Load();
+	
+	sTrie.Lookup(new Sentence("Student"))
+
+    }
+    
+    public void tagFile() {
+	
+    }
+    
+    public void tagParagraph() {
+	
+    }
+    
     /*
      * List of training data files. All the sentences from all the files in the
      * array will be trainied
@@ -44,7 +69,7 @@ public class Srs2er {
     // "data/training/TrainingSuresh.xml",
     // "data/training/TrainingRohit.xml" };
 
-    private static final String[] trainingDataFiles = { "data/training/MegaTraining.xml" };
+    
 
     /* List of test data file. Keep only one file and comment out the rest */
     private static final String testDataFile = "data/testing/college.txt";
@@ -86,8 +111,6 @@ public class Srs2er {
 	}
 	
 	SerialTrie sTrie = new SerialTrie(trie);
-	// System.out.println(sTrie.toString());
-
 	TagDataLoader.getInstance().Load();
 
 	// sTrie.Lookup(new
