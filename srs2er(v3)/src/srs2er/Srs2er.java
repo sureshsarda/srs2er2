@@ -32,6 +32,8 @@ public class Srs2er {
 
     
     private static final String[] trainingDataFiles = { "data/training/MegaTraining.xml" };
+    private static final String statFile = "out/stat.csv";
+
     SerialTrie sTrie;
     
     public Srs2er() throws JAXBException, IOException {
@@ -65,36 +67,7 @@ public class Srs2er {
 	
     }
     
-    /*
-     * List of training data files. All the sentences from all the files in the
-     * array will be trainied
-     */
-    // private static final String[] trainingDataFiles = {
-    // "data/training/TrainingSentences1.xml",
-    // "data/training/TrainingSentences2.xml",
-    // "data/training/TrainingPooja.xml",
-    // "data/training/TrainingRohini.xml",
-    // "data/training/TrainingSuresh.xml",
-    // "data/training/TrainingRohit.xml" };
-
-    
-
-    /* List of test data file. Keep only one file and comment out the rest */
-    private static final String testDataFile = "data/testing/college.txt";
-    // private static final String testDataFile = "data/testing/roadways.txt";
-    // private static final String testDataFile = "data/testing/e-exam.txt";
-    // private static final String testDataFile = "data/testing/employee.txt";
-    // private static final String testDataFile = "data/testing/employee.txt";
-    // private static final String testDataFile = "data/testing/team.txt";
-    // private static final String testDataFile = "data/testing/hostel.txt";
-    // private static final String testDataFile = "data/testing/student.txt";
-    // private static final String testDataFile = "data/testing/mobile.txt";
-
-    /* Output file will be generated at this path */
-    // private static final String outputFile = "out/out.erd";
-    private static final String outputFile = "D:/Workplace/runtime-EclipseApplication/test/out.erd";
-    private static final String statFile = "out/stat.csv";
-
+ 
     public static final Logger LOGGER = Logger
 	    .getLogger(Srs2er.class.getName());
 
@@ -111,38 +84,6 @@ public class Srs2er {
 	tool.tagParagraph("Student takes a course");
 	
 	
-//	LOGGER.info("Loading trainig data");
-//	Sentences sentences = loadTrainingSentences();
-//
-//	LOGGER.info("Training Trie...");
-//	Trie trie = new Trie();
-//	trie.insert(sentences);
-//
-//	if (LOGGER.getLevel().intValue() <= Level.FINE.intValue()) {
-//	    PrintStream trieOut = new PrintStream(new File("Trie.txt"));
-//	    trieOut.printf("Legend: TAG (Stopword Probability StopwordCount | TotalWordcount)\n\n");
-//	    trie.print(trieOut, PrintDetail.TAGS_ONLY);
-//	}
-//	
-//	SerialTrie sTrie = new SerialTrie(trie);
-//	TagDataLoader.getInstance().Load();
-//
-//	// sTrie.Lookup(new
-//	// Sentence("Online Registration includes username, password, name, address, registration number and user id."));
-//
-//	
-//	
-//	List<String> test = Files.readAllLines(Paths
-//		.get("C:\\Users\\SureshSarda\\Desktop\\sentences.txt"));
-//
-//	for (String string : test) {
-//	    
-//	    File file = new File("C:\\Users\\SureshSarda\\Desktop\\eda\\" + string + ".txt");
-//	    file.createNewFile();
-//	    System.setOut(new PrintStream(file));
-//	    sTrie.Lookup(new Sentence(string));
-//	}
-//
 	/* Generate Statistics */
 	// File out = new File(statFile);
 	// PrintStream ps = new PrintStream(out);
