@@ -2,10 +2,6 @@ package srs2er;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,7 +15,6 @@ import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import nlp.objects.TagDataLoader;
 import trie.Trie;
-import trie.Trie.PrintDetail;
 import trie.serial.SerialTrie;
 import util.logging.LoggerSetup;
 
@@ -32,14 +27,13 @@ public class Srs2er
 {
 
 	private static final String[] trainingDataFiles = {"data/training/MegaTraining.xml"};
-	private static final String statFile = "out/stat.csv";
+//	private static final String statFile = "out/stat.csv";
 
 	SerialTrie sTrie;
 
 	public Srs2er() throws JAXBException, IOException
 	{
 		trainModel();
-
 	}
 
 	public void trainModel() throws JAXBException, IOException
