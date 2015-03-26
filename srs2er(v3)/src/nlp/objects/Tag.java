@@ -24,7 +24,8 @@ public class Tag implements Comparable<Tag> {
 	return tagType;
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
 	return tagType.toString();
     }
     

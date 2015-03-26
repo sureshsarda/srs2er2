@@ -17,6 +17,7 @@ public class SerialNode implements Comparable<SerialNode>{
 		setTag(tag);
 	}
 	
+	@Override
 	public String toString() {
 		return tag.toString();
 	}

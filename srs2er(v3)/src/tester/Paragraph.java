@@ -21,7 +21,6 @@ import nlp.objects.Model;
 import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
-import nlp.processing.Stopwords;
 import srs2er.ErdBuilder;
 import srs2er.Srs2er;
 import trie.LeafNode;

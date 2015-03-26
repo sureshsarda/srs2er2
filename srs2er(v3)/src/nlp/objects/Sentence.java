@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 
 import nlp.processing.StanfordProcessor;
 import nlp.processing.TextProcessor;
-import srs2er.Srs2er;
 import edu.stanford.nlp.util.Triple;
 
 public class Sentence {

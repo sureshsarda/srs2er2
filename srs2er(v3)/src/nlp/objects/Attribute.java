@@ -9,6 +9,7 @@ public class Attribute extends Type
 		return super.toString();
 	}
 
+	@Override
 	public String toAbstractString()
 	{
 		return super.toAbstractString();

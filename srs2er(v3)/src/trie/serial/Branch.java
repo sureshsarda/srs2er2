@@ -25,6 +25,7 @@ public class Branch implements Comparable<Branch> {
 		nodes.add(index, node);
 	}
 
+	@Override
 	public String toString() {
 		return toString("[%s] ");
 	}

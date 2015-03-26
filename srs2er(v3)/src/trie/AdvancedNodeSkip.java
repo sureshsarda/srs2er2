@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Queue;
 
 import nlp.objects.Sentence;
-import nlp.objects.Tag;
-import nlp.objects.Tag.TAG_DIFFERENCE;
 import util.Tuple;
 
 public class AdvancedNodeSkip {
