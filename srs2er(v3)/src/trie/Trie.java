@@ -10,7 +10,7 @@ import java.util.List;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import nlp.objects.Word;
-import srs2er.Srs2er;
+import srs2er.ERTagger;
 
 /**
  * Trie:
@@ -60,7 +60,7 @@ public class Trie {
 	 * exist already.
 	 */
 	for (Sentence sentence : trainingData.getSentence()) {
-	    Srs2er.LOGGER.finer(String.format("Inserting: [%s]",
+	    ERTagger.LOGGER.finer(String.format("Inserting: [%s]",
 		    sentence.getValue()));
 	    insertIntoTrie(sentence);
 	}

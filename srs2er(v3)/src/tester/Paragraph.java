@@ -22,7 +22,7 @@ import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import srs2er.ErdBuilder;
-import srs2er.Srs2er;
+import srs2er.ERTagger;
 import trie.LeafNode;
 import trie.Lookup;
 import trie.Trie;
@@ -81,14 +81,14 @@ public class Paragraph {
 	public void acquireDataModel(Trie trie) {
 		for (Sentence sentence : this.Paragraph.getSentence()) {
 
-			Srs2er.LOGGER.info(String.format("Acquiring Data Model for: %s",
+			ERTagger.LOGGER.info(String.format("Acquiring Data Model for: %s",
 					sentence.getValue()));
 
 			LeafNode leafInfo = Lookup.lookup(trie, sentence, new Tuple(100, 80));
 			if (leafInfo == null) {
-				Srs2er.LOGGER.severe("Lookup Permanently Failed.");
+				ERTagger.LOGGER.severe("Lookup Permanently Failed.");
 			} else {
-				Srs2er.LOGGER.info("Data Model Acquired.");
+				ERTagger.LOGGER.info("Data Model Acquired.");
 				sentence.setDataModel(leafInfo.getDataModel());
 			}
 		}
@@ -120,7 +120,7 @@ public class Paragraph {
 				.getRelationships()) {
 			boolean result = relationSet.add(relationship);
 			if (result == false) {
-				Srs2er.LOGGER.info("Duplicate Relationship removed.");
+				ERTagger.LOGGER.info("Duplicate Relationship removed.");
 			}
 		}
 		List<Relationship> newRelationList = new ArrayList<Relationship>(

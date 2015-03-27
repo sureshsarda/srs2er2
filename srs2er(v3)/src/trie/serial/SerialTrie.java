@@ -9,7 +9,7 @@ import java.util.Map;
 import nlp.objects.Sentence;
 import nlp.processing.EditDistance;
 import nlp.processing.EditDistance.Operation;
-import srs2er.Srs2er;
+import srs2er.ERTagger;
 import trie.Node;
 import trie.Trie;
 
@@ -65,13 +65,13 @@ public class SerialTrie
 		/* Hash map with chaining */
 		Map<Integer, List<Branch>> costs = new HashMap<Integer, List<Branch>>();
 
-		Srs2er.LOGGER.info("Looking up for: " + sentence);
+		ERTagger.LOGGER.info("Looking up for: " + sentence);
 
 		for (Branch branch : branches)
 		{
-			Srs2er.LOGGER.config("Looking up against: " + branch.toString("[%-4s] "));
+			ERTagger.LOGGER.config("Looking up against: " + branch.toString("[%-4s] "));
 			int cost = EditDistance.editDistance(sentence, branch);
-			Srs2er.LOGGER.config("Cost = " + cost);
+			ERTagger.LOGGER.config("Cost = " + cost);
 
 			/* Add the branch and its cost to Map */
 			if (costs.containsKey(cost) == false)

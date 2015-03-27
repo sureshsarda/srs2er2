@@ -12,7 +12,7 @@ import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import nlp.objects.Word;
 import nlp.processing.Stopwords;
-import srs2er.Srs2er;
+import srs2er.ERTagger;
 
 public class StatisticsCollector {
 
@@ -86,7 +86,7 @@ public class StatisticsCollector {
 							Posts.replace(word, object);
 						}
 					} catch (NullPointerException ex) {
-						Srs2er.LOGGER.info("Cannot parse attribute [" + sentence.getValue() + "]");
+						ERTagger.LOGGER.info("Cannot parse attribute [" + sentence.getValue() + "]");
 					}
 				}
 			}

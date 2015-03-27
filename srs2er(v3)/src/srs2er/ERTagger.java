@@ -27,7 +27,7 @@ import util.logging.LoggerSetup;
  * @author Suresh Sarda
  *
  */
-public class Srs2er
+public class ERTagger
 {
 
 	private static final String[] trainingDataFiles = {"data/training/MegaTraining.xml"};
@@ -36,7 +36,7 @@ public class Srs2er
 	SerialTrie sTrie;
 
 	private Logger logger = Logger.getLogger(this.getClass().getName());
-	public Srs2er() throws JAXBException, IOException
+	public ERTagger() throws JAXBException, IOException
 	{
 		LoggerSetup.setup(logger);
 		logger.setLevel(Level.ALL);
@@ -93,7 +93,7 @@ public class Srs2er
 
 		LOGGER.setLevel(Level.INFO);
 
-		Srs2er tool = new Srs2er();
+		ERTagger tool = new ERTagger();
 		tool.trainModel();
 		tool.tagParagraph("A comment can be meant for the reviewer or for the author.");
 

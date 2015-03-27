@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
-import srs2er.Srs2er;
+import srs2er.ERTagger;
 import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
@@ -33,7 +33,7 @@ public class StanfordProcessor {
 		}
 		lemmString = lemmString.substring(0, lemmString.length() - 1);
 		
-		Srs2er.LOGGER.finest(String.format("lemmatiseString() - String: %-15s LemmString: %-15s", string, lemmString));
+		ERTagger.LOGGER.finest(String.format("lemmatiseString() - String: %-15s LemmString: %-15s", string, lemmString));
 		return lemmString;
 	}
 
@@ -92,7 +92,7 @@ public class StanfordProcessor {
 
 	public String compareLemmatisedString(String string1, String string2) {
 
-		Srs2er.LOGGER.finest(String.format(
+		ERTagger.LOGGER.finest(String.format(
 				"Comparing [%s] and [%s] with their lemmatized names.",
 				string1, string2));
 
@@ -100,11 +100,11 @@ public class StanfordProcessor {
 		String lemmaString2 = lemmatiseString(string2);
 
 		if (lemmaString1.compareTo(lemmaString2) == 0) {
-			Srs2er.LOGGER.finest(String.format(
+			ERTagger.LOGGER.finest(String.format(
 					"Lemmatized Names are same. [%s]", lemmaString1));
 			return lemmaString1;
 		} else {
-			Srs2er.LOGGER.finest(String.format(
+			ERTagger.LOGGER.finest(String.format(
 					"Lemmatized Names are not same. [%s] and [%s]",
 					lemmaString1, lemmaString2));
 			return null;

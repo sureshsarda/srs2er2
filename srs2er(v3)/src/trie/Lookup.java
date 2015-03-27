@@ -15,7 +15,7 @@ import nlp.objects.RelationEntity;
 import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Word;
-import srs2er.Srs2er;
+import srs2er.ERTagger;
 import util.Name;
 import util.Tuple;
 
@@ -36,11 +36,11 @@ public class Lookup {
 
 		LeafNode leaf = strictMatch(trie, sentence);
 		if (leaf == null) {
-			Srs2er.LOGGER.warning("Exact not match found.");
+			ERTagger.LOGGER.warning("Exact not match found.");
 		} else {
 			/*Leaf is not null*/
 			if (leaf.getDataModel() == null) {
-				Srs2er.LOGGER
+				ERTagger.LOGGER
 						.warning("Exact Match Found but Data Model is not present at this level.");
 			}
 			else {
@@ -49,7 +49,7 @@ public class Lookup {
 
 		}
 		/*Exact match not found*/
-		Srs2er.LOGGER.info("Applying AdvancedLookup Algorithm");
+		ERTagger.LOGGER.info("Applying AdvancedLookup Algorithm");
 		advancedLookupPrettyPrint(sentence, advancedLookup(trie, sentence, cost));
 		
 		return null;
@@ -63,7 +63,7 @@ public class Lookup {
 		if (base.second == EXACTLY_SAME) {
 			return searchRemaining(base.first(), sentence);
 		} else if (base.second == FAMILY_SAME) {
-			Srs2er.LOGGER.config(String.format(
+			ERTagger.LOGGER.config(String.format(
 					"Lookup: [%s] matched in family. WordIndex = 0", sentence
 							.getTokens().get(0).getPost()));
 			return searchRemaining(base.first(), sentence);
@@ -84,14 +84,14 @@ public class Lookup {
 			if (searchResult.second() == EXACTLY_SAME) {
 				parent = searchResult.first();
 			} else if (searchResult.second == FAMILY_SAME) {
-				Srs2er.LOGGER.config(String.format(
+				ERTagger.LOGGER.config(String.format(
 						"Lookup: %s matched in family. WordIndex = %d",
 						currentWord.getPost(), currentWord.getId()));
 				parent = searchResult.first();
 			} else {
-				Srs2er.LOGGER.config(String.format("Lookup Failed.",
+				ERTagger.LOGGER.config(String.format("Lookup Failed.",
 						sentence.getValue()));
-				Srs2er.LOGGER
+				ERTagger.LOGGER
 						.info(String
 								.format("Trying to match: [%s]. But parent has children: [%s]",
 										currentWord.toString(), parent
@@ -183,12 +183,12 @@ public class Lookup {
 				processDataModel(sentence, node.getLeafInformation()
 						.getDataModel());
 				
-				Srs2er.LOGGER.info(String.format("Cost: %d Unmatched: %d",
+				ERTagger.LOGGER.info(String.format("Cost: %d Unmatched: %d",
 						cst.first(), cst.second()));
-				Srs2er.LOGGER.info(node.getLeafInformation().getDataModel()
+				ERTagger.LOGGER.info(node.getLeafInformation().getDataModel()
 						.toString());
 			} catch (NullPointerException npe) {
-				Srs2er.LOGGER.fine("No leaf node found at this level.");
+				ERTagger.LOGGER.fine("No leaf node found at this level.");
 			}
 		}
 
