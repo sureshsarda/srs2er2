@@ -2,6 +2,7 @@ package srs2er;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,6 +15,7 @@ import javax.xml.bind.ValidationEventHandler;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import nlp.objects.TagDataLoader;
+import nlp.processing.StanfordProcessor;
 import trie.Trie;
 import trie.serial.SerialTrie;
 import util.logging.LoggerSetup;
@@ -56,7 +58,10 @@ public class Srs2er
 
 	public void tagParagraph(String paragraph)
 	{
-		String[] sentences = paragraph.split(".");
+		LOGGER.info("Splitting and trying to tag sentence...");
+
+		
+		List<String> sentences = StanfordProcessor.getInstance().ParagraphToSentences(paragraph);
 		for (String sentence : sentences)
 		{
 			sTrie.Lookup(new Sentence(sentence));
@@ -75,7 +80,7 @@ public class Srs2er
 
 		Srs2er tool = new Srs2er();
 		tool.trainModel();
-		tool.tagParagraph("Student takes a course");
+		tool.tagParagraph("A comment can be meant for the reviewer or for the author.");
 
 		/* Generate Statistics */
 		// File out = new File(statFile);

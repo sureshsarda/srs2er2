@@ -91,7 +91,7 @@ public class SerialTrie
 			 * Change cost to include more results. All the branches with cost
 			 * less than this threshold will be displayed.
 			 */
-			// if (cost < 10) {
+			if (cost < 5) {
 			System.out.println("Matches with cost: " + cost);
 			for (Branch branch : costs.get(cost))
 			{
@@ -121,7 +121,7 @@ public class SerialTrie
 						.println("-------------------------------------------------------------------------------------");
 				// /System.out.printf("\n%80s\n", "");
 			}
-			// }
+			}
 		}
 	}
 
