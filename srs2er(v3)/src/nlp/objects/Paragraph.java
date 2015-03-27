@@ -1,9 +1,6 @@
 package nlp.objects;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -15,12 +12,12 @@ import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
-import erTagger.ERTagger;
-import erTagger.ErdBuilder;
 import trie.LeafNode;
 import trie.Lookup;
 import trie.Trie;
 import util.Tuple;
+import erTagger.ERTagger;
+import erTagger.ErdBuilder;
 
 public class Paragraph {
 
