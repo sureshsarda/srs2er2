@@ -2,6 +2,7 @@ package srs2er;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import trie.serial.SerialTrie;
 import util.logging.LoggerSetup;
 
 /**
+ * This is the tagger class that can actually be used in the program.
  * 
  * @author Suresh Sarda
  *
@@ -29,38 +31,51 @@ public class Srs2er
 {
 
 	private static final String[] trainingDataFiles = {"data/training/MegaTraining.xml"};
-//	private static final String statFile = "out/stat.csv";
+	// private static final String statFile = "out/stat.csv";
 
 	SerialTrie sTrie;
 
+	private Logger logger = Logger.getLogger(this.getClass().getName());
 	public Srs2er() throws JAXBException, IOException
 	{
+		LoggerSetup.setup(logger);
+		logger.setLevel(Level.ALL);
+
+		logger.info("Training model");
 		trainModel();
 	}
 
 	public void trainModel() throws JAXBException, IOException
 	{
 		/* Load and Train the Trie */
+		logger.info("Loading Trie with training sentences...");
 		Sentences sentences = loadTrainingSentences();
 		Trie trie = new Trie();
 		trie.insert(sentences);
 
 		/* Create and insert data in Serial Trie from original Trie */
+		logger.info("Serializing trie...");
 		sTrie = new SerialTrie(trie);
-		TagDataLoader.getInstance().Load();
 
+		logger.info("Loading TagData...");
+		TagDataLoader.getInstance().Load();
 	}
 
-	public void tagFile()
+	public void tagFile(File file) throws IOException
 	{
+		List<String> paragraphs = Files.readAllLines(file.toPath());
+		logger.info("Number of paragraphs read: " + paragraphs.size());
 
+		for (String para : paragraphs)
+		{
+			tagParagraph(para);
+		}
 	}
 
 	public void tagParagraph(String paragraph)
 	{
 		LOGGER.info("Splitting and trying to tag sentence...");
 
-		
 		List<String> sentences = StanfordProcessor.getInstance().ParagraphToSentences(paragraph);
 		for (String sentence : sentences)
 		{
@@ -69,7 +84,7 @@ public class Srs2er
 
 	}
 
-	public static final Logger LOGGER = Logger.getLogger(Srs2er.class.getName());
+	public static final Logger LOGGER = Logger.getLogger("Global");
 
 	public static void main(String[] args) throws JAXBException, IOException
 	{
