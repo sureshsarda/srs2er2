@@ -19,8 +19,5 @@ public class LoggerSetup {
 		logger.addHandler(handler);
 	}
 
-	public static void Log(String message) {
-
-	}
 
 }
