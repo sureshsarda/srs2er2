@@ -1,4 +1,4 @@
-package ERTagger;
+package erTagger;
 
 import java.io.File;
 import java.io.IOException;

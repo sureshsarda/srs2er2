@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import ERTagger.ERTagger;
+import erTagger.ERTagger;
 import nlp.objects.Attribute;
 import nlp.objects.Entity;
 import nlp.objects.Model;

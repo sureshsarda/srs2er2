@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import ERTagger.ERTagger;
+import erTagger.ERTagger;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import nlp.objects.Word;

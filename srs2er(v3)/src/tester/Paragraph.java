@@ -15,8 +15,8 @@ import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
-import ERTagger.ERTagger;
-import ERTagger.ErdBuilder;
+import erTagger.ERTagger;
+import erTagger.ErdBuilder;
 import nlp.objects.Attribute;
 import nlp.objects.Entity;
 import nlp.objects.Model;

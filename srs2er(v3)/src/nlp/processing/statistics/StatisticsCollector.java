@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import ERTagger.ERTagger;
+import erTagger.ERTagger;
 import nlp.objects.Attribute;
 import nlp.objects.Entity;
 import nlp.objects.Relationship;
