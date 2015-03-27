@@ -15,14 +15,14 @@ import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import ERTagger.ERTagger;
+import ERTagger.ErdBuilder;
 import nlp.objects.Attribute;
 import nlp.objects.Entity;
 import nlp.objects.Model;
 import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Sentences;
-import srs2er.ErdBuilder;
-import srs2er.ERTagger;
 import trie.LeafNode;
 import trie.Lookup;
 import trie.Trie;

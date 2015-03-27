@@ -1,4 +1,4 @@
-package srs2er;
+package ERTagger;
 
 import java.io.File;
 import java.util.ArrayList;

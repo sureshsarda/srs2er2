@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import ERTagger.ERTagger;
 import nlp.objects.Attribute;
 import nlp.objects.Entity;
 import nlp.objects.Model;
@@ -15,7 +16,6 @@ import nlp.objects.RelationEntity;
 import nlp.objects.Relationship;
 import nlp.objects.Sentence;
 import nlp.objects.Word;
-import srs2er.ERTagger;
 import util.Name;
 import util.Tuple;
 

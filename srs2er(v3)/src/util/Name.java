@@ -17,7 +17,7 @@ public class Name {
 //				name += getName(tokens, i) + " ";
 			}
 			catch (ArrayIndexOutOfBoundsException aioobe) {
-				srs2er.ERTagger.LOGGER.info(String.format("Failed to build word at wordId: %d and Length: %d", wordId, length));
+				ERTagger.ERTagger.LOGGER.info(String.format("Failed to build word at wordId: %d and Length: %d", wordId, length));
 				break;
 			}
 			

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import ERTagger.ERTagger;
 import nlp.objects.Attribute;
 import nlp.objects.Entity;
 import nlp.objects.Relationship;
@@ -12,7 +13,6 @@ import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import nlp.objects.Word;
 import nlp.processing.Stopwords;
-import srs2er.ERTagger;
 
 public class StatisticsCollector {
 

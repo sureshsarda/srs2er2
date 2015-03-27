@@ -6,10 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import ERTagger.ERTagger;
 import nlp.objects.Sentence;
 import nlp.processing.EditDistance;
 import nlp.processing.EditDistance.Operation;
-import srs2er.ERTagger;
 import trie.Node;
 import trie.Trie;
 
