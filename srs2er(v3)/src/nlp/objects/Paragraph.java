@@ -1,4 +1,4 @@
-package tester;
+package nlp.objects;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,12 +17,6 @@ import javax.xml.transform.TransformerException;
 
 import erTagger.ERTagger;
 import erTagger.ErdBuilder;
-import nlp.objects.Attribute;
-import nlp.objects.Entity;
-import nlp.objects.Model;
-import nlp.objects.Relationship;
-import nlp.objects.Sentence;
-import nlp.objects.Sentences;
 import trie.LeafNode;
 import trie.Lookup;
 import trie.Trie;
@@ -33,30 +27,7 @@ public class Paragraph {
 	private Sentences Paragraph;
 	private Model ParagraphDataModel;
 
-	// FIXME This class is not at its proper location.
-	/**
-	 * Reads a paragraph from the inputFile provided and loads it. POSTags the
-	 * setences.
-	 * 
-	 * @param inputFile
-	 */
-	public Paragraph(File inputFile) {
-		this.Paragraph = new Sentences();
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(inputFile));
-
-			// TODO Reads only one line from the file. That is one paragraph
-			// TODO Lines starting with # are comments.
-			String paragraph = br.readLine();
-			load(paragraph);
-			br.close();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-			System.err.println("Error reading test data file.");
-		}
-	}
-
+	
 	/**
 	 * Loads the paragraph provided from paragraph into the list of sentences.
 	 * POSTags the sentences.
