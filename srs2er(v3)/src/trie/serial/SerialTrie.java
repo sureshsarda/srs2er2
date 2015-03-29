@@ -85,42 +85,42 @@ public class SerialTrie
 			costs.put(cost, br);
 		}
 
+		int numberOfResultsAsOutput = 4;
 		for (Integer cost : costs.keySet())
 		{
-			/*
-			 * Change cost to include more results. All the branches with cost
-			 * less than this threshold will be displayed.
-			 */
-			if (cost < 5) {
-			System.out.println("Matches with cost: " + cost);
-			for (Branch branch : costs.get(cost))
+			if (numberOfResultsAsOutput > 0)
 			{
-				System.out.println("POST of the branch:");
-				System.out.println(branch.toString("[%-4s] "));
+				System.out.println("Matches with cost: " + cost);
+				for (Branch branch : costs.get(cost))
+				{
+					numberOfResultsAsOutput--;
+					System.out.println("POST of the branch:");
+					System.out.println(branch.toString("[%-4s] "));
 
-				List<Operation> ops = EditDistance.editDistanceExtended(sentence, branch).second();
+					List<Operation> ops = EditDistance.editDistanceExtended(sentence, branch)
+							.second();
 
-				Sentence sent_copy = EditDistance.updateWordIndexes(sentence, ops);
+					Sentence sent_copy = EditDistance.updateWordIndexes(sentence, ops);
 
-				System.out.println(sent_copy.toWordIndexString());
-				// System.out.println(ops);
-				System.out.println(branch.sentences);
-				System.out.println(branch.leafInformation.getDataModel().toString());
+					System.out.println(sent_copy.toWordIndexString());
+					// System.out.println(ops);
+					System.out.println(branch.sentences);
+					System.out.println(branch.leafInformation.getDataModel().toString());
 
-				/*
-				 * List<Word> updatedWords = new LinkedList<Word>(); for (Word
-				 * token : sent_copy.getTokens()) { if (token.getId() != -1) {
-				 * updatedWords.add(token); } }
-				 * sent_copy.setTokens(updatedWords);
-				 * 
-				 * Lookup.processDataModel(sent_copy,
-				 * branch.leafInformation.getDataModel());
-				 */
-				// System.out.println(branch.leafInformation.getDataModel());
-				System.out
-						.println("-------------------------------------------------------------------------------------");
-				// /System.out.printf("\n%80s\n", "");
-			}
+					/*
+					 * List<Word> updatedWords = new LinkedList<Word>(); for
+					 * (Word token : sent_copy.getTokens()) { if (token.getId()
+					 * != -1) { updatedWords.add(token); } }
+					 * sent_copy.setTokens(updatedWords);
+					 * 
+					 * Lookup.processDataModel(sent_copy,
+					 * branch.leafInformation.getDataModel());
+					 */
+					// System.out.println(branch.leafInformation.getDataModel());
+					System.out
+							.println("-------------------------------------------------------------------------------------");
+					// /System.out.printf("\n%80s\n", "");
+				}
 			}
 		}
 	}
