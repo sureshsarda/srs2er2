@@ -374,7 +374,7 @@ WORD,4,0,events
 WORD,4,3,shopping
 WORD,0,1,confidential
 WORD,1,0,displayed
-WORD,1,0,models
+WORD,1,0,ui.model
 WORD,1,0,insurances
 WORD,2,0,hosts
 WORD,0,1,night

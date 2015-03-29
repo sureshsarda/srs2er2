@@ -4993,10 +4993,10 @@
   </DataModel>
 </Sentence>
 <Sentence Id="">
-  <Value>Process models model the software building process.</Value>
+  <Value>Process ui.model model the software building process.</Value>
   <Tokens>
     <Word Id="0" POST="VB"><Name>process</Name></Word>
-    <Word Id="1" POST="NNS"><Name>models</Name></Word>
+    <Word Id="1" POST="NNS"><Name>ui.model</Name></Word>
     <Word Id="2" POST="VB"><Name>model</Name></Word>
     <Word Id="3" POST="DT"><Name>the</Name></Word>
     <Word Id="4" POST="NN"><Name>software</Name></Word>
@@ -5006,7 +5006,7 @@
   <DataModel>
     <Entities>
       <Entity Id="0" WordId="2" Length="1">
-        <Name>models</Name>
+        <Name>ui.model</Name>
         <Attributes />
         <Superclass></Superclass>
       </Entity>
@@ -5020,7 +5020,7 @@
       <Relationship Id="0" WordId="3" Length="1">
         <Name>model</Name>
         <Connects>
-          <Entity EntityId="0" Cardanility="" Participation=""><Name>models</Name></Entity>
+          <Entity EntityId="0" Cardanility="" Participation=""><Name>ui.model</Name></Entity>
           <Entity EntityId="1" Cardanility="" Participation=""><Name>software building process</Name></Entity>
         </Connects>
       </Relationship>

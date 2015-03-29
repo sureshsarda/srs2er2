@@ -36,20 +36,47 @@ public class ERTagger
 	SerialTrie sTrie;
 
 	private Logger logger = Logger.getLogger(this.getClass().getName());
-	public ERTagger() throws JAXBException, IOException
+	public ERTagger()
 	{
-		LoggerSetup.setup(logger);
+		try
+		{
+			LoggerSetup.setup(logger);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		logger.setLevel(Level.ALL);
 
 		logger.info("Training model");
 		trainModel();
 	}
 
-	public void trainModel() throws JAXBException, IOException
+	public void trainModel() 
 	{
+		logger.info("Loading TagData...");
+		try
+		{
+			TagDataLoader.getInstance().Load();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
 		/* Load and Train the Trie */
 		logger.info("Loading Trie with training sentences...");
-		Sentences sentences = loadTrainingSentences();
+		Sentences sentences = null;
+		try
+		{
+			sentences = loadTrainingSentences();
+		}
+		catch (JAXBException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Trie trie = new Trie();
 		trie.insert(sentences);
 
@@ -57,8 +84,7 @@ public class ERTagger
 		logger.info("Serializing trie...");
 		sTrie = new SerialTrie(trie);
 
-		logger.info("Loading TagData...");
-		TagDataLoader.getInstance().Load();
+
 	}
 
 	public void tagFile(File file) throws IOException
