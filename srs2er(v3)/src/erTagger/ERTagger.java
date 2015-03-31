@@ -17,6 +17,7 @@ import nlp.objects.Sentence;
 import nlp.objects.Sentences;
 import nlp.objects.TagDataLoader;
 import nlp.processing.StanfordProcessor;
+import nlp.test.TestParagraph;
 import trie.Trie;
 import trie.serial.SerialTrie;
 import util.logging.LoggerSetup;
@@ -89,13 +90,10 @@ public class ERTagger
 
 	public void tagParagraph(String paragraph)
 	{
-		LOGGER.info("Splitting and trying to tag sentence...");
+		logger.info("Splitting and trying to tag sentence...");
 
-		List<String> sentences = StanfordProcessor.getInstance().paragraphToSentences(paragraph);
-		for (String sentence : sentences)
-		{
-			sTrie.Lookup(new Sentence(sentence));
-		}
+		TestParagraph para = new TestParagraph(paragraph);
+		para.generateLookupResults(sTrie);
 
 	}
 

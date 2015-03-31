@@ -1,5 +1,6 @@
 package nlp.objects;
 
+import java.lang.invoke.MethodHandles.Lookup;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -10,7 +11,6 @@ import java.util.logging.Logger;
 
 import nlp.processing.StanfordProcessor;
 import trie.LeafNode;
-import trie.Lookup;
 import trie.Trie;
 import util.Tuple;
 import erTagger.ERTagger;
@@ -21,6 +21,7 @@ public class Paragraph
 	private Sentences paragraphSentences;
 	private Model paragraphDataModel;
 
+	
 	/**
 	 * Loads the paragraph provided from paragraph into the list of sentences.
 	 * POSTags the sentences.
@@ -46,7 +47,7 @@ public class Paragraph
 		{
 			logger.config(String.format("Acquiring Data Model for: %s", sentence.getValue()));
 
-			LeafNode leafInfo = Lookup.lookup(trie, sentence, new Tuple(100, 80));
+			/*LeafNode leafInfo = Lookup.lookup(trie, sentence, new Tuple(100, 80));
 			if (leafInfo == null)
 			{
 				ERTagger.LOGGER.severe("Lookup Permanently Failed.");
@@ -55,7 +56,7 @@ public class Paragraph
 			{
 				ERTagger.LOGGER.info("Data Model Acquired.");
 				sentence.setDataModel(leafInfo.getDataModel());
-			}
+			}*/
 		}
 		createDataModel();
 	}

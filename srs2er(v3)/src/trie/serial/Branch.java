@@ -9,6 +9,7 @@ public class Branch implements Comparable<Branch> {
 	List<SerialNode> nodes = new ArrayList<SerialNode>();
 	LeafNode leafInformation;
 	List<String> sentences;
+	
 	public Branch() {
 
 	}

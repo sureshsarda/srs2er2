@@ -2,16 +2,25 @@ package trie.serial;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import erTagger.ERTagger;
+import nlp.objects.Attribute;
+import nlp.objects.Entity;
+import nlp.objects.Model;
+import nlp.objects.RelationEntity;
+import nlp.objects.Relationship;
 import nlp.objects.Sentence;
+import nlp.objects.Word;
 import nlp.processing.EditDistance;
 import nlp.processing.EditDistance.Operation;
+import nlp.test.LookupResultObject;
+import nlp.test.TestSentence;
 import trie.Node;
 import trie.Trie;
+import erTagger.ERTagger;
 
 /*
  * 
@@ -60,6 +69,95 @@ public class SerialTrie
 		return childBranches;
 	}
 
+	public void assignLookupResults(TestSentence sentence)
+	{
+		for (Branch branch : branches)
+		{
+			int cost = EditDistance.editDistance(sentence, branch);
+			if (cost < 10)
+			{
+				List<Operation> ops = EditDistance.editDistanceExtended(sentence, branch).second();
+				Sentence copy = EditDistance.updateWordIndexes(sentence, ops);
+
+				updateDataModel(copy, branch.leafInformation.getDataModel());
+
+				LookupResultObject obj = new LookupResultObject(cost,
+						branch.leafInformation.getDataModel(), branch);
+				sentence.addLookupResult(obj);
+
+				// System.out.println(branch.leafInformation.getDataModel());
+				// System.out.println(branch.sentences.get(0));
+				// System.out.println(branch);
+				// System.out.println(sentence);
+				// System.out.println(ops);
+				// System.out.println("---------------");
+			}
+		}
+
+	}
+
+	public static void updateDataModel(Sentence sent, Model model)
+	{
+		// Model modelToUpdate = sent.getDataModel();
+		for (Entity entity : model.getEntities())
+		{
+			int wordId = entity.getWordIndex();
+			int length = entity.getLength();
+			entity.setName(getLabelWith(sent, wordId, length));
+			for (Attribute attribute : entity.getAttributes())
+			{
+				wordId = attribute.getWordIndex();
+				length = attribute.getLength();
+				attribute.setName(getLabelWith(sent, wordId, length));
+			}
+		}
+
+		for (Relationship relationship : model.getRelationships())
+		{
+			int wordId = relationship.getWordIndex();
+			int length = relationship.getLength();
+			relationship.setName(getLabelWith(sent, wordId, length));
+			for (RelationEntity relation : relationship.getConnects())
+			{
+				// wordId = relation.getWordIndex();
+				// length = relation.getLength();
+				// relation.setName(getLabelWith(sent, wordId, length));
+			}
+		}
+
+	}
+	private static String getLabelWith(Sentence sent, int wordIndex, int length)
+	{
+		StringBuilder sb = new StringBuilder();
+		Iterator<Word> itr = sent.getTokens().iterator();
+		while (itr.hasNext())
+		{
+			Word curr = itr.next();
+			if (curr.getId() == wordIndex)
+			{
+				sb.append(curr.getLemmatizedName() + " ");
+				length--;
+				break;
+			}
+			else if (wordIndex < curr.getId())
+			{
+				return "!Failed";
+			}
+			else
+				;
+		}
+		while (length > 0)
+		{
+			Word curr = itr.next();
+			if (curr.getId() != -1)
+			{
+				sb.append(curr.getLemmatizedName() + " ");
+				length--;
+			}
+		}
+
+		return sb.toString();
+	}
 	public void Lookup(Sentence sentence)
 	{
 		/* Hash map with chaining */
