@@ -31,45 +31,35 @@ public class ERTagger
 {
 
 	private static final String[] trainingDataFiles = {"data/training/MegaTraining.xml"};
+
 	// private static final String statFile = "out/stat.csv";
 
-	SerialTrie sTrie;
+	private SerialTrie sTrie;
 
-	private Logger logger = Logger.getLogger(this.getClass().getName());
 	public ERTagger()
 	{
-		LoggerSetup.setup(logger);
+		// TODO Remove Global Logger when refactoring completes
+		LoggerSetup.setup(LOGGER);
+		LOGGER.setLevel(Level.INFO);
 
+		LoggerSetup.setup(logger);
 		logger.setLevel(Level.ALL);
 
 		logger.info("Training model");
 		trainModel();
 	}
 
-	public void trainModel() 
+	public void trainModel()
 	{
 		logger.info("Loading TagData...");
-		try
-		{
-			TagDataLoader.getInstance().Load();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		
+
+		TagDataLoader.getInstance().load();
+
 		/* Load and Train the Trie */
 		logger.info("Loading Trie with training sentences...");
 		Sentences sentences = null;
-		try
-		{
-			sentences = loadTrainingSentences();
-		}
-		catch (JAXBException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		sentences = loadTrainingSentences();
+
 		Trie trie = new Trie();
 		trie.insert(sentences);
 
@@ -77,17 +67,23 @@ public class ERTagger
 		logger.info("Serializing trie...");
 		sTrie = new SerialTrie(trie);
 
-
 	}
 
-	public void tagFile(File file) throws IOException
+	public void tagFile(File file)
 	{
-		List<String> paragraphs = Files.readAllLines(file.toPath());
-		logger.info("Number of paragraphs read: " + paragraphs.size());
-
-		for (String para : paragraphs)
+		try
 		{
-			tagParagraph(para);
+			List<String> paragraphs = Files.readAllLines(file.toPath());
+			logger.info("Number of paragraphs read: " + paragraphs.size());
+
+			for (String para : paragraphs)
+			{
+				tagParagraph(para);
+			}
+		}
+		catch (IOException e)
+		{
+			logger.severe("Failed to read file.");
 		}
 	}
 
@@ -95,7 +91,7 @@ public class ERTagger
 	{
 		LOGGER.info("Splitting and trying to tag sentence...");
 
-		List<String> sentences = StanfordProcessor.getInstance().ParagraphToSentences(paragraph);
+		List<String> sentences = StanfordProcessor.getInstance().paragraphToSentences(paragraph);
 		for (String sentence : sentences)
 		{
 			sTrie.Lookup(new Sentence(sentence));
@@ -103,75 +99,44 @@ public class ERTagger
 
 	}
 
-	public static final Logger LOGGER = Logger.getLogger("Global");
-
-	public static void main(String[] args) throws JAXBException, IOException
+	private Sentences loadTrainingSentences()
 	{
-
-		LoggerSetup.setup(LOGGER);
-
-		LOGGER.setLevel(Level.INFO);
-
-		ERTagger tool = new ERTagger();
-		tool.trainModel();
-		tool.tagParagraph("A comment can be meant for the reviewer or for the author.");
-
-		/* Generate Statistics */
-		// File out = new File(statFile);
-		// PrintStream ps = new PrintStream(out);
-		// StatisticsCollector.Analyze(sentences, ps);
-
-		// LOGGER.info("Loading test paragraph...");
-		// Paragraph p = new Paragraph(new File(testDataFile));
-		//
-		// LOGGER.info("Acquiring data model...");
-		// p.acquireDataModel(trie);
-		//
-		// LOGGER.fine(p.getParagraphDataModel().toString());
-		//
-		// LOGGER.info("Saving the output...");
-		// p.saveAsXml(outputFile);
-	}
-
-	private static Sentences loadTrainingSentences() throws JAXBException
-	{
-
-		JAXBContext jc = JAXBContext.newInstance(Sentences.class);
-		Unmarshaller unmarshaller = jc.createUnmarshaller();
-
-		/*
-		 * The following code overrides the default behavior of JABX which
-		 * silently ignores error. Source:
-		 * http://stackoverflow.com/questions/2633276
-		 * /jaxb-unmarshall-created-an-empty-object
-		 */
-		unmarshaller.setEventHandler(new ValidationEventHandler()
+		Unmarshaller unmarshaller = null;
+		try
 		{
-			@Override
-			public boolean handleEvent(ValidationEvent event)
+			JAXBContext jc = JAXBContext.newInstance(Sentences.class);
+			unmarshaller = jc.createUnmarshaller();
+
+			/* Prints the details of the exception thrown by JABX */
+			unmarshaller.setEventHandler(new ValidationEventHandler()
 			{
-				throw new RuntimeException(event.getMessage(), event.getLinkedException());
+				@Override
+				public boolean handleEvent(ValidationEvent event)
+				{
+					throw new RuntimeException(event.getMessage(), event.getLinkedException());
+				}
+			});
+
+			Sentences sentences = new Sentences();
+			logger.config("Unmarshalling training sentences...");
+			for (int i = 0; i < trainingDataFiles.length; i++)
+			{
+				File xml = new File(trainingDataFiles[i]);
+				Sentences sentSet = (Sentences) unmarshaller.unmarshal(xml);
+				sentences.addAll(sentSet.getSentence());
 			}
-		});
-
-		Sentences sentences = new Sentences();
-
-		int totalTrained = 0;
-
-		LOGGER.config("Unmarshalling training sentences...");
-		for (int i = 0; i < trainingDataFiles.length; i++)
-		{
-
-			File xml = new File(trainingDataFiles[i]);
-			Sentences sentSet = (Sentences) unmarshaller.unmarshal(xml);
-			sentences.addSentence(sentSet.getSentence());
-
-			LOGGER.config(String.format("Reading %d sentences from file %s...", sentSet
-					.getSentence().size(), trainingDataFiles[i]));
-			totalTrained += sentSet.getSentence().size();
+			return sentences;
 		}
-
-		LOGGER.config(String.format("Read %d sentences.", totalTrained));
-		return sentences;
+		catch (JAXBException e)
+		{
+			e.printStackTrace();
+			logger.severe("JABX Exception. Program needs to exit.");
+			System.exit(1);
+		}
+		return null; // Useless
 	}
+
+	/* Loggers */
+	private Logger logger = Logger.getLogger(this.getClass().getName());
+	public static final Logger LOGGER = Logger.getLogger("Global");
 }

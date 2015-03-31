@@ -102,7 +102,7 @@ public class StanfordProcessor
 	 *            Paragraph text
 	 * @return List of sentence (string) in paragraph.
 	 */
-	public List<String> ParagraphToSentences(String paragraphText)
+	public List<String> paragraphToSentences(String paragraphText)
 	{
 		Annotation paragraph = new Annotation(paragraphText);
 		List<String> sentences = new LinkedList<String>();
