@@ -38,15 +38,8 @@ public class ERTagger
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	public ERTagger()
 	{
-		try
-		{
-			LoggerSetup.setup(logger);
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		LoggerSetup.setup(logger);
+
 		logger.setLevel(Level.ALL);
 
 		logger.info("Training model");

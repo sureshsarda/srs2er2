@@ -1,12 +1,12 @@
 package util.logging;
 
-import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoggerSetup {
 
-	static public void setup(java.util.logging.Logger logger) throws IOException {
+	static public void setup(Logger logger) {
 		
 		logger.setUseParentHandlers(false);
 		logger.setLevel(Level.ALL);

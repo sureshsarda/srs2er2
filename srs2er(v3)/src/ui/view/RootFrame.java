@@ -16,7 +16,6 @@ public class RootFrame
 		rootFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		rootFrame.setTitle("Data Model Extractor");
 		rootFrame.setLocationRelativeTo(null);
-		rootFrame.setResizable(false);
 		rootFrame.setSize(400, 300);
 		
 		Container inputFrame = new InputFrame();
