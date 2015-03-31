@@ -88,13 +88,13 @@ public class ERTagger
 		}
 	}
 
-	public void tagParagraph(String paragraph)
+	public TestParagraph tagParagraph(String paragraph)
 	{
 		logger.info("Splitting and trying to tag sentence...");
 
 		TestParagraph para = new TestParagraph(paragraph);
 		para.generateLookupResults(sTrie);
-
+		return para;
 	}
 
 	private Sentences loadTrainingSentences()

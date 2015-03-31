@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import nlp.test.TestParagraph;
 import erTagger.ERTagger;
 
 public class InputFrame extends Container
@@ -62,6 +63,9 @@ public class InputFrame extends Container
 		this.setLayout(new BorderLayout());
 		this.add(textPanel, BorderLayout.CENTER);
 		this.add(buttonPanel, BorderLayout.PAGE_END);
+		
+		//TODO Remove this default entry
+		taInput.setText("A student takes a course. A student has name and an address. Every course has a title.");
 
 	}
 	private void initComponents()
@@ -125,7 +129,7 @@ public class InputFrame extends Container
 			public void actionPerformed(ActionEvent arg0)
 			{
 				ERTagger tagger = new ERTagger();
-				tagger.tagParagraph(taInput.getText());
+				TestParagraph para = tagger.tagParagraph(taInput.getText());
 
 			}
 
