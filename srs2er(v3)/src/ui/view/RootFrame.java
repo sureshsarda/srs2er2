@@ -8,7 +8,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class RootFrame
 {
-	JFrame rootFrame = new JFrame();
+	public static JFrame rootFrame = new JFrame();
 	public RootFrame()
 	{
 		setCurrentSystemLookAndFeel();
@@ -18,7 +18,7 @@ public class RootFrame
 		rootFrame.setLocationRelativeTo(null);
 		rootFrame.setSize(400, 300);
 		
-		Container inputFrame = new InputFrame();
+		InputFrame inputFrame = new InputFrame();
 		rootFrame.setContentPane(inputFrame);
 		
 		rootFrame.setVisible(true);

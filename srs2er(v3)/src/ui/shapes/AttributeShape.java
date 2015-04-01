@@ -1,5 +1,6 @@
-package ui.erModelComponents;
+package ui.shapes;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -8,23 +9,18 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-import javax.swing.BorderFactory;
-import javax.swing.FocusManager;
 import javax.swing.JPanel;
 
-public class EntityShape extends JPanel
+public class AttributeShape extends JPanel
 {
-	protected String name;
-
-	public EntityShape(String name)
+	public AttributeShape(String name)
 	{
-		this.name = new String(name);
 		this.setName(name);
+		this.setOpaque(false);
 		this.setPreferredSize(new Dimension(50, 20));
 		this.setVisible(true);
 		this.addMouseListener(ShapeMouseAdapter.shapeMouseAdapter);
 		this.addMouseMotionListener(ShapeMouseAdapter.shapeMouseAdapter);
-
 	}
 
 	@Override
@@ -38,21 +34,21 @@ public class EntityShape extends JPanel
 		qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g2.setRenderingHints(qualityHints);
 
-		g2.setFont(new Font("Times New Roman", Font.ROMAN_BASELINE, 20));
+		g2.setColor(new Color(0, 131, 185));
+		
+		g2.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		FontMetrics fm = g2.getFontMetrics();
 		int width = fm.stringWidth(this.getName());
-		int height = fm.getAscent();
+		int height = fm.getHeight();
+
+		this.setSize(width + 20, height + 20);
+		g2.setStroke(new BasicStroke((float) 1.5));
 		
-		this.setSize(width + 30, height + 30);
+		g2.drawRoundRect(1, 1, width + 18, height + 18, 20, 20);
+		g2.drawString(this.getName(), 10, height + 10 - fm.getDescent());
 		
-		g2.setColor(new Color(0, 131, 185));
-		g2.fillRect(0, 0, this.getWidth(), this.getHeight());
-		
-		g2.setColor(Color.WHITE);
-		g2.drawString(this.getName(), 15, height + 15 - fm.getDescent());
 
 		this.getParent().repaint();
 
 	}
-
 }

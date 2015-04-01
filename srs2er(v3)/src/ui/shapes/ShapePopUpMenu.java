@@ -1,4 +1,4 @@
-package ui.erModelComponents;
+package ui.shapes;
 
 import java.util.ArrayList;
 import java.util.List;

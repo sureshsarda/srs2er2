@@ -3,6 +3,8 @@ package ui.view;
 import java.awt.Graphics2D;
 import java.awt.SplashScreen;
 
+
+
 public class Splash
 {
 	public static void main(String[] args)

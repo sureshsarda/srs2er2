@@ -1,4 +1,4 @@
-package ui.erModelComponents;
+package ui.shapes;
 
 import java.awt.Component;
 import java.awt.Point;
@@ -121,11 +121,11 @@ public class ShapeMouseAdapter implements MouseMotionListener, MouseListener
 			 * 
 			 * GOD HELP JAVA! :P (or help me)
 			 */
-			if (((Editor) compo.getParent().getParent().getParent().getParent()).alignToGrid())
+			/*if (((Editor) compo.getParent().getParent().getParent().getParent()).alignToGrid())
 			{
 				myXX -= (myXX % 10);
 				myYY -= (myYY % 10);
-			}
+			}*/
 
 			// set the calculated new location
 			compo.setLocation(myXX, myYY);

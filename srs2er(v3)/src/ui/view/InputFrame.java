@@ -18,10 +18,11 @@ import javax.swing.JTextArea;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import ui.data.Data;
 import nlp.test.TestParagraph;
 import erTagger.ERTagger;
 
-public class InputFrame extends Container
+public class InputFrame extends JPanel
 {
 	JTextArea taInput;
 	JButton butBrowseFile;
@@ -129,8 +130,13 @@ public class InputFrame extends Container
 			public void actionPerformed(ActionEvent arg0)
 			{
 				ERTagger tagger = new ERTagger();
-				TestParagraph para = tagger.tagParagraph(taInput.getText());
-
+				Data.para = tagger.tagParagraph(taInput.getText());
+				
+				RootFrame.rootFrame.removeAll(); //.setVisible(false);
+				RootFrame.rootFrame.add(new Feedback());
+				RootFrame.rootFrame.revalidate();
+				RootFrame.rootFrame.repaint();
+				RootFrame.rootFrame.pack();
 			}
 
 		});
