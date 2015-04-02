@@ -6,7 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-public class Relationship extends Type
+public class Relationship extends Type implements Cloneable
 {
 
 	List<RelationEntity> Connects = new ArrayList<RelationEntity>();
@@ -80,19 +80,18 @@ public class Relationship extends Type
 		return false;
 	}
 
-	public Relationship copy()
+
+	@Override
+	public Object clone() throws CloneNotSupportedException
 	{
-		Relationship copy = new Relationship();
-		copy = (Relationship) super.copy();
-		
+		// TODO Auto-generated method stub
+		Relationship copy = (Relationship) super.clone();
 		copy.Connects = new ArrayList<RelationEntity>();
 		for (RelationEntity relationEntity : Connects)
 		{
-			copy.Connects.add(relationEntity.copy());
+			copy.Connects.add((RelationEntity) relationEntity.clone());
 		}
-		
-		return copy;
-		
-	}
 
+		return copy;
+	}
 }

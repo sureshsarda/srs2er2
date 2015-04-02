@@ -49,28 +49,25 @@ public class Model implements Cloneable{
 		return sb.toString();
 	}
 	
-	public Model copy() {
-		Model copy = new Model();
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException
+	{
+		
+		Model copy =  (Model) super.clone();
 		
 		copy.Entities = new ArrayList<Entity>();
 		for (Entity entity : Entities)
 		{
-			copy.Entities.add(entity.copy());
+			copy.Entities.add((Entity) entity.clone());
 		}
 		
 		copy.Relationships = new ArrayList<Relationship>();
 		for (Relationship relationship : Relationships)
 		{
-			copy.Relationships.add(relationship.copy());
+			copy.Relationships.add((Relationship) relationship.clone());
 		}
 		
 		return copy;
-	}
-	
-	@Override
-	protected Object clone() throws CloneNotSupportedException
-	{
-		
-		return super.clone();
 	}
 }

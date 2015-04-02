@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import nlp.processing.StanfordProcessor;
 
-public class RelationEntity {
+public class RelationEntity implements Cloneable {
 	private int Id;
 	private String Cardinality;
 	private String Participation;
@@ -79,9 +79,11 @@ public class RelationEntity {
 		}
 	}
 	
-	public RelationEntity copy() {
-		RelationEntity copy = new RelationEntity();
-		
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException
+	{
+		RelationEntity copy = (RelationEntity) super.clone();
 		copy.Id = new Integer(Id);
 		copy.Cardinality = new String(Cardinality);
 		copy.Participation = new  String(Participation);

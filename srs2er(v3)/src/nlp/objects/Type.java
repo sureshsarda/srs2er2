@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import nlp.processing.StanfordProcessor;
 
-public class Type implements Comparable<Type>
+public class Type implements Comparable<Type>, Cloneable
 {
 	String name;
 	String lemmName;
@@ -76,7 +76,7 @@ public class Type implements Comparable<Type>
 	public String toAbstractString()
 	{
 		return toString();
-//		return String.format("WI=%d L=%d", wordIndex, length);
+		// return String.format("WI=%d L=%d", wordIndex, length);
 	}
 
 	@Override
@@ -99,17 +99,16 @@ public class Type implements Comparable<Type>
 		}
 	}
 
-
-	public Type copy() {
-		Type copy = new Type();
-		
+	@Override
+	public Object clone() throws CloneNotSupportedException
+	{
+		Type copy = (Type) super.clone();
 		copy.name = new String(name);
 		copy.lemmName = new String(lemmName);
 		copy.wordIndex = new Integer(wordIndex);
 		copy.length = new Integer(length);
 		copy.id = new Integer(id);
-
-		return copy;
+		return (Object) copy;
 	}
-	
+
 }

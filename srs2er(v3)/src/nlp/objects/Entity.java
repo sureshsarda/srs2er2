@@ -6,7 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-public class Entity extends Type
+public class Entity extends Type implements Cloneable
 {
 
 	private List<Attribute> Attributes = new ArrayList<Attribute>();
@@ -76,14 +76,16 @@ public class Entity extends Type
 		return false;
 	}
 
-	public Entity copy()
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException
 	{
-		Entity copy = new Entity();
-		copy = (Entity) super.copy();
+		Entity copy = (Entity) super.clone();
+		
 		copy.Attributes = new ArrayList<Attribute>();
 		for (Attribute attribute : Attributes)
 		{
-			copy.Attributes.add(attribute.copy());
+			copy.Attributes.add((Attribute) attribute.clone());
 		}
 		copy.Superclass = new String(Superclass);
 		return copy;

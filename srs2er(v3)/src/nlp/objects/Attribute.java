@@ -1,6 +1,6 @@
 package nlp.objects;
 
-public class Attribute extends Type
+public class Attribute extends Type implements Cloneable
 {
 	@Override
 	public String toString()
@@ -26,9 +26,10 @@ public class Attribute extends Type
 		}
 	}
 	
-	public Attribute copy() {
-		Attribute copy = new Attribute();
-		copy = (Attribute) super.copy();
-		return copy;
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException
+	{
+		return super.clone();
 	}
 }
