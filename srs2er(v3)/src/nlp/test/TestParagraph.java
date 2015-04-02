@@ -3,7 +3,6 @@ package nlp.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import nlp.objects.Sentence;
 import nlp.processing.StanfordProcessor;
 import trie.serial.SerialTrie;
 
@@ -16,9 +15,11 @@ public class TestParagraph
 		setSentences(new ArrayList<TestSentence>());
 		List<String> rawSentences = StanfordProcessor.getInstance().paragraphToSentences(paragraph);
 
+		int id = 0;
 		for (String sentence : rawSentences)
 		{
 			TestSentence tSent = new TestSentence(sentence);
+			tSent.setId(id++);
 			getSentences().add(tSent);
 		}
 	}
@@ -30,7 +31,7 @@ public class TestParagraph
 			sTrie.assignLookupResults(testSentence);
 			testSentence.sortLookupResult();
 			testSentence.discardExtraResults(4);
-			System.out.println();
+			testSentence.updateResultIds();
 		}
 
 	}
@@ -43,5 +44,15 @@ public class TestParagraph
 	public void setSentences(List<TestSentence> sentences)
 	{
 		this.sentences = sentences;
+	}
+	
+	public List<String> getSentenceList() {
+		List<String> sents = new ArrayList<String>(this.sentences.size());
+		for (TestSentence sent: this.sentences)
+		{
+			sents.add(sent.getValue());
+		}
+		
+		return sents;
 	}
 }

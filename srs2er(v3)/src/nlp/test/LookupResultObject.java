@@ -5,9 +5,10 @@ import trie.serial.Branch;
 
 public class LookupResultObject implements Comparable<LookupResultObject>
 {
-	private Integer cost;
-	private Model dataModel;
-	Branch branch;
+	protected Integer id;
+	protected Integer cost;
+	protected Model dataModel;
+	protected Branch branch;
 
 	public LookupResultObject(Integer cost, Model model, Branch branch)
 	{
@@ -40,16 +41,12 @@ public class LookupResultObject implements Comparable<LookupResultObject>
 	{
 		this.dataModel = dataModel;
 	}
-	/**
-	 * @return the cost
-	 */
+
 	public Integer getCost()
 	{
 		return cost;
 	}
-	/**
-	 * @param cost the cost to set
-	 */
+
 	public void setCost(Integer cost)
 	{
 		this.cost = cost;

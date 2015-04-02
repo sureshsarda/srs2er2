@@ -59,7 +59,16 @@ public class TestSentence extends Sentence
 	{
 		setResults(getResults().subList(0, limit));
 	}
-
+	
+	public void updateResultIds()
+	{
+		int id = 0;
+		for (LookupResultObject lookupResultObject : results)
+		{
+			lookupResultObject.id = id++;
+		}
+	}
+	
 	public List<LookupResultObject> getResults()
 	{
 		return results;
@@ -69,7 +78,8 @@ public class TestSentence extends Sentence
 	{
 		this.results = results;
 	}
-	public int getMinCost() {
+	public int getMinCost()
+	{
 		return Collections.min(getResults()).getCost();
 	}
 
