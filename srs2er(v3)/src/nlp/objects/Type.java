@@ -99,4 +99,17 @@ public class Type implements Comparable<Type>
 		}
 	}
 
+
+	public Type copy() {
+		Type copy = new Type();
+		
+		copy.name = new String(name);
+		copy.lemmName = new String(lemmName);
+		copy.wordIndex = new Integer(wordIndex);
+		copy.length = new Integer(length);
+		copy.id = new Integer(id);
+
+		return copy;
+	}
+	
 }

@@ -78,4 +78,16 @@ public class RelationEntity {
 			return false;
 		}
 	}
+	
+	public RelationEntity copy() {
+		RelationEntity copy = new RelationEntity();
+		
+		copy.Id = new Integer(Id);
+		copy.Cardinality = new String(Cardinality);
+		copy.Participation = new  String(Participation);
+		copy.Name = new String(Name);
+		copy.LemmName = new String(LemmName);
+		
+		return copy;
+	}
 }

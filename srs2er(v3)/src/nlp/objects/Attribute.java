@@ -2,7 +2,6 @@ package nlp.objects;
 
 public class Attribute extends Type
 {
-
 	@Override
 	public String toString()
 	{
@@ -25,5 +24,11 @@ public class Attribute extends Type
 		{
 			return false;
 		}
+	}
+	
+	public Attribute copy() {
+		Attribute copy = new Attribute();
+		copy = (Attribute) super.copy();
+		return copy;
 	}
 }

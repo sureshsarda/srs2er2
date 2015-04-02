@@ -61,4 +61,5 @@ public class Word {
     public String toWordIndexString() {
 	return LemmatizedName + "\\" + Id;
     }
+
 }

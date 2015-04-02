@@ -6,7 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-public class Model {
+public class Model implements Cloneable{
 
 	private List<Entity> Entities = new ArrayList<Entity>();
 	private List<Relationship> Relationships = new ArrayList<Relationship>();
@@ -47,5 +47,30 @@ public class Model {
 		}
 		
 		return sb.toString();
+	}
+	
+	public Model copy() {
+		Model copy = new Model();
+		
+		copy.Entities = new ArrayList<Entity>();
+		for (Entity entity : Entities)
+		{
+			copy.Entities.add(entity.copy());
+		}
+		
+		copy.Relationships = new ArrayList<Relationship>();
+		for (Relationship relationship : Relationships)
+		{
+			copy.Relationships.add(relationship.copy());
+		}
+		
+		return copy;
+	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException
+	{
+		
+		return super.clone();
 	}
 }
