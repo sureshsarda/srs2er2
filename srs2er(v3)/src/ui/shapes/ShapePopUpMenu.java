@@ -1,14 +1,19 @@
 package ui.shapes;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 public class ShapePopUpMenu extends JPopupMenu
 {
-	List<JMenuItem> items;
+	JMenuItem rename;
+	JMenuItem delete;
+	JMenuItem connect;
+
+	Component caller;
 
 	public ShapePopUpMenu()
 	{
@@ -17,16 +22,30 @@ public class ShapePopUpMenu extends JPopupMenu
 
 	private void intiItems()
 	{
-		items = new ArrayList<JMenuItem>();
-
-		items.add(new JMenuItem("Rename"));
-		items.add(new JMenuItem("Delete"));
+		this.add(rename = new JMenuItem("Rename"));
+		this.add(delete = new JMenuItem("Delete"));
+		this.add(connect = new JMenuItem("Connect"));
 		
-		for (JMenuItem item : items)
-		{
-			this.add(item);
-		}
-		
-		
+		addEventListener();
 	}
+
+	public void setCaller(Component component)
+	{
+		this.caller = component;
+	}
+	
+	private void addEventListener() {
+		delete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				caller.getParent().remove(caller);
+			}
+			
+		});
+	}
+	
+	
+
 }

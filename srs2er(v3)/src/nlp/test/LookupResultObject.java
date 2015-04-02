@@ -5,14 +5,14 @@ import trie.serial.Branch;
 
 public class LookupResultObject implements Comparable<LookupResultObject>
 {
-	Integer cost;
-	Model dataModel;
+	private Integer cost;
+	private Model dataModel;
 	Branch branch;
 
 	public LookupResultObject(Integer cost, Model model, Branch branch)
 	{
-		this.cost = cost;
-		this.dataModel = model;
+		this.setCost(cost);
+		this.setDataModel(model);
 		this.branch = branch;
 
 	}
@@ -23,13 +23,36 @@ public class LookupResultObject implements Comparable<LookupResultObject>
 
 	public String toString()
 	{
-		return cost + " " + branch + "\n" + dataModel;
+		return getCost() + " " + branch + "\n" + getDataModel();
 	}
 
 	@Override
 	public int compareTo(LookupResultObject arg0)
 	{
-		return cost.compareTo(arg0.cost);
+		return getCost().compareTo(arg0.getCost());
+	}
+
+	public Model getDataModel()
+	{
+		return dataModel;
+	}
+	public void setDataModel(Model dataModel)
+	{
+		this.dataModel = dataModel;
+	}
+	/**
+	 * @return the cost
+	 */
+	public Integer getCost()
+	{
+		return cost;
+	}
+	/**
+	 * @param cost the cost to set
+	 */
+	public void setCost(Integer cost)
+	{
+		this.cost = cost;
 	}
 
 }

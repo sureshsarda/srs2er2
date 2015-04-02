@@ -13,7 +13,7 @@ import edu.stanford.nlp.util.Triple;
 
 public class TestSentence extends Sentence
 {
-	List<LookupResultObject> results = null;
+	private List<LookupResultObject> results = null;
 
 	public TestSentence(String sentValue)
 	{
@@ -39,25 +39,38 @@ public class TestSentence extends Sentence
 
 	public void addLookupResult(LookupResultObject obj)
 	{
-		if (results == null)
+		if (getResults() == null)
 		{
-			results = new LinkedList<LookupResultObject>();
+			setResults(new LinkedList<LookupResultObject>());
 		}
-		results.add(obj);
+		getResults().add(obj);
 	}
 
 	public void sortLookupResult()
 	{
-		Collections.sort(results);
+		Collections.sort(getResults());
 	}
 	public List<LookupResultObject> getLookupResults()
 	{
-		return results;
+		return getResults();
 	}
 
 	public void discardExtraResults(int limit)
 	{
-		results = results.subList(0, limit);
+		setResults(getResults().subList(0, limit));
+	}
+
+	public List<LookupResultObject> getResults()
+	{
+		return results;
+	}
+
+	public void setResults(List<LookupResultObject> results)
+	{
+		this.results = results;
+	}
+	public int getMinCost() {
+		return Collections.min(getResults()).getCost();
 	}
 
 }

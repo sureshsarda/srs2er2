@@ -10,8 +10,10 @@ public class EditorMouseAdapter implements MouseMotionListener, MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-//		Component compo = e.getComponent().getComponentAt(e.getPoint());
-//		System.out.println("Clicked on: " + compo.getName());
+		if (e.getButton() == MouseEvent.BUTTON3) {
+			EditorPopUpMenu menu = new EditorPopUpMenu();
+			menu.show(e.getComponent(), e.getX(), e.getY());
+		}
 		
 	}
 

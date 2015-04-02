@@ -1,11 +1,13 @@
 package ui.editor;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.plaf.ComponentUI;
 
 public class EditorPopUpMenu extends JPopupMenu
 {
@@ -20,19 +22,7 @@ public class EditorPopUpMenu extends JPopupMenu
 		add(addAttribute);
 		add(addRelationship);
 		
-		addEntity.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				/*Entity ent = new Entity("Test");
-				ent.setLocation(sourceCoord);
-				ent.setSize(50, 50);
-				Editor.frame.add(ent);*/
-				
-			}
-			
-		});
+		
 	}
 	
 	public void setSourceCoord(Point p) {

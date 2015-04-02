@@ -16,6 +16,9 @@ import javax.swing.border.BevelBorder;
 
 import ui.editor.Editor;
 
+
+//FIXME Shapes should not move out of editable area
+
 public class ShapeMouseAdapter implements MouseMotionListener, MouseListener
 {
 	protected static ShapeMouseAdapter shapeMouseAdapter = new ShapeMouseAdapter();
@@ -58,6 +61,7 @@ public class ShapeMouseAdapter implements MouseMotionListener, MouseListener
 		{
 			/* Show pop up menu */
 			ShapePopUpMenu menu = new ShapePopUpMenu();
+			menu.setCaller(e.getComponent());
 			menu.show(e.getComponent(), e.getX(), e.getY());
 
 		}
@@ -109,8 +113,8 @@ public class ShapeMouseAdapter implements MouseMotionListener, MouseListener
 
 			// System.out.println("Draged" + this.getLocation() + e.getPoint());
 
-			int myXX = p.x - (compo.getWidth() / 2);
-			int myYY = p.y - (compo.getHeight() / 2);
+			int newX = p.x - (compo.getWidth() / 2);
+			int newY = p.y - (compo.getHeight() / 2);
 
 			/*
 			 * This code helps in alignment of shapes.
@@ -123,12 +127,12 @@ public class ShapeMouseAdapter implements MouseMotionListener, MouseListener
 			 */
 			/*if (((Editor) compo.getParent().getParent().getParent().getParent()).alignToGrid())
 			{
-				myXX -= (myXX % 10);
-				myYY -= (myYY % 10);
+				newX -= (newX % 10);
+				newY -= (newY % 10);
 			}*/
 
 			// set the calculated new location
-			compo.setLocation(myXX, myYY);
+			compo.setLocation(newX, newY);
 			e.getComponent().repaint();
 		}
 	}

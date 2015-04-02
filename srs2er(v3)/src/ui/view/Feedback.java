@@ -1,32 +1,49 @@
 package ui.view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
+import nlp.test.TestParagraph;
+import ui.data.Data;
 import ui.editor.EditorGroupPanel;
 
 public class Feedback extends JFrame
 {
-	public Feedback()
+	public Feedback(TestParagraph para)
 	{
-		this.setSize(new Dimension(800, 750));
+		Splash.setCurrentSystemLookAndFeel();
+		
 		this.setLocationRelativeTo(null);
 		this.setTitle("Feedback");
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-//		EditorPanel pan = new EditorPanel();
-		EditorGroupPanel pan = new EditorGroupPanel();
-		pan.setLocation(0, 0);
-		pan.setSize(700, 700);
-		this.add(pan);
+		this.setLayout(new BorderLayout(10, 10));
+		
+		
+		JPanel sPan = new SummaryViewPanel();
+		this.add(sPan, BorderLayout.LINE_START);
+		
+
+		updateEditorGroupPanel(0);
+		
+		this.add(new JLabel("This windows helps you to correct the model of every sentence."),BorderLayout.PAGE_START);
+		
 		
 	}
 	
-	public static void main(String[] args) {
-		Feedback fb = new Feedback();
+	public void updateEditorGroupPanel(int index) {
+		EditorGroupPanel pan = new EditorGroupPanel(Data.para.getSentences().get(0));
+		this.setPreferredSize(new Dimension(200, 200));
+		this.add(pan, BorderLayout.CENTER);
+	}
+	/*public static void main(String[] args) {
+		Feedback fb = new Feedback(Data.para);
 		fb.revalidate();
 		fb.repaint();
-	}
+	}*/
 }

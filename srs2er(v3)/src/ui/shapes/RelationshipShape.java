@@ -66,7 +66,7 @@ public class RelationshipShape extends JPanel
 		y[0] = h / 2;
 		y[1] = 0;
 		y[2] = h / 2;
-		y[3] = h;
+		y[3] = h - 2;
 		
 		g2.drawPolygon(x, y, 4);
 	}

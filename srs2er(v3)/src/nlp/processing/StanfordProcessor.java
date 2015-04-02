@@ -60,6 +60,11 @@ public class StanfordProcessor
 
 	public String lemmatiseString(String string)
 	{
+		logger.finest("lemmatiseString() - Lemmatising: [" + string + "]");
+		if (string == null || string.equals("") == true) {
+			logger.warning("Empty string passed for Lemmatisation.");
+			return string;
+		}
 		Annotation annotation = new Annotation(string);
 		this.pipeline.annotate(annotation);
 
@@ -69,7 +74,8 @@ public class StanfordProcessor
 		{
 			lemmString += coreLabel.get(LemmaAnnotation.class) + "_";
 		}
-		lemmString = lemmString.substring(0, lemmString.length() - 1);
+		if (lemmString.endsWith("_") == true)
+			lemmString = lemmString.substring(0, lemmString.length() - 1);
 
 		logger.finest(String.format("lemmatiseString() - String: %-15s LemmString: %-15s", string,
 				lemmString));

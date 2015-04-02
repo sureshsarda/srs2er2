@@ -9,23 +9,23 @@ import trie.serial.SerialTrie;
 
 public class TestParagraph
 {
-	List<TestSentence> sentences;
+	private List<TestSentence> sentences;
 
 	public TestParagraph(String paragraph)
 	{
-		sentences = new ArrayList<TestSentence>();
+		setSentences(new ArrayList<TestSentence>());
 		List<String> rawSentences = StanfordProcessor.getInstance().paragraphToSentences(paragraph);
 
 		for (String sentence : rawSentences)
 		{
 			TestSentence tSent = new TestSentence(sentence);
-			sentences.add(tSent);
+			getSentences().add(tSent);
 		}
 	}
 
 	public void generateLookupResults(SerialTrie sTrie)
 	{
-		for (TestSentence testSentence : sentences)
+		for (TestSentence testSentence : getSentences())
 		{
 			sTrie.assignLookupResults(testSentence);
 			testSentence.sortLookupResult();
@@ -33,5 +33,15 @@ public class TestParagraph
 			System.out.println();
 		}
 
+	}
+
+	public List<TestSentence> getSentences()
+	{
+		return sentences;
+	}
+
+	public void setSentences(List<TestSentence> sentences)
+	{
+		this.sentences = sentences;
 	}
 }

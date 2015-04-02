@@ -8,7 +8,10 @@ import java.awt.Point;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
+import nlp.objects.Attribute;
+import nlp.objects.Entity;
 import nlp.objects.Model;
+import nlp.objects.Relationship;
 import ui.shapes.AttributeShape;
 import ui.shapes.EntityShape;
 import ui.shapes.RelationshipShape;
@@ -19,8 +22,7 @@ public class Editor extends JPanel
 	private Model dataModel;
 	private JCheckBox alignToGrid;
 
-	public Editor()
-	{
+	public Editor(Model model) {
 		this.setVisible(true);
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
@@ -31,35 +33,8 @@ public class Editor extends JPanel
 		mouseAdapter = new EditorMouseAdapter();
 		this.addMouseListener(mouseAdapter);
 		this.addMouseMotionListener(mouseAdapter);
-
-		EntityShape e1 = new EntityShape("Entity");
-		e1.setLocation(10, 10);
-		e1.setSize(100, 100);
-		this.add(e1);
-
-		EntityShape e2 = new EntityShape("longer entity");
-		e2.setLocation(10, 100);
-		e2.setSize(100, 100);
-		this.add(e2);
-
-		RelationshipShape a1 = new RelationshipShape("relationship");
-		a1.setLocation(200, 10);
-		a1.setSize(100, 100);
-		this.add(a1);
-
-		AttributeShape a2 = new AttributeShape("longer attribute");
-		a2.setLocation(200, 100);
-		a2.setSize(100, 100);
-		this.add(a2);
-
-		alignToGrid = new JCheckBox();
-		alignToGrid.setOpaque(false);
-		alignToGrid.setText("Align to grid");
-		alignToGrid.setLocation(this.getWidth() - 100, 50);
-		alignToGrid.setSize(100, 50);
-
-		this.add(alignToGrid);
-
+		
+		this.setDataModel(model);
 	}
 
 	@Override
@@ -80,5 +55,36 @@ public class Editor extends JPanel
 	}
 	private void paintDataModel()
 	{
+		int rely = 50;
+		for (Relationship rel : dataModel.getRelationships())
+		{
+			RelationshipShape a1 = new RelationshipShape(rel.getLemmName());
+			a1.setLocation(20, rely);
+			a1.setSize(100, 100);
+			this.add(a1);
+			rely = rely + 100;
+		}
+		
+		int enty = 50;
+		int atry = 50;
+		for (Entity ent : dataModel.getEntities())
+		{
+			EntityShape a1 = new EntityShape(ent.getLemmName());
+			a1.setLocation(150, rely);
+			a1.setSize(100, 100);
+			this.add(a1);
+			for (Attribute atrib : ent.getAttributes())
+			{
+				AttributeShape a2 = new AttributeShape(atrib.getLemmName());
+				a2.setLocation(300, atry);
+				a2.setSize(100, 100);
+				this.add(a2);
+				atry += 50;
+			}
+			enty = atry + 50;
+			
+			
+		}
+
 	}
 }

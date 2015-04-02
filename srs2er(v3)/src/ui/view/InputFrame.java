@@ -66,7 +66,10 @@ public class InputFrame extends JPanel
 		this.add(buttonPanel, BorderLayout.PAGE_END);
 		
 		//TODO Remove this default entry
-		taInput.setText("A student takes a course. A student has name and an address. Every course has a title.");
+		taInput.setText("The school admits students based on their grades and financial status. "
+				+ "Schools classify students according to their grades and financial status. "
+				+ "Students are classified by the school according to their grades as well as financial status. "
+				+ "Grades are dependent on the academic performance of the student.");
 
 	}
 	private void initComponents()
@@ -76,7 +79,8 @@ public class InputFrame extends JPanel
 		taInput.setAlignmentX(LEFT_ALIGNMENT);
 		taInput.setWrapStyleWord(true);
 		JScrollPane scroll = new JScrollPane(taInput, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); //TODO This code is not working
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); // TODO This code is
+															// not working
 
 		/* The Upper Label and TextArea */
 		labTitle = new JLabel();
@@ -131,12 +135,14 @@ public class InputFrame extends JPanel
 			{
 				ERTagger tagger = new ERTagger();
 				Data.para = tagger.tagParagraph(taInput.getText());
-				
-				RootFrame.rootFrame.removeAll(); //.setVisible(false);
-				RootFrame.rootFrame.add(new Feedback());
-				RootFrame.rootFrame.revalidate();
-				RootFrame.rootFrame.repaint();
-				RootFrame.rootFrame.pack();
+
+				new Feedback(Data.para);
+
+				// RootFrame.rootFrame.removeAll(); //.setVisible(false);
+				// RootFrame.rootFrame.add(new Feedback(Data.para));
+				// RootFrame.rootFrame.revalidate();
+				// RootFrame.rootFrame.repaint();
+				// RootFrame.rootFrame.pack();
 			}
 
 		});

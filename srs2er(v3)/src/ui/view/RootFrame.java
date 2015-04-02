@@ -11,7 +11,7 @@ public class RootFrame
 	public static JFrame rootFrame = new JFrame();
 	public RootFrame()
 	{
-		setCurrentSystemLookAndFeel();
+		Splash.setCurrentSystemLookAndFeel();
 		
 		rootFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		rootFrame.setTitle("Data Model Extractor");
@@ -25,28 +25,7 @@ public class RootFrame
 		
 	}
 
-	private void setCurrentSystemLookAndFeel() {
-		try
-		{
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		}
-		catch (ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-		catch (InstantiationException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IllegalAccessException e)
-		{
-			e.printStackTrace();
-		}
-		catch (UnsupportedLookAndFeelException e)
-		{
-			e.printStackTrace();
-		}
-	}
+
 
 
 }

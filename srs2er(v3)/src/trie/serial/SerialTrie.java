@@ -74,7 +74,7 @@ public class SerialTrie
 		for (Branch branch : branches)
 		{
 			int cost = EditDistance.editDistance(sentence, branch);
-			if (cost < 10)
+			//if (cost < 10)
 			{
 				List<Operation> ops = EditDistance.editDistanceExtended(sentence, branch).second();
 				Sentence copy = EditDistance.updateWordIndexes(sentence, ops);
@@ -146,7 +146,7 @@ public class SerialTrie
 			else
 				;
 		}
-		while (length > 0)
+		while (length > 0 && itr.hasNext())
 		{
 			Word curr = itr.next();
 			if (curr.getId() != -1)
