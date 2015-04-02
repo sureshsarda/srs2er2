@@ -5,7 +5,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 import nlp.processing.StanfordProcessor;
 
-public class RelationEntity implements Cloneable {
+public class RelationEntity implements Cloneable
+{
 	private int Id;
 	private String Cardinality;
 	private String Participation;
@@ -18,78 +19,81 @@ public class RelationEntity implements Cloneable {
 	 * WILL regret
 	 */
 	@XmlAttribute(name = "Cardanality")
-	public String getCardinality() {
+	public String getCardinality()
+	{
 		return Cardinality;
 	}
 
-	public void setCardinality(String Cardinality) {
+	public void setCardinality(String Cardinality)
+	{
 		this.Cardinality = Cardinality;
 	}
 
 	@XmlAttribute(name = "Participation")
-	public String getParticipation() {
+	public String getParticipation()
+	{
 		return Participation;
 	}
 
-	public void setParticipation(String Participation) {
+	public void setParticipation(String Participation)
+	{
 		this.Participation = Participation;
 	}
 
 	@XmlAttribute(name = "EntityId")
-	public int getEntityId() {
+	public int getEntityId()
+	{
 		return Id;
 	}
 
-	public void setEntityId(int id) {
+	public void setEntityId(int id)
+	{
 		this.Id = id;
 	}
 
 	@XmlElement(name = "Name")
-	public String getName() {
+	public String getName()
+	{
 		return Name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		Name = name;
+		this.LemmName = StanfordProcessor.getInstance().lemmatiseString(this.Name);
 	}
 
-	public String getLemmName() {
-		if (this.LemmName == null) {
-			this.LemmName = StanfordProcessor.getInstance().lemmatiseString(
-					this.Name);
-		}
+	public String getLemmName()
+	{
 		return this.LemmName;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return this.getLemmName();
 	}
-	
-	public String toAbstractString() {
-	    return String.valueOf(this.Id);
+
+	public String toAbstractString()
+	{
+		return String.valueOf(this.Id);
 	}
 
-	public boolean equals(RelationEntity rent) {
-		// FIXME Compare Lemmetized names
-		if (this.Name.compareTo(rent.Name) == 0) {
-			return true;
-		} else {
-			return false;
-		}
+	public boolean equals(RelationEntity rent)
+	{
+		return this.LemmName.equals(rent.LemmName);
 	}
-	
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException
 	{
 		RelationEntity copy = (RelationEntity) super.clone();
 		copy.Id = new Integer(Id);
-		copy.Cardinality = new String(Cardinality);
-		copy.Participation = new  String(Participation);
+		// copy.Cardinality = new String(Cardinality);
+		// copy.Participation = new String(Participation);
 		copy.Name = new String(Name);
 		copy.LemmName = new String(LemmName);
-		
+
 		return copy;
 	}
 }
