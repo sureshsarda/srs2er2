@@ -89,10 +89,10 @@ public class RelationEntity implements Cloneable
 	{
 		RelationEntity copy = (RelationEntity) super.clone();
 		copy.Id = new Integer(Id);
-		// copy.Cardinality = new String(Cardinality);
-		// copy.Participation = new String(Participation);
-		copy.Name = new String(Name);
-		copy.LemmName = new String(LemmName);
+		copy.Cardinality = new String(Cardinality != null ? Cardinality : "");
+		copy.Participation = new String(Participation != null ? Participation : "");
+		copy.Name = new String(Name != null ? Name : "");
+		copy.LemmName = new String(LemmName != null ? LemmName : "");
 
 		return copy;
 	}

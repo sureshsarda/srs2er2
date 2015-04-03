@@ -74,15 +74,14 @@ public class SerialTrie
 		for (Branch branch : branches)
 		{
 			int cost = EditDistance.editDistance(sentence, branch);
-			//if (cost < 10)
+			// if (cost < 10)
 			{
 				List<Operation> ops = EditDistance.editDistanceExtended(sentence, branch).second();
-				Sentence copy = EditDistance.updateWordIndexes(sentence, ops);
+				Sentence sent_copy = EditDistance.updateWordIndexes(sentence, ops);
 
-				updateDataModel(copy, branch.leafInformation.getDataModel());
+				Model model_copy = updateDataModel(sent_copy, branch.leafInformation.getDataModel());
 
-				LookupResultObject obj = new LookupResultObject(cost,
-						branch.leafInformation.getDataModel(), branch);
+				LookupResultObject obj = new LookupResultObject(cost, model_copy, branch);
 				sentence.addLookupResult(obj);
 
 				// System.out.println(branch.leafInformation.getDataModel());
@@ -96,10 +95,20 @@ public class SerialTrie
 
 	}
 
-	public static void updateDataModel(Sentence sent, Model model)
+	public static Model updateDataModel(Sentence sent, Model model)
 	{
-		// Model modelToUpdate = sent.getDataModel();
-		for (Entity entity : model.getEntities())
+		Model copy = null;
+		try
+		{
+			copy = (Model) model.clone();
+		}
+		catch (CloneNotSupportedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (Entity entity : copy.getEntities())
 		{
 			int wordId = entity.getWordIndex();
 			int length = entity.getLength();
@@ -112,18 +121,26 @@ public class SerialTrie
 			}
 		}
 
-		for (Relationship relationship : model.getRelationships())
+		for (Relationship relationship : copy.getRelationships())
 		{
 			int wordId = relationship.getWordIndex();
 			int length = relationship.getLength();
 			relationship.setName(getLabelWith(sent, wordId, length));
 			for (RelationEntity relation : relationship.getConnects())
 			{
-				// wordId = relation.getWordIndex();
-				// length = relation.getLength();
-				// relation.setName(getLabelWith(sent, wordId, length));
+				try
+				{
+					String name = relation.getLemmName();
+					Entity ent = model.getEntityByName(name);
+					Entity ent1 = copy.getEntityById(ent.getId());
+					relation.setName(ent1.getLemmName());
+				}
+				catch (NullPointerException e)
+				{
+				}
 			}
 		}
+		return copy;
 
 	}
 	private static String getLabelWith(Sentence sent, int wordIndex, int length)
@@ -141,7 +158,7 @@ public class SerialTrie
 			}
 			else if (wordIndex < curr.getId())
 			{
-				return "!Failed";
+				return "!Failure";
 			}
 			else
 				;

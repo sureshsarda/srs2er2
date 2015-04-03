@@ -1,7 +1,6 @@
 package ui.view;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +17,6 @@ import javax.swing.JTextArea;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import ui.data.Data;
 import nlp.test.TestParagraph;
 import erTagger.ERTagger;
 
@@ -66,11 +64,11 @@ public class InputFrame extends JPanel
 		this.add(buttonPanel, BorderLayout.PAGE_END);
 		
 		//TODO Remove this default entry
-		taInput.setText("The school admits students based on their grades and financial status. "
-				+ "Schools classify students according to their grades and financial status. "
-				+ "Students are classified by the school according to their grades as well as financial status. "
-				+ "Grades are dependent on the academic performance of the student.");
-
+//		taInput.setText("The school admits students based on their grades and financial status. "
+//				+ "Schools classify students according to their grades and financial status. "
+//				+ "Students are classified by the school according to their grades as well as financial status. "
+//				+ "Grades are dependent on the academic performance of the student.");
+		taInput.setText("A student takes a course. Student has a name and address. Student can select faculty.");
 	}
 	private void initComponents()
 	{
@@ -134,9 +132,9 @@ public class InputFrame extends JPanel
 			public void actionPerformed(ActionEvent arg0)
 			{
 				ERTagger tagger = new ERTagger();
-				Data.para = tagger.tagParagraph(taInput.getText());
+				TestParagraph para = tagger.tagParagraph(taInput.getText());
 
-				new Feedback(Data.para);
+				new Feedback(para);
 
 				// RootFrame.rootFrame.removeAll(); //.setVisible(false);
 				// RootFrame.rootFrame.add(new Feedback(Data.para));

@@ -7,16 +7,15 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
-import ui.data.Data;
-
-public class SummaryViewPanel extends JPanel
+public class SummaryViewPane extends JPanel
 {
-	JTable table;
-
-	public SummaryViewPanel()
+	protected JTable table;
+	
+	public SummaryViewPane()
 	{
-		String[] colNames = {"Sentence", "Min Cost", "Status"};
+		String[] colNames = {"Id", "Sentence", "Min Cost", "Status"};
 		Object[][] data = readData();
 		table = new JTable(data, colNames)
 		{
@@ -28,8 +27,12 @@ public class SummaryViewPanel extends JPanel
 		};
 		setTableMouseAdapter();
 		table.setVisible(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		table.getColumn("Sentence").setPreferredWidth(300);
-		this.setVisible(true);
+		table.getColumn("Id").setPreferredWidth(20);
+		
+		
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setVisible(true);
@@ -39,19 +42,20 @@ public class SummaryViewPanel extends JPanel
 		this.setLayout(new BorderLayout());
 		this.add(table.getTableHeader(), BorderLayout.PAGE_START);
 		this.add(table, BorderLayout.CENTER);
-
+		this.setVisible(true);
 	}
 
 	private Object[][] readData()
 	{
-		int sentCount = Data.para.getSentences().size();
-		Object[][] data = new Object[sentCount][3];
+		int sentCount = Feedback.instance.para.getSentences().size();
+		Object[][] data = new Object[sentCount][4];
 
 		for (int i = 0; i < sentCount; i++)
 		{
-			data[i][0] = Data.para.getSentences().get(i).getValue();
-			data[i][1] = Data.para.getSentences().get(i).getMinCost();
-			data[i][2] = (int) data[i][1] > 0 ? "Pending" : "Complete";
+			data[i][0] = Feedback.instance.para.getSentences().get(i).getId();
+			data[i][1] = Feedback.instance.para.getSentences().get(i).getValue();
+			data[i][2] = Feedback.instance.para.getSentences().get(i).getMinCost();
+			data[i][3] = (int) data[i][2] > 0 ? "Pending" : "Complete";
 		}
 
 		return data;
@@ -61,35 +65,35 @@ public class SummaryViewPanel extends JPanel
 		table.addMouseListener(new MouseListener(){
 
 			@Override
-			public void mouseClicked(MouseEvent arg0)
+			public void mouseClicked(MouseEvent e)
 			{
-				
+				Feedback.instance.updateEditorGroupPanel(table.getSelectedRow());
+			
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e)
+			{
+
 				
 			}
 
 			@Override
-			public void mouseEntered(MouseEvent arg0)
-			{
-
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0)
-			{
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0)
+			public void mouseExited(MouseEvent e)
 			{
 				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
-			public void mouseReleased(MouseEvent arg0)
+			public void mousePressed(MouseEvent e)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e)
 			{
 				// TODO Auto-generated method stub
 				

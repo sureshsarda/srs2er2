@@ -9,14 +9,20 @@ import nlp.test.TestSentence;
 
 public class EditorGroupPanel extends JTabbedPane
 {
-	private TestSentence sentence;
+	public TestSentence sentence;
 	
 	public EditorGroupPanel(TestSentence sentence)
 	{
-		this.sentence = sentence;
-		
 		
 		this.setTabPlacement(BOTTOM);
+		updateLayout(sentence);
+		
+	}
+	
+	public void updateLayout(TestSentence sent) {
+		this.sentence = sent;
+		
+		this.removeAll();
 		
 		for (LookupResultObject obj : sentence.getResults())
 		{
@@ -25,7 +31,5 @@ public class EditorGroupPanel extends JTabbedPane
 			
 			this.addTab(title, pan);
 		}
-		
-		
 	}
 }

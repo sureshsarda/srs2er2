@@ -11,16 +11,11 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
-public class RelationshipShape extends JPanel
+public class RelationshipShape extends Shape
 {
 	public RelationshipShape(String name)
 	{
-		this.setName(name);
-		this.setOpaque(false);
-		this.setPreferredSize(new Dimension(50, 20));
-		this.setVisible(true);
-		this.addMouseListener(ShapeMouseAdapter.shapeMouseAdapter);
-		this.addMouseMotionListener(ShapeMouseAdapter.shapeMouseAdapter);
+		super(name);
 	}
 	
 	@Override
@@ -28,11 +23,6 @@ public class RelationshipShape extends JPanel
 	{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-
-		RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g2.setRenderingHints(qualityHints);
 
 		g2.setColor(new Color(0, 131, 185));
 		

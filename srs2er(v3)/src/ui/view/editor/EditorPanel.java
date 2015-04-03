@@ -48,7 +48,7 @@ public class EditorPanel extends JPanel
 		JPanel buttons = new JPanel();
 		buttons.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		buttons.add(new JButton("Save This Diagram"));
-		buttons.add(new JButton("Reset"));
+		//buttons.add(new JButton("Reset"));
 		buttons.setOpaque(false);
 		this.add(buttons, BorderLayout.PAGE_END);
 		

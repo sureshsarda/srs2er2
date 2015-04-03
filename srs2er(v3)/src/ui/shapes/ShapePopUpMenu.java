@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import ui.view.editor.Editor;
+
 public class ShapePopUpMenu extends JPopupMenu
 {
 	JMenuItem rename;
@@ -17,35 +19,42 @@ public class ShapePopUpMenu extends JPopupMenu
 
 	public ShapePopUpMenu()
 	{
-		intiItems();
-	}
 
-	private void intiItems()
-	{
 		this.add(rename = new JMenuItem("Rename"));
 		this.add(delete = new JMenuItem("Delete"));
 		this.add(connect = new JMenuItem("Connect"));
-		
-		addEventListener();
+
+		delete.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				Editor ed = (Editor) caller.getParent();
+				ed.remove(caller);
+				
+				ed.data.remove(caller.getName());
+				
+			}
+
+		});
+
+		connect.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				((Editor)caller.getParent()).setSource(caller);
+			}
+
+		});
+
 	}
 
 	public void setCaller(Component component)
 	{
 		this.caller = component;
 	}
-	
-	private void addEventListener() {
-		delete.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				caller.getParent().remove(caller);
-			}
-			
-		});
-	}
-	
-	
 
 }

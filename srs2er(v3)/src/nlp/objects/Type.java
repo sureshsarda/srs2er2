@@ -103,8 +103,8 @@ public class Type implements Comparable<Type>, Cloneable
 	public Object clone() throws CloneNotSupportedException
 	{
 		Type copy = (Type) super.clone();
-		copy.name = new String(name);
-		copy.lemmName = new String(lemmName);
+		copy.name = new String(name != null ? name : "");
+		copy.lemmName = new String(lemmName != null ? lemmName : "");
 		copy.wordIndex = new Integer(wordIndex);
 		copy.length = new Integer(length);
 		copy.id = new Integer(id);

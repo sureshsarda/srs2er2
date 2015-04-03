@@ -12,7 +12,9 @@ public class EditorMouseAdapter implements MouseMotionListener, MouseListener
 	{
 		if (e.getButton() == MouseEvent.BUTTON3)
 		{
-			EditorPopUpMenu menu = new EditorPopUpMenu();
+			Editor editor = (Editor) e.getSource();
+			EditorPopUpMenu menu = new EditorPopUpMenu(editor);
+			menu.setSourceCoord(e.getPoint());
 			menu.show(e.getComponent(), e.getX(), e.getY());
 		}
 
@@ -47,20 +49,16 @@ public class EditorMouseAdapter implements MouseMotionListener, MouseListener
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent arg0)
+	public void mouseDragged(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
+
 
 	}
 
-	protected boolean connection = false;
 	@Override
-	public void mouseMoved(MouseEvent arg0)
+	public void mouseMoved(MouseEvent e)
 	{
-		if (((Editor) arg0.getComponent()).line == true)
-		{
-
-		}
+		((Editor) e.getComponent()).drawConnector(e.getX(), e.getY());
 
 	}
 

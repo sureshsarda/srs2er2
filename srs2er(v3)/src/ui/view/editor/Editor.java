@@ -1,29 +1,32 @@
 package ui.view.editor;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
+import java.util.ArrayList;
 
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
-import nlp.objects.Attribute;
-import nlp.objects.Entity;
 import nlp.objects.Model;
-import nlp.objects.Relationship;
 import ui.shapes.AttributeShape;
 import ui.shapes.EntityShape;
 import ui.shapes.RelationshipShape;
+import ui.shapes.Shape;
 
 public class Editor extends JPanel
 {
 	protected EditorMouseAdapter mouseAdapter;
-	protected Model dataModel;
+	public DataModelAdapter data;
+	
 	
 
-	public Editor(Model model) {
+	public Editor(Model model)
+	{
 		this.setVisible(true);
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
@@ -34,7 +37,7 @@ public class Editor extends JPanel
 		mouseAdapter = new EditorMouseAdapter();
 		this.addMouseListener(mouseAdapter);
 		this.addMouseMotionListener(mouseAdapter);
-		
+
 		this.setDataModel(model);
 	}
 
@@ -46,62 +49,131 @@ public class Editor extends JPanel
 
 	public void setDataModel(Model model)
 	{
-		this.dataModel = model;
+		data = new DataModelAdapter(model);
 		this.paintDataModel();
 	}
 	private void paintDataModel()
 	{
-		int rely = 50;
-		for (Relationship rel : dataModel.getRelationships())
+		int y = 50;
+		for (String rel : data.relationships)
 		{
-			RelationshipShape a1 = new RelationshipShape(rel.getLemmName());
-			a1.setLocation(20, rely);
+			RelationshipShape a1 = new RelationshipShape(rel);
+			a1.setLocation(20, y);
 			a1.setSize(100, 100);
 			this.add(a1);
-			rely = rely + 100;
+			y = y + 100;
 		}
-		
-		int enty = 50;
-		int atry = 50;
-		for (Entity ent : dataModel.getEntities())
+
+		y = 50;
+		for (String ent : data.entities)
 		{
-			EntityShape a1 = new EntityShape(ent.getLemmName());
-			a1.setLocation(150, rely);
+			EntityShape a1 = new EntityShape(ent);
+			a1.setLocation(150, y);
 			a1.setSize(100, 100);
 			this.add(a1);
-			for (Attribute atrib : ent.getAttributes())
-			{
-				AttributeShape a2 = new AttributeShape(atrib.getLemmName());
-				a2.setLocation(300, atry);
-				a2.setSize(100, 100);
-				this.add(a2);
-				atry += 50;
-			}
-			enty = atry + 50;
-			
-			
+			y = y + 50;
+
 		}
-		
-		JPanel pan = new JPanel();
-		pan.setSize(200, 200);
-		pan.setLocation(10, 10);
-		pan.setBackground(new Color(0, 0, 0, 5));
-		pan.setVisible(true);
-		this.add(pan, 0);
+
+		y = 50;
+		for (String atrib : data.attributes)
+		{
+			AttributeShape a2 = new AttributeShape(atrib);
+			a2.setLocation(300, y);
+			a2.setSize(100, 100);
+			this.add(a2);
+			y += 50;
+		}
 	}
-	
-	protected boolean line = false;
-	protected Point source;
-	Point dest;
-	public void setSource(Point source) {
+
+	public boolean line = false;
+	Component source, dest;
+	public void setSource(Component source)
+	{
 		this.source = source;
+		line = true;
+
 	}
+
+	public void setDest(Component dest)
+	{
+		this.dest = dest;
+		line = false;
+		
+		if (data.connections.containsKey(source.getName()) == false) {
+			data.connections.put(source.getName(), new ArrayList<String>());
+		}
+		data.connections.get(source.getName()).add(dest.getName());
+
+	}
+
 	@Override
 	protected void paintComponent(Graphics g)
 	{
-		if (line == true) {
-			
-		}
 		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
+
+		RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g2.setRenderingHints(qualityHints);
+
+		g2.setColor(new Color(0, 131, 185));
+		g2.setStroke(new BasicStroke((float) 1.5));
+
+		for (String key : data.connections.keySet())
+		{
+			Shape source = (Shape) this.getComponentByName(key);
+			for (String value : data.connections.get(key))
+			{
+				Shape dest = (Shape) this.getComponentByName(value);
+				if (dest != null)
+				{
+					Point[] anchors = source.getAnchors(dest);
+					for (int i = 1; i < anchors.length; i++) {
+						g2.drawLine(anchors[i - 1].x, anchors[i - 1].y, anchors[i].x, anchors[i].y);
+					}
+					//g2.drawLine(source.getX(), source.getY(), dest.getX(), dest.getY());
+
+					// g2.drawLine(source.getX() + source.getWidth() / 2,
+					// source.getY() + source.getHeight() / 2, dest.getX() +
+					// dest.getWidth()
+					// / 2, dest.getY() + dest.getHeight() / 2);
+				}
+			}
+		}
+
+		this.getParent().repaint();
+
 	}
+	protected void drawConnector(int x, int y)
+	{
+		if (line == true)
+		{
+			Graphics2D g2 = (Graphics2D) this.getGraphics();
+			
+			RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
+					RenderingHints.VALUE_ANTIALIAS_ON);
+			qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+			g2.setRenderingHints(qualityHints);
+
+			g2.setColor(new Color(0, 131, 185));
+			g2.setStroke(new BasicStroke((float) 1.5));
+			
+			g2.drawLine(source.getX(), source.getY(), x, y);
+			System.out.println("Success");
+		}
+	}
+
+	private Component getComponentByName(String name)
+	{
+		for (Component compo : this.getComponents())
+		{
+			if (name.equals(compo.getName()) == true)
+				return compo;
+		}
+
+		return null;
+	}
+
 }

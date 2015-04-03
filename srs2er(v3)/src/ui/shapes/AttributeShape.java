@@ -11,16 +11,11 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
-public class AttributeShape extends JPanel
+public class AttributeShape extends Shape
 {
 	public AttributeShape(String name)
 	{
-		this.setName(name);
-		this.setOpaque(false);
-		this.setPreferredSize(new Dimension(50, 20));
-		this.setVisible(true);
-		this.addMouseListener(ShapeMouseAdapter.shapeMouseAdapter);
-		this.addMouseMotionListener(ShapeMouseAdapter.shapeMouseAdapter);
+		super(name);
 	}
 
 	@Override
@@ -28,11 +23,6 @@ public class AttributeShape extends JPanel
 	{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-
-		RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g2.setRenderingHints(qualityHints);
 
 		g2.setColor(new Color(0, 131, 185));
 		
@@ -48,7 +38,7 @@ public class AttributeShape extends JPanel
 		g2.drawString(this.getName(), 10, height + 10 - fm.getDescent());
 		
 
-		this.getParent().repaint();
+//		this.getParent().repaint();
 
 	}
 }

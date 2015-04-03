@@ -14,6 +14,7 @@ import edu.stanford.nlp.util.Triple;
 public class TestSentence extends Sentence
 {
 	private List<LookupResultObject> results = null;
+	public static final int LIMIT = 4;
 
 	public TestSentence(String sentValue)
 	{
@@ -39,6 +40,7 @@ public class TestSentence extends Sentence
 
 	public void addLookupResult(LookupResultObject obj)
 	{
+		System.out.println(obj);
 		if (getResults() == null)
 		{
 			setResults(new LinkedList<LookupResultObject>());
@@ -57,7 +59,8 @@ public class TestSentence extends Sentence
 
 	public void discardExtraResults(int limit)
 	{
-		setResults(getResults().subList(0, limit));
+		if (getResults().size() > limit)
+			setResults(getResults().subList(0, limit));
 	}
 	
 	public void updateResultIds()
