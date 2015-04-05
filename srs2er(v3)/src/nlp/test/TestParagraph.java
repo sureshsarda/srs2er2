@@ -45,14 +45,27 @@ public class TestParagraph
 	{
 		this.sentences = sentences;
 	}
-	
-	public List<String> getSentenceList() {
+
+	public List<String> getSentenceList()
+	{
 		List<String> sents = new ArrayList<String>(this.sentences.size());
-		for (TestSentence sent: this.sentences)
+		for (TestSentence sent : this.sentences)
 		{
 			sents.add(sent.getValue());
 		}
-		
+
 		return sents;
+	}
+
+	public void removeSentence(String name)
+	{
+		for (int i = 0; i < sentences.size(); i++)
+		{
+			if (sentences.get(i).getValue().equals(name) == true)
+			{
+				sentences.remove(i);
+				break;
+			}
+		}
 	}
 }

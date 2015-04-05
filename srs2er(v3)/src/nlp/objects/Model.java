@@ -154,6 +154,20 @@ public class Model implements Cloneable
 		}
 		return null;
 	}
+	
+	public Relationship getRelationshipByName(String name)
+	{
+		for (Relationship relation: Relationships)
+		{
+			if (relation.getLemmName().equals(name) == true)
+			{
+				return relation;
+			}
+		}
+		return null;
+	}
+
+	
 	public Entity getEntityById(int id)
 	{
 		for (Entity entity : Entities)

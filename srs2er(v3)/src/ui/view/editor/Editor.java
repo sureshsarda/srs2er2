@@ -22,8 +22,6 @@ public class Editor extends JPanel
 {
 	protected EditorMouseAdapter mouseAdapter;
 	public DataModelAdapter data;
-	
-	
 
 	public Editor(Model model)
 	{
@@ -99,8 +97,19 @@ public class Editor extends JPanel
 	{
 		this.dest = dest;
 		line = false;
-		
-		if (data.connections.containsKey(source.getName()) == false) {
+
+		System.out.println(source.getClass());
+		System.out.println(dest.getClass());
+
+		if ((source.getClass() == AttributeShape.class && dest.getClass() == EntityShape.class)
+				|| (source.getClass() == EntityShape.class && dest.getClass() == RelationshipShape.class))
+		{
+			Component temp = source;
+			source = dest;
+			dest = temp;
+		}
+		if (data.connections.containsKey(source.getName()) == false)
+		{
 			data.connections.put(source.getName(), new ArrayList<String>());
 		}
 		data.connections.get(source.getName()).add(dest.getName());
@@ -130,10 +139,12 @@ public class Editor extends JPanel
 				if (dest != null)
 				{
 					Point[] anchors = source.getAnchors(dest);
-					for (int i = 1; i < anchors.length; i++) {
+					for (int i = 1; i < anchors.length; i++)
+					{
 						g2.drawLine(anchors[i - 1].x, anchors[i - 1].y, anchors[i].x, anchors[i].y);
 					}
-					//g2.drawLine(source.getX(), source.getY(), dest.getX(), dest.getY());
+					// g2.drawLine(source.getX(), source.getY(), dest.getX(),
+					// dest.getY());
 
 					// g2.drawLine(source.getX() + source.getWidth() / 2,
 					// source.getY() + source.getHeight() / 2, dest.getX() +
@@ -151,7 +162,7 @@ public class Editor extends JPanel
 		if (line == true)
 		{
 			Graphics2D g2 = (Graphics2D) this.getGraphics();
-			
+
 			RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);
 			qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
@@ -159,7 +170,7 @@ public class Editor extends JPanel
 
 			g2.setColor(new Color(0, 131, 185));
 			g2.setStroke(new BasicStroke((float) 1.5));
-			
+
 			g2.drawLine(source.getX(), source.getY(), x, y);
 			System.out.println("Success");
 		}

@@ -27,6 +27,7 @@ public class InputFrame extends JPanel
 	JButton butTag;
 	JLabel labTitle;
 	JLabel labHelp;
+	JScrollPane scroll;
 
 	public InputFrame()
 	{
@@ -41,7 +42,7 @@ public class InputFrame extends JPanel
 		/* Adding components */
 		textPanel.add(labTitle);
 		textPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-		textPanel.add(taInput);
+		textPanel.add(scroll);
 
 		/*
 		 * Lower button components
@@ -76,10 +77,10 @@ public class InputFrame extends JPanel
 		taInput.setPreferredSize(new Dimension(300, 400));
 		taInput.setAlignmentX(LEFT_ALIGNMENT);
 		taInput.setWrapStyleWord(true);
-		JScrollPane scroll = new JScrollPane(taInput, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); // TODO This code is
-															// not working
-
+		taInput.setLineWrap(true);
+		scroll = new JScrollPane(taInput, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); 
+	
 		/* The Upper Label and TextArea */
 		labTitle = new JLabel();
 		labTitle.setText("Select file or enter text:");

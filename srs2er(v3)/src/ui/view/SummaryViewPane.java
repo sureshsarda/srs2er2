@@ -8,14 +8,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class SummaryViewPane extends JPanel
 {
 	protected JTable table;
+	String[] colNames = {"Id", "Sentence", "Min Cost", "Status"};
+
 	
 	public SummaryViewPane()
 	{
-		String[] colNames = {"Id", "Sentence", "Min Cost", "Status"};
 		Object[][] data = readData();
 		table = new JTable(data, colNames)
 		{
@@ -57,9 +60,11 @@ public class SummaryViewPane extends JPanel
 			data[i][2] = Feedback.instance.para.getSentences().get(i).getMinCost();
 			data[i][3] = (int) data[i][2] > 0 ? "Pending" : "Complete";
 		}
-
+		
+		
 		return data;
 	}
+
 	
 	private void setTableMouseAdapter() {
 		table.addMouseListener(new MouseListener(){
