@@ -31,8 +31,8 @@ public class Splash
 		{
 			Graphics2D g2 = splash.createGraphics();
 
-			loadStanfordProcessor();
-			loadERTagger();
+//			loadStanfordProcessor();
+//			loadERTagger();
 
 		}
 	}

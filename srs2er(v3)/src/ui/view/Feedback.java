@@ -28,12 +28,8 @@ public class Feedback extends JPanel
 	{
 		instance = this;
 		instance.para = para;
-		
-		Splash.setCurrentSystemLookAndFeel();
-		
-		instance.setVisible(true);
 
-//		instance.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+		instance.setVisible(true);
 		instance.setLayout(new BorderLayout(10, 10));
 		
 		instance.add(new JLabel("This windows helps you to correct the model of every sentence."),BorderLayout.PAGE_START);
@@ -42,10 +38,6 @@ public class Feedback extends JPanel
 		instance.add(sPan, BorderLayout.LINE_START);
 		
 		updateEditorGroupPanel(0);
-		
-		
-		
-		
 	}
 	public void removeSentence(String sent) {
 	
@@ -76,9 +68,4 @@ public class Feedback extends JPanel
 		
 		currentSentence = para.getSentences().get(index);
 	}
-	/*public static void main(String[] args) {
-		Feedback fb = new Feedback(Data.para);
-		fb.revalidate();
-		fb.repaint();
-	}*/
 }
