@@ -28,7 +28,7 @@ import util.logging.LoggerSetup;
  * @author Suresh Sarda
  *
  */
-public class ERTagger
+public class ERTagger implements Runnable
 {
 
 	private static final String[] trainingDataFiles = {"data/training/MegaTraining.xml"};
@@ -36,8 +36,17 @@ public class ERTagger
 	// private static final String statFile = "out/stat.csv";
 
 	private SerialTrie sTrie;
+	private static ERTagger instance;
 
-	public ERTagger()
+	public static ERTagger getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new ERTagger();
+		}
+		return instance;
+	}
+	private ERTagger()
 	{
 		// TODO Remove Global Logger when refactoring completes
 		LoggerSetup.setup(LOGGER);
@@ -50,7 +59,7 @@ public class ERTagger
 		trainModel();
 	}
 
-	public void trainModel()
+	private void trainModel()
 	{
 		logger.info("Loading TagData...");
 
@@ -137,4 +146,11 @@ public class ERTagger
 	/* Loggers */
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	public static final Logger LOGGER = Logger.getLogger("Global");
+
+	@Override
+	public void run()
+	{
+		ERTagger.getInstance();
+
+	}
 }

@@ -24,7 +24,7 @@ import edu.stanford.nlp.util.Triple;
  * @author SureshSarda
  *
  */
-public class StanfordProcessor
+public class StanfordProcessor implements Runnable
 {
 	private static StanfordProcessor instance = null;
 	private StanfordCoreNLP pipeline;
@@ -143,6 +143,13 @@ public class StanfordProcessor
 					lemmaString1, lemmaString2));
 			return null;
 		}
+	}
+
+	@Override
+	public void run()
+	{
+		StanfordProcessor.getInstance();
+		
 	}
 
 }
