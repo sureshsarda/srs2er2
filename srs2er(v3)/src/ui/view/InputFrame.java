@@ -65,11 +65,11 @@ public class InputFrame extends JPanel
 		this.add(buttonPanel, BorderLayout.PAGE_END);
 		
 		//TODO Remove this default entry
-//		taInput.setText("The school admits students based on their grades and financial status. "
-//				+ "Schools classify students according to their grades and financial status. "
-//				+ "Students are classified by the school according to their grades as well as financial status. "
-//				+ "Grades are dependent on the academic performance of the student.");
-		taInput.setText("A student takes a course. Student has a name and address. Student can select faculty.");
+		taInput.setText("The school admits students based on their grades and financial status. "
+				+ "Schools classify students according to their grades and financial status. "
+				+ "Students are classified by the school according to their grades as well as financial status. "
+				+ "Grades are dependent on the academic performance of the student.");
+//		taInput.setText("A student takes a course. Student has a name and address. Student can select faculty.");
 	}
 	private void initComponents()
 	{
@@ -132,10 +132,13 @@ public class InputFrame extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				ERTagger tagger = new ERTagger();
-				TestParagraph para = tagger.tagParagraph(taInput.getText());
 
-				new Feedback(para);
+				TestParagraph para = ERTagger.getInstance().tagParagraph(taInput.getText());
+
+				RootFrame.rootFrame.setContentPane(new Feedback(para));
+				
+//				RootFrame.rootFrame.dispose();
+//				new Feedback(para);
 
 				// RootFrame.rootFrame.removeAll(); //.setVisible(false);
 				// RootFrame.rootFrame.add(new Feedback(Data.para));

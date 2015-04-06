@@ -52,18 +52,25 @@ public class ShapeMouseAdapter implements MouseMotionListener, MouseListener
 					@Override
 					public void actionPerformed(ActionEvent a)
 					{
-						if (((EditorGroupPanel) thisComponent.getParent().getParent().getParent()).sentence
-								.getValue().contains(rename.getText()) == true)
-						{
-							thisComponent.setName(rename.getText());
-							rename.setVisible(false);
 
-							thisComponent.setVisible(true);
-						}
-						else
-						{
-							rename.setText("Error");
-						}
+						thisComponent.setName(rename.getText());
+						rename.setVisible(false);
+						thisComponent.setVisible(true);
+
+						updateData(ed, thisComponent);
+
+						/* Checks if the new name is in the sentence */
+						/*
+						 * if (((EditorGroupPanel)
+						 * thisComponent.getParent().getParent
+						 * ().getParent()).sentence
+						 * .getValue().contains(rename.getText()) == true) {
+						 * thisComponent.setName(rename.getText());
+						 * rename.setVisible(false);
+						 * 
+						 * thisComponent.setVisible(true); } else {
+						 * rename.setText("Error"); }
+						 */
 
 					}
 
@@ -156,5 +163,17 @@ public class ShapeMouseAdapter implements MouseMotionListener, MouseListener
 	public void mouseMoved(MouseEvent e)
 	{
 
+	}
+
+	private void updateData(Editor ed, JPanel thisComponent)
+	{
+		if (thisComponent.getClass() == EntityShape.class)
+			ed.data.addEntity(thisComponent.getName());
+		else if (thisComponent.getClass() == AttributeShape.class)
+			ed.data.addAttribute(thisComponent.getName());
+		else if (thisComponent.getClass() == RelationshipShape.class)
+			ed.data.addRelationship(thisComponent.getName());
+		else
+			;
 	}
 }

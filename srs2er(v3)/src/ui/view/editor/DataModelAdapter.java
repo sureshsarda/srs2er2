@@ -16,12 +16,22 @@ public class DataModelAdapter
 	protected List<String> attributes;
 	protected Map<String, List<String>> connections;
 
+	public void addEntity(String name) {
+		entities.add(name);
+	}
+	public void addRelationship(String name) {
+		relationships.add(name);
+	}
+	public void addAttribute(String name) {
+		attributes.add(name);
+	}
+	
+	
 	public DataModelAdapter(Model data)
 	{
 		entities = data.getEntitiesAsStringList();
 		relationships = data.getRelationshipsAsStringList();
 		attributes = data.getAttributesAsStringList();
-
 		connections = data.getConnectorsAsStringMap();
 	}
 
@@ -72,6 +82,7 @@ public class DataModelAdapter
 			}
 			else /*The Key is relationship*/
 			{
+
 				Relationship relation = model.getRelationshipByName(key);
 				for (String string : connections.get(key))
 				{

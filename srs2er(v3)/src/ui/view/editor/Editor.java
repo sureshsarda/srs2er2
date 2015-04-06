@@ -139,10 +139,14 @@ public class Editor extends JPanel
 				if (dest != null)
 				{
 					Point[] anchors = source.getAnchors(dest);
+					
+					
+					g2.fillOval(anchors[0].x - 3, anchors[0].y - 3, 6, 6);
 					for (int i = 1; i < anchors.length; i++)
 					{
 						g2.drawLine(anchors[i - 1].x, anchors[i - 1].y, anchors[i].x, anchors[i].y);
 					}
+					g2.fillOval(anchors[anchors.length - 1].x - 3, anchors[anchors.length - 1].y - 3, 6, 6);
 					// g2.drawLine(source.getX(), source.getY(), dest.getX(),
 					// dest.getY());
 
@@ -172,7 +176,6 @@ public class Editor extends JPanel
 			g2.setStroke(new BasicStroke((float) 1.5));
 
 			g2.drawLine(source.getX(), source.getY(), x, y);
-			System.out.println("Success");
 		}
 	}
 
