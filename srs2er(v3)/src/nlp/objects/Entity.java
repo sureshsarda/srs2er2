@@ -76,18 +76,17 @@ public class Entity extends Type implements Cloneable
 		return false;
 	}
 
-	
 	@Override
 	public Object clone() throws CloneNotSupportedException
 	{
 		Entity copy = (Entity) super.clone();
-		
+
 		copy.Attributes = new ArrayList<Attribute>();
 		for (Attribute attribute : Attributes)
 		{
 			copy.Attributes.add((Attribute) attribute.clone());
 		}
-		copy.Superclass = new String(Superclass);
+		copy.Superclass = new String(Superclass != null ? Superclass : "");
 		return copy;
 	}
 }

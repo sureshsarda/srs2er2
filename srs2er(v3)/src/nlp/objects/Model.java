@@ -147,19 +147,19 @@ public class Model implements Cloneable
 	{
 		for (Entity entity : Entities)
 		{
-			if (entity.getLemmName().equals(name) == true)
+			if (entity.getLemmName().equals(name) == true || entity.getName().equals(name) == true)
 			{
 				return entity;
 			}
 		}
 		return null;
 	}
-	
+
 	public Relationship getRelationshipByName(String name)
 	{
-		for (Relationship relation: Relationships)
+		for (Relationship relation : Relationships)
 		{
-			if (relation.getLemmName().equals(name) == true)
+			if (relation.getLemmName().equals(name) == true || relation.getName().equals(name) == true)
 			{
 				return relation;
 			}
@@ -167,7 +167,6 @@ public class Model implements Cloneable
 		return null;
 	}
 
-	
 	public Entity getEntityById(int id)
 	{
 		for (Entity entity : Entities)
@@ -178,5 +177,50 @@ public class Model implements Cloneable
 			}
 		}
 		return null;
+	}
+
+	public Model(List<Model> mods)
+	{
+		try
+		{
+			for (int modelIndex = 0; modelIndex < mods.size(); modelIndex++)
+			{
+				Model model = mods.get(modelIndex);
+
+				for (Entity entity : model.Entities)
+				{
+					Entity ent = this.getEntityByName(entity.getLemmName());
+					if (ent == null)
+					{
+						this.Entities.add(entity);
+					}
+					else
+					{
+						ent.getAttributes().addAll(entity.getAttributes());
+					}
+
+				}
+				for (Relationship relation : model.Relationships)
+				{
+					Relationship rel = this.getRelationshipByName(relation.lemmName);
+					if (rel == null)
+					{
+						this.Relationships.add(relation);
+					}
+					else
+					{
+						rel.getConnects().addAll(relation.getConnects());
+					}
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+	public Model()
+	{
 	}
 }
