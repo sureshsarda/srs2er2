@@ -2,12 +2,12 @@ package ui.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.WindowEvent;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import nlp.objects.Model;
 import nlp.test.TestParagraph;
@@ -15,7 +15,7 @@ import nlp.test.TestSentence;
 import ui.view.editor.EditorGroupPanel;
 
 @SuppressWarnings("serial")
-public class Feedback extends JFrame
+public class Feedback extends JPanel
 {
 	public TestParagraph para;
 	public static Feedback instance;
@@ -31,11 +31,9 @@ public class Feedback extends JFrame
 		
 		Splash.setCurrentSystemLookAndFeel();
 		
-		instance.setLocationRelativeTo(null);
-		instance.setTitle("Feedback");
 		instance.setVisible(true);
-		instance.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		instance.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+
+//		instance.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		instance.setLayout(new BorderLayout(10, 10));
 		
 		instance.add(new JLabel("This windows helps you to correct the model of every sentence."),BorderLayout.PAGE_START);
@@ -50,13 +48,15 @@ public class Feedback extends JFrame
 		
 	}
 	public void removeSentence(String sent) {
-		
-		
+	
 		para.removeSentence(sent);
+		
 
 		if (para.getSentenceList().size() <= 0) {
-			ParagraphModel model = new ParagraphModel(dataModels);
-			instance.dispatchEvent(new WindowEvent(instance, WindowEvent.WINDOW_CLOSING));
+			
+			Model merged = new Model(dataModels);
+			new ParagraphModel(merged);
+			//instance.dispose();
 		}
 
 		instance.remove(sPan);
