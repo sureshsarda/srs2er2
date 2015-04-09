@@ -1,5 +1,7 @@
 package ui.view.editor;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,10 +31,20 @@ public class DataModelAdapter
 	
 	public DataModelAdapter(Model data)
 	{
-		entities = data.getEntitiesAsStringList();
-		relationships = data.getRelationshipsAsStringList();
-		attributes = data.getAttributesAsStringList();
-		connections = data.getConnectorsAsStringMap();
+		try {
+			entities = data.getEntitiesAsStringList();
+			relationships = data.getRelationshipsAsStringList();
+			attributes = data.getAttributesAsStringList();
+			connections = data.getConnectorsAsStringMap();	
+		}
+		catch (NullPointerException e) {
+			entities = new ArrayList<String>();
+			relationships = new ArrayList<String>();
+			attributes = new ArrayList<String>();
+			connections = new HashMap<String, List<String>>();
+			
+		}
+		
 	}
 
 	public void remove(String name)

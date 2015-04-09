@@ -10,6 +10,7 @@ public class TestParagraph
 {
 	private List<TestSentence> sentences;
 
+	public TestParagraph(){}
 	public TestParagraph(String paragraph)
 	{
 		setSentences(new ArrayList<TestSentence>());

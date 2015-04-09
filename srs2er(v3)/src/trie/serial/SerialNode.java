@@ -5,6 +5,7 @@ import nlp.objects.Tag;
 public class SerialNode implements Comparable<SerialNode>{
 	Tag tag;
 	
+	
 	public Tag getTag() {
 		return tag;
 	}

@@ -12,6 +12,8 @@ import javax.swing.BorderFactory;
 import javax.swing.FocusManager;
 import javax.swing.JPanel;
 
+import ui.view.editor.EditorStatus;
+
 public class EntityShape extends Shape
 {
 	protected String name;
@@ -28,17 +30,17 @@ public class EntityShape extends Shape
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
-		g2.setFont(new Font("Times New Roman", Font.ROMAN_BASELINE, 20));
+		g2.setFont(EditorStatus.shapeFont);
 		FontMetrics fm = g2.getFontMetrics();
 		int width = fm.stringWidth(this.getName());
 		int height = fm.getAscent();
 		
 		this.setSize(width + 30, height + 30);
 		
-		g2.setColor(new Color(0, 131, 185));
+		g2.setColor(EditorStatus.contrastColor);
 		g2.fillRect(0, 0, this.getWidth(), this.getHeight());
 		
-		g2.setColor(Color.WHITE);
+		g2.setColor(EditorStatus.foregroundColor);
 		g2.drawString(this.getName(), 15, height + 15 - fm.getDescent());
 
 		this.getParent().repaint();

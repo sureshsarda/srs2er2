@@ -11,6 +11,8 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
+import ui.view.editor.EditorStatus;
+
 public class AttributeShape extends Shape
 {
 	public AttributeShape(String name)
@@ -24,9 +26,9 @@ public class AttributeShape extends Shape
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
-		g2.setColor(new Color(0, 131, 185));
+		g2.setColor(EditorStatus.contrastColor);
 		
-		g2.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		g2.setFont(EditorStatus.shapeFont);
 		FontMetrics fm = g2.getFontMetrics();
 		int width = fm.stringWidth(this.getName());
 		int height = fm.getHeight();

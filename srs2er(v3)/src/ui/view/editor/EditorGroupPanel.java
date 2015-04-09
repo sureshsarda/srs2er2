@@ -26,7 +26,7 @@ public class EditorGroupPanel extends JTabbedPane
 		
 		for (LookupResultObject obj : sentence.getResults())
 		{
-			EditorPanel pan = new EditorPanel(obj.getDataModel());
+			EditorPanel pan = new EditorPanel(obj.getDataModel(), sentence.getValue());
 			String title = "Cost: " + obj.getCost();
 			
 			this.addTab(title, pan);

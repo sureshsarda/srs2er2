@@ -4,15 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ui.view.Feedback;
 import nlp.objects.Model;
+import ui.view.Feedback;
 
 @SuppressWarnings("serial")
 public class EditorPanel extends JPanel
@@ -20,7 +22,7 @@ public class EditorPanel extends JPanel
 	private Model dataModel;
 	Editor editor;
 	
-	public EditorPanel(Model dataModel)
+	public EditorPanel(Model dataModel, String sentence)
 	{
 		
 		this.dataModel = dataModel;
@@ -34,7 +36,11 @@ public class EditorPanel extends JPanel
 		/*
 		 * Upper Sentence Text
 		 */
-		this.add(new JLabel("Sentence text here"), BorderLayout.PAGE_START);
+		JLabel sentenceLabel = new JLabel();
+		sentenceLabel.setText(sentence);
+		sentenceLabel.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		sentenceLabel.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+		this.add(sentenceLabel, BorderLayout.PAGE_START);
 		
 		
 		/*

@@ -40,12 +40,12 @@ public class InputFrame extends JPanel
 		 * Upper Panel for Title and text area
 		 */
 		JPanel textPanel = new JPanel();
-		// textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.PAGE_AXIS));
-		textPanel.setBackground(Color.CYAN);
+		 textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.PAGE_AXIS));
+		
 		textPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 10));
 		/* Adding components */
 		textPanel.add(titleLabel, BorderLayout.PAGE_START);
-		// textPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		 textPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 		textPanel.add(scroll, BorderLayout.LINE_START);
 
 		/*
